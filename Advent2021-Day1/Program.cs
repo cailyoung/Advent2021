@@ -2008,15 +2008,37 @@ var inputNumbers = rawInput
     .Select(int.Parse)
     .ToArray();
 
-var countOfDepthIncreases = 0;
+var countOfDepthIncreases = CountMeasurementIncreases(inputNumbers);
 
-for (int i = 0; i < (inputNumbers.Length - 1); i++)
-{
-    if (inputNumbers[i + 1] > inputNumbers[i])
-    {
-        countOfDepthIncreases++;
-    }
-}
+// Day 1 Part 1
 
 Console.WriteLine($"For the input, the number of measurements larger than the previous measurement is {countOfDepthIncreases}.");
 
+// Day 1 Part 2
+
+var windowSums = new List<int>();
+
+for (int i = 0; i < (inputNumbers.Length - 2); i++)
+{
+    var windowSum = inputNumbers[i] + inputNumbers[i + 1] + inputNumbers[i + 2];
+    windowSums.Add(windowSum);
+}
+
+var countOfWindowedDepthIncreases = CountMeasurementIncreases(windowSums.ToArray());
+
+Console.WriteLine($"For the input, the number of windowed measurements larger than the previous windowed measurement is {countOfWindowedDepthIncreases}.");
+
+int CountMeasurementIncreases(int[] ints)
+{
+    int count = 0;
+
+    for (int i = 0; i < (ints.Length - 1); i++)
+    {
+        if (ints[i + 1] > ints[i])
+        {
+            count++;
+        }
+    }
+
+    return count;
+}

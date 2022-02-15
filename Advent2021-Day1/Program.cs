@@ -2010,7 +2010,7 @@ var inputNumbers = rawInput
 
 var countOfDepthIncreases = 0;
 
-for (int i = 1; i < (inputNumbers.Length - 1); i++)
+for (int i = 0; i < (inputNumbers.Length - 1); i++)
 {
     if (inputNumbers[i + 1] > inputNumbers[i])
     {

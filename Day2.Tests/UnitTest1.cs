@@ -11,12 +11,12 @@ public class UnitTest1
     public void Part1SubmarinePositionIsCorrect()
     {
         var sub = new Submarine();
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 5));
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 5));
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 8));
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.up, 3));
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 8));
-        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 2));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 5));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Down, 5));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 8));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Up, 3));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Down, 8));
+        sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 2));
 
         var product = sub.GetCurrentHorizontalPosition() * sub.GetCurrentDepth();
         
@@ -27,12 +27,12 @@ public class UnitTest1
     public void Part2SubmarinePositionIsCorrect()
     {
         var sub = new Submarine();
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 5));
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 5));
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 8));
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.up, 3));
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 8));
-        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 2));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 5));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Down, 5));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 8));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Up, 3));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Down, 8));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.Forward, 2));
 
         var product = sub.GetCurrentHorizontalPosition() * sub.GetCurrentDepth();
         
@@ -52,17 +52,17 @@ up 5
         {
             new()
             {
-                Instruction = Submarine.Instruction.down,
+                Instruction = Submarine.Instruction.Down,
                 Distance = 5
             },
             new()
             {
-                Instruction = Submarine.Instruction.forward,
+                Instruction = Submarine.Instruction.Forward,
                 Distance = 1
             },
             new()
             {
-                Instruction = Submarine.Instruction.up,
+                Instruction = Submarine.Instruction.Up,
                 Distance = 5
             }
         };

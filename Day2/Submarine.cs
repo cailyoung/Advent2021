@@ -18,9 +18,9 @@ public class Submarine
     }
     
     public enum Instruction {
-        forward,
-        down,
-        up
+        Forward,
+        Down,
+        Up
     }
 
     private int HorizontalPosition;
@@ -47,13 +47,13 @@ public class Submarine
     {
         switch (command.Instruction)
         {
-            case Instruction.forward:
+            case Instruction.Forward:
                 HorizontalPosition += command.Distance;
                 break;
-            case Instruction.down:
+            case Instruction.Down:
                 Depth += command.Distance;
                 break;
-            case Instruction.up:
+            case Instruction.Up:
                 Depth -= command.Distance;
                 break;
             default:
@@ -65,14 +65,14 @@ public class Submarine
     {
         switch (command.Instruction)
         {
-            case Instruction.forward:
+            case Instruction.Forward:
                 HorizontalPosition += command.Distance;
                 Depth += (Aim * command.Distance);
                 break;
-            case Instruction.down:
+            case Instruction.Down:
                 Aim += command.Distance;
                 break;
-            case Instruction.up:
+            case Instruction.Up:
                 Aim -= command.Distance;
                 break;
             default:

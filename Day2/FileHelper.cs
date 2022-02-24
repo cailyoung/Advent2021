@@ -15,7 +15,7 @@ public class FileHelper
             .Select(s => s.Split(" "))
             .Select(s => new Submarine.Command()
         {
-            Instruction = Enum.Parse<Submarine.Instruction>(s[0]),
+            Instruction = Enum.Parse<Submarine.Instruction>(s[0], true),
             Distance = int.Parse(s[1])
         }).ToArray();
         

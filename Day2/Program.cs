@@ -12,3 +12,13 @@ var part1Answer = sub.GetCurrentDepth() * sub.GetCurrentHorizontalPosition();
 
 // Part 1
 Console.WriteLine($"Part 1 - final product is {part1Answer}");
+
+// Part 2
+
+var sub2 = new Submarine();
+
+sub2.Part2TakeCommands(commandList);
+
+var part2Answer = sub2.GetCurrentDepth() * sub2.GetCurrentHorizontalPosition();
+
+Console.WriteLine($"Part 2 - final product is {part2Answer}");

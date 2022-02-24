@@ -8,7 +8,7 @@ namespace Day2.Tests;
 public class UnitTest1
 {
     [Fact]
-    public void SubmarinePositionIsCorrect()
+    public void Part1SubmarinePositionIsCorrect()
     {
         var sub = new Submarine();
         sub.Part1Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 5));
@@ -21,6 +21,22 @@ public class UnitTest1
         var product = sub.GetCurrentHorizontalPosition() * sub.GetCurrentDepth();
         
         Assert.Equal(150, product);
+    }
+    
+    [Fact]
+    public void Part2SubmarinePositionIsCorrect()
+    {
+        var sub = new Submarine();
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 5));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 5));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 8));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.up, 3));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.down, 8));
+        sub.Part2Move(Submarine.Command.BuildCommand(Submarine.Instruction.forward, 2));
+
+        var product = sub.GetCurrentHorizontalPosition() * sub.GetCurrentDepth();
+        
+        Assert.Equal(900, product);
     }
 
     [Fact]

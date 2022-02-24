@@ -23,14 +23,23 @@ public class Submarine
         up
     }
 
-    private int HorizontalPosition = 0;
-    private int Depth = 0;
+    private int HorizontalPosition;
+    private int Depth;
+    private int Aim;
 
     public void Part1TakeCommands(Command[] commands)
     {
         foreach (var command in commands)
         {
             Part1Move(command);
+        }
+    }
+    
+    public void Part2TakeCommands(Command[] commands)
+    {
+        foreach (var command in commands)
+        {
+            Part2Move(command);
         }
     }
     
@@ -46,6 +55,25 @@ public class Submarine
                 break;
             case Instruction.up:
                 Depth -= command.Distance;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(command.Instruction), command.Instruction, "Unknown command supplied");
+        }
+    }
+
+    public void Part2Move(Command command)
+    {
+        switch (command.Instruction)
+        {
+            case Instruction.forward:
+                HorizontalPosition += command.Distance;
+                Depth += (Aim * command.Distance);
+                break;
+            case Instruction.down:
+                Aim += command.Distance;
+                break;
+            case Instruction.up:
+                Aim -= command.Distance;
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(command.Instruction), command.Instruction, "Unknown command supplied");

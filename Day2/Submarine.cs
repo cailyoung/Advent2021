@@ -4,8 +4,8 @@ public class Submarine
 {
     public class Command
     {
-        public Instruction Instruction { get; set; }
-        public int Distance { get; set; }
+        public Instruction Instruction { get; init; }
+        public int Distance { get; init; }
 
         public static Command BuildCommand(Instruction instruction, int distance)
         {

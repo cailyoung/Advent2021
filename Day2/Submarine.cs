@@ -2,30 +2,53 @@ namespace Day2;
 
 public class Submarine
 {
+    public class Command
+    {
+        public Instruction Instruction { get; set; }
+        public int Distance { get; set; }
+
+        public static Command BuildCommand(Instruction instruction, int distance)
+        {
+            return new Command()
+            {
+                Instruction = instruction,
+                Distance = distance
+            };
+        }
+    }
+    
     public enum Instruction {
-        Forward,
-        Down,
-        Up
+        forward,
+        down,
+        up
     }
 
     private int HorizontalPosition = 0;
     private int Depth = 0;
 
-    public void Move(Instruction instruction, int distance)
+    public void Part1TakeCommands(Command[] commands)
     {
-        switch (instruction)
+        foreach (var command in commands)
         {
-            case Instruction.Forward:
-                HorizontalPosition += distance;
+            Part1Move(command);
+        }
+    }
+    
+    public void Part1Move(Command command)
+    {
+        switch (command.Instruction)
+        {
+            case Instruction.forward:
+                HorizontalPosition += command.Distance;
                 break;
-            case Instruction.Down:
-                Depth += distance;
+            case Instruction.down:
+                Depth += command.Distance;
                 break;
-            case Instruction.Up:
-                Depth -= distance;
+            case Instruction.up:
+                Depth -= command.Distance;
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(instruction), instruction, null);
+                throw new ArgumentOutOfRangeException(nameof(command.Instruction), command.Instruction, "Unknown command supplied");
         }
     }
 

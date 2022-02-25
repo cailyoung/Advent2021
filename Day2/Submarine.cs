@@ -9,7 +9,7 @@ public class Submarine
 
         public static Command BuildCommand(Instruction instruction, int distance)
         {
-            return new Command()
+            return new Command
             {
                 Instruction = instruction,
                 Distance = distance

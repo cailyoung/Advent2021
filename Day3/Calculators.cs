@@ -67,6 +67,11 @@ public static class Calculators
     {
         throw new NotImplementedException();
     }
+
+    public static int CalculateCarbonDioxideRate(List<int[]> inputs)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 // https://stackoverflow.com/a/11920783/16498827

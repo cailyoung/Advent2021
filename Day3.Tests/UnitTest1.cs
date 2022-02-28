@@ -84,4 +84,16 @@ public class UnitTest1
 
         Assert.Equal(expectedOutput, actualOutput);
     }
+    
+    [Fact]
+    public void CarbonDioxideRateCalculatorIsCorrect()
+    {
+        var testInput = FullTestData;
+
+        const int expectedOutput = 0b01010; // binary 10
+
+        var actualOutput = Calculators.CalculateCarbonDioxideRate(testInput);
+
+        Assert.Equal(expectedOutput, actualOutput);
+    }
 }

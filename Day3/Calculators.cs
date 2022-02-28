@@ -13,6 +13,17 @@ public static class Calculators
         return gammaRate;
     }
 
+    public static int CalculateEpsilonRate(List<int[]> inputs)
+    {
+        var initialArray = GenerateAveragedArray(inputs);
+
+        var flippedArray = initialArray.Select(s => !s).ToArray();
+
+        var epsilonRate = new BitArray(flippedArray).GetIntFromBitArray();
+        
+        return epsilonRate;
+    }
+
     private static bool[] GenerateAveragedArray(List<int[]> inputs)
     {
         var summedArray = SumInputPositions(inputs);

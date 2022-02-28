@@ -28,12 +28,19 @@ public static class Calculators
     {
         var summedArray = SumInputPositions(inputs);
 
-        var finalArray = AverageValues(inputs.Count, summedArray);
+        var finalArray = AverageValues(inputs.Count, summedArray)
+            .EnsureArrayEndianness();
+        
+        return finalArray;
+    }
 
+    private static bool[] EnsureArrayEndianness(this bool[] array)
+    {
         // dear lord, the yak shaving
         if (BitConverter.IsLittleEndian)
-            Array.Reverse(finalArray);
-        return finalArray;
+            Array.Reverse(array);
+
+        return array;
     }
 
     private static bool[] AverageValues(int length, double[] summedArray)

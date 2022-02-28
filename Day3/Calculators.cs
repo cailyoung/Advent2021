@@ -6,24 +6,9 @@ public static class Calculators
 {
     public static int CalculateGammaRate(List<int[]> inputs)
     {
-        var summedArray = new double[inputs[0].Length];
+        var summedArray = SumInputPositions(inputs);
 
-        foreach (var row in inputs)
-        {
-            var rowIndex = 0;
-            
-            foreach (var positionValue in row)
-            {
-                summedArray[rowIndex] += positionValue;
-                rowIndex++;
-            }
-        }
-
-        var finalArray = summedArray
-            .Select(s => s / inputs.Count)
-            .Select(s => Math.Round(s))
-            .Select(Convert.ToBoolean)
-            .ToArray();
+        var finalArray = AverageValues(inputs.Count, summedArray);
 
         // dear lord, the yak shaving
         if (BitConverter.IsLittleEndian)
@@ -32,6 +17,33 @@ public static class Calculators
         var gammaRate = new BitArray(finalArray).GetIntFromBitArray();
 
         return gammaRate;
+    }
+
+    private static bool[] AverageValues(int length, double[] summedArray)
+    {
+        return summedArray
+            .Select(s => s / length)
+            .Select(s => Math.Round(s))
+            .Select(Convert.ToBoolean)
+            .ToArray();
+    }
+
+    private static double[] SumInputPositions(List<int[]> inputs)
+    {
+        var summedArray = new double[inputs[0].Length];
+
+        foreach (var row in inputs)
+        {
+            var rowIndex = 0;
+
+            foreach (var positionValue in row)
+            {
+                summedArray[rowIndex] += positionValue;
+                rowIndex++;
+            }
+        }
+
+        return summedArray;
     }
 }
 

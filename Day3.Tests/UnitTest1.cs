@@ -17,12 +17,12 @@ public class UnitTest1
 10110
 ".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
-        var expectedOutput = new List<BitArray>
+        var expectedOutput = new List<int[]>
         {
-            new(new[] {false, false, true, false, false}),
-            new(new[] {true, true, true, true, false}),
-            new(new[] {true, false, true, true, false})
-            };
+            new[] {0, 0, 1, 0, 0},
+            new[] {1, 1, 1, 1, 0},
+            new[] {1, 0, 1, 1, 0}
+        };
         
         var output = FileHelper.ParseInput(testInput);
 

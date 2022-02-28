@@ -12,19 +12,18 @@ public class FileHelper
         return rawInput;
     }
 
-    public static IEnumerable<BitArray> ParseInput(string[] input)
+    public static IEnumerable<int[]> ParseInput(string[] input)
     {
-        return input
-            .Select(ConvertBinaryCharsToBoolArray())
-            .Select(bools => new BitArray(bools));
-    }
+        var returned = new List<int[]>();
+        
+        foreach (var row in input)
+        {
+            var transformedRow = row.ToCharArray()
+                .Select(c => c.ToString())
+                .Select(int.Parse).ToArray();
+            returned.Add(transformedRow);
+        }
 
-    private static Func<string, bool[]> ConvertBinaryCharsToBoolArray()
-    {
-        return s => s
-            .Select(c => c.ToString())
-            .Select(character => Convert.ToInt32(character))
-            .Select(Convert.ToBoolean)
-            .ToArray();
+        return returned;
     }
 }

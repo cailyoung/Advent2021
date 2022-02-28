@@ -14,19 +14,12 @@ public class FileHelper
 
     public static IEnumerable<BitArray> ParseInput(string[] input)
     {
-        var response = new List<BitArray>();
-        
-        foreach (var row in input)
-        {
-            var foo = row.Select(s => s.ToString()).ToArray();
-
-            var fooAsInts = foo.Select(s => Convert.ToInt32(s)).ToArray();
-
-            var bitArray = new BitArray(fooAsInts.Select(Convert.ToBoolean).ToArray());
-            
-            response.Add(bitArray);
-        }
-
-        return response;
+        return input
+            .Select(row => row.Select(c => c.ToString())
+                .Select(s => Convert.ToInt32(s))
+                .Select(Convert.ToBoolean)
+                .ToArray()
+            )
+            .Select(bools => new BitArray(bools));
     }
 }

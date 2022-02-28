@@ -6,6 +6,15 @@ public static class Calculators
 {
     public static int CalculateGammaRate(List<int[]> inputs)
     {
+        var finalArray = GenerateAveragedArray(inputs);
+
+        var gammaRate = new BitArray(finalArray).GetIntFromBitArray();
+
+        return gammaRate;
+    }
+
+    private static bool[] GenerateAveragedArray(List<int[]> inputs)
+    {
         var summedArray = SumInputPositions(inputs);
 
         var finalArray = AverageValues(inputs.Count, summedArray);
@@ -13,10 +22,7 @@ public static class Calculators
         // dear lord, the yak shaving
         if (BitConverter.IsLittleEndian)
             Array.Reverse(finalArray);
-        
-        var gammaRate = new BitArray(finalArray).GetIntFromBitArray();
-
-        return gammaRate;
+        return finalArray;
     }
 
     private static bool[] AverageValues(int length, double[] summedArray)

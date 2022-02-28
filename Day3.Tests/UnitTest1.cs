@@ -28,4 +28,21 @@ public class UnitTest1
 
         output.Should().BeEquivalentTo(expectedOutput);
     }
+
+    [Fact]
+    public void GammaRateCalculatorIsCorrect()
+    {
+        var testInput = new List<BitArray>
+        {
+            new(new[] {false, false, true, false, false}),
+            new(new[] {true, true, true, true, false}),
+            new(new[] {true, false, true, true, false})
+        };
+
+        const int expectedOutput = 0b10110; // binary 
+
+        var actualOutput = Calculators.CalculateGammaRate(testInput);
+        
+        Assert.Equal(expectedOutput, actualOutput);
+    }
 }

@@ -8,6 +8,22 @@ namespace Day3.Tests;
 
 public class UnitTest1
 {
+    private static readonly List<int[]> FullTestData = new()
+    {
+        new[] { 0, 0, 1, 0, 0 },
+        new[] { 1, 1, 1, 1, 0 },
+        new[] { 1, 0, 1, 1, 0 },
+        new[] { 1, 0, 1, 1, 1 },
+        new[] { 1, 0, 1, 0, 1 },
+        new[] { 0, 1, 1, 1, 1 },
+        new[] { 0, 0, 1, 1, 1 },
+        new[] { 1, 1, 1, 0, 0 },
+        new[] { 1, 0, 0, 0, 0 },
+        new[] { 1, 1, 0, 0, 1 },
+        new[] { 0, 0, 0, 1, 0 },
+        new[] { 0, 1, 0, 1, 0 }
+    };
+
     [Fact]
     public void ParserReturnsValidOutput()
     {
@@ -32,12 +48,7 @@ public class UnitTest1
     [Fact]
     public void GammaRateCalculatorIsCorrect()
     {
-        var testInput = new List<int[]>
-        {
-            new[] { 0, 0, 1, 0, 0 },
-            new[] { 1, 1, 1, 1, 0 },
-            new[] { 1, 0, 1, 1, 0 }
-        };
+        var testInput = FullTestData;
 
         const int expectedOutput = 0b10110; // binary 22
 
@@ -49,12 +60,7 @@ public class UnitTest1
     [Fact]
     public void EpsilonRateCalculatorIsCorrect()
     {
-        var testInput = new List<int[]>
-        {
-            new[] { 0, 0, 1, 0, 0 },
-            new[] { 1, 1, 1, 1, 0 },
-            new[] { 1, 0, 1, 1, 0 }
-        };
+        var testInput = FullTestData;
 
         const int expectedOutput = 0b01001; // binary 9
 
@@ -82,21 +88,7 @@ public class UnitTest1
     [Fact]
     public void OxygenRateCalculatorIsCorrect()
     {
-        var testInput = new List<int[]>
-        {
-            new[] { 0, 0, 1, 0, 0 },
-            new[] { 1, 1, 1, 1, 0 },
-            new[] { 1, 0, 1, 1, 0 },
-            new[] { 1, 0, 1, 1, 1 },
-            new[] { 1, 0, 1, 0, 1 },
-            new[] { 0, 1, 1, 1, 1 },
-            new[] { 0, 0, 1, 1, 1 },
-            new[] { 1, 1, 1, 0, 0 },
-            new[] { 1, 0, 0, 0, 0 },
-            new[] { 1, 1, 0, 0, 1 },
-            new[] { 0, 0, 0, 1, 0 },
-            new[] { 0, 1, 0, 1, 0 }
-        };
+        var testInput = FullTestData;
 
         const int expectedOutput = 0b10111; // binary 23
 

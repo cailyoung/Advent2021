@@ -62,6 +62,11 @@ public static class Calculators
 
         return summedArray;
     }
+
+    public static int CalculateOxygenRate(List<int[]> inputs)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 // https://stackoverflow.com/a/11920783/16498827

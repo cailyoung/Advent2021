@@ -59,7 +59,49 @@ public class UnitTest1
         const int expectedOutput = 0b01001; // binary 9
 
         var actualOutput = Calculators.CalculateEpsilonRate(testInput);
-        
+
+        Assert.Equal(expectedOutput, actualOutput);
+    }
+
+
+/*
+00100
+11110
+10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010
+*/
+
+    [Fact]
+    public void OxygenRateCalculatorIsCorrect()
+    {
+        var testInput = new List<int[]>
+        {
+            new[] { 0, 0, 1, 0, 0 },
+            new[] { 1, 1, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 1 },
+            new[] { 1, 0, 1, 0, 1 },
+            new[] { 0, 1, 1, 1, 1 },
+            new[] { 0, 0, 1, 1, 1 },
+            new[] { 1, 1, 1, 0, 0 },
+            new[] { 1, 0, 0, 0, 0 },
+            new[] { 1, 1, 0, 0, 1 },
+            new[] { 0, 0, 0, 1, 0 },
+            new[] { 0, 1, 0, 1, 0 }
+        };
+
+        const int expectedOutput = 0b10111; // binary 23
+
+        var actualOutput = Calculators.CalculateOxygenRate(testInput);
+
         Assert.Equal(expectedOutput, actualOutput);
     }
 }

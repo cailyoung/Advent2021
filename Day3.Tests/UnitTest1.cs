@@ -32,11 +32,11 @@ public class UnitTest1
     [Fact]
     public void GammaRateCalculatorIsCorrect()
     {
-        var testInput = new List<BitArray>
+        var testInput = new List<int[]>
         {
-            new(new[] {false, false, true, false, false}),
-            new(new[] {true, true, true, true, false}),
-            new(new[] {true, false, true, true, false})
+            new[] {0, 0, 1, 0, 0},
+            new[] {1, 1, 1, 1, 0},
+            new[] {1, 0, 1, 1, 0}
         };
 
         const int expectedOutput = 0b10110; // binary 

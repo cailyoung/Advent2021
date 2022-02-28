@@ -31,14 +31,18 @@ public class UnitTest1
 00100
 11110
 10110
+10111
+10101
+01111
+00111
+11100
+10000
+11001
+00010
+01010
 ".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
-        var expectedOutput = new List<int[]>
-        {
-            new[] { 0, 0, 1, 0, 0 },
-            new[] { 1, 1, 1, 1, 0 },
-            new[] { 1, 0, 1, 1, 0 }
-        };
+        var expectedOutput = FullTestData;
 
         var output = FileHelper.ParseInput(testInput);
 

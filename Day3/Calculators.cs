@@ -20,7 +20,7 @@ public static class Calculators
         var flippedArray = initialArray.Select(s => !s).ToArray();
 
         var epsilonRate = new BitArray(flippedArray).GetIntFromBitArray();
-        
+
         return epsilonRate;
     }
 

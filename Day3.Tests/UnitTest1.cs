@@ -19,11 +19,11 @@ public class UnitTest1
 
         var expectedOutput = new List<int[]>
         {
-            new[] {0, 0, 1, 0, 0},
-            new[] {1, 1, 1, 1, 0},
-            new[] {1, 0, 1, 1, 0}
+            new[] { 0, 0, 1, 0, 0 },
+            new[] { 1, 1, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 0 }
         };
-        
+
         var output = FileHelper.ParseInput(testInput);
 
         output.Should().BeEquivalentTo(expectedOutput);
@@ -34,26 +34,26 @@ public class UnitTest1
     {
         var testInput = new List<int[]>
         {
-            new[] {0, 0, 1, 0, 0},
-            new[] {1, 1, 1, 1, 0},
-            new[] {1, 0, 1, 1, 0}
+            new[] { 0, 0, 1, 0, 0 },
+            new[] { 1, 1, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 0 }
         };
 
         const int expectedOutput = 0b10110; // binary 22
 
         var actualOutput = Calculators.CalculateGammaRate(testInput);
-        
+
         Assert.Equal(expectedOutput, actualOutput);
     }
-    
+
     [Fact]
     public void EpsilonRateCalculatorIsCorrect()
     {
         var testInput = new List<int[]>
         {
-            new[] {0, 0, 1, 0, 0},
-            new[] {1, 1, 1, 1, 0},
-            new[] {1, 0, 1, 1, 0}
+            new[] { 0, 0, 1, 0, 0 },
+            new[] { 1, 1, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 0 }
         };
 
         const int expectedOutput = 0b01001; // binary 9

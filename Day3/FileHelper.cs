@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Globalization;
-
 namespace Day3;
 
 public class FileHelper

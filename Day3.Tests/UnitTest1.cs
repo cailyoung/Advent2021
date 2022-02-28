@@ -45,4 +45,21 @@ public class UnitTest1
         
         Assert.Equal(expectedOutput, actualOutput);
     }
+    
+    [Fact]
+    public void EpsilonRateCalculatorIsCorrect()
+    {
+        var testInput = new List<int[]>
+        {
+            new[] {0, 0, 1, 0, 0},
+            new[] {1, 1, 1, 1, 0},
+            new[] {1, 0, 1, 1, 0}
+        };
+
+        const int expectedOutput = 0b01001; // binary 9
+
+        var actualOutput = Calculators.CalculateEpsilonRate(testInput);
+        
+        Assert.Equal(expectedOutput, actualOutput);
+    }
 }

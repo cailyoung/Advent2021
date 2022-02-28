@@ -15,11 +15,16 @@ public class FileHelper
     public static IEnumerable<BitArray> ParseInput(string[] input)
     {
         return input
-            .Select(row => row.Select(c => c.ToString())
-                .Select(s => Convert.ToInt32(s))
-                .Select(Convert.ToBoolean)
-                .ToArray()
-            )
+            .Select(ConvertBinaryCharsToBoolArray())
             .Select(bools => new BitArray(bools));
+    }
+
+    private static Func<string, bool[]> ConvertBinaryCharsToBoolArray()
+    {
+        return s => s
+            .Select(c => c.ToString())
+            .Select(character => Convert.ToInt32(character))
+            .Select(Convert.ToBoolean)
+            .ToArray();
     }
 }

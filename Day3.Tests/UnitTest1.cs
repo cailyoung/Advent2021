@@ -39,7 +39,7 @@ public class UnitTest1
             new[] {1, 0, 1, 1, 0}
         };
 
-        const int expectedOutput = 0b10110; // binary 
+        const int expectedOutput = 0b10110; // binary 22
 
         var actualOutput = Calculators.CalculateGammaRate(testInput);
         

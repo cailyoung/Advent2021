@@ -47,7 +47,7 @@ public static class Calculators
     {
         return summedArray
             .Select(s => s / length)
-            .Select(s => Math.Round(s))
+            .Select(RoundedColumnValue)
             .Select(Convert.ToBoolean)
             .ToArray();
     }
@@ -70,9 +70,56 @@ public static class Calculators
         return summedArray;
     }
 
+    private static int RoundedColumnValue(double columnValue)
+    {
+        return (int)Math.Round(columnValue);
+    }
+
+    private static int MostCommonBitValueInColumn(IEnumerable<int> columnValues)
+    {
+        var average = columnValues.Average();
+
+        return RoundedColumnValue(average);
+    }
+
+    private static int FilterInputValuesForEnvironmentRatings(List<int[]> inputs, bool findMostCommon = true)
+    {
+        var inputLength = inputs[0].Length;
+
+        for (int i = 0; i < inputLength; i++)
+        {
+            var columnIndex = i;
+
+            var tempColumn = inputs.Select(row => row[columnIndex]);
+
+            var mostCommonBitValueInColumn = MostCommonBitValueInColumn(tempColumn);
+
+
+            switch (findMostCommon)
+            {
+                case true:
+                    inputs.RemoveAll(s => s[columnIndex] != mostCommonBitValueInColumn);
+                    break;
+                case false:
+                    inputs.RemoveAll(s => s[columnIndex] == mostCommonBitValueInColumn);
+                    break;
+            }
+            
+            if (inputs.Count == 1) 
+                break;
+        }
+
+        var finalValueBools = inputs
+            .Single()
+            .Select(Convert.ToBoolean)
+            .ToArray()
+            .EnsureArrayEndianness();
+
+        return new BitArray(finalValueBools).GetIntFromBitArray();
+    }
     public static int CalculateOxygenRate(List<int[]> inputs)
     {
-        throw new NotImplementedException();
+        return FilterInputValuesForEnvironmentRatings(inputs);
     }
 
     public static int CalculateCarbonDioxideRate(List<int[]> inputs)

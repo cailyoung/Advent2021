@@ -158,4 +158,31 @@ public class UnitTest1
         
         Assert.Equal(1, Calculators.RoundedColumnValue(midpoint));
     }
+
+    [Fact]
+    public void CalculatorsDontMutateInput()
+    {
+        var testInput = new List<int[]>()
+        {
+            new[] { 0, 0, 1, 0, 0 },
+            new[] { 1, 1, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 0 },
+            new[] { 1, 0, 1, 1, 1 },
+            new[] { 1, 0, 1, 0, 1 },
+            new[] { 0, 1, 1, 1, 1 },
+            new[] { 0, 0, 1, 1, 1 },
+            new[] { 1, 1, 1, 0, 0 },
+            new[] { 1, 0, 0, 0, 0 },
+            new[] { 1, 1, 0, 0, 1 },
+            new[] { 0, 0, 0, 1, 0 },
+            new[] { 0, 1, 0, 1, 0 }
+        };
+
+        var inputCopy = new List<int[]>(testInput);
+
+        Calculators.CalculateOxygenRate(testInput);
+
+        inputCopy.Should().BeEquivalentTo(testInput);
+    }
+    
 }

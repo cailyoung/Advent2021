@@ -70,9 +70,9 @@ public static class Calculators
         return summedArray;
     }
 
-    private static int RoundedColumnValue(double columnValue)
+    public static int RoundedColumnValue(double columnValue)
     {
-        return (int)Math.Round(columnValue);
+        return (int)Math.Round(columnValue, MidpointRounding.AwayFromZero);
     }
 
     private static int MostCommonBitValueInColumn(IEnumerable<int> columnValues)

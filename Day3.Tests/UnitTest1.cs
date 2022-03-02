@@ -150,4 +150,12 @@ public class UnitTest1
 
         Assert.Equal(expectedOutput, actualOutput);
     }
+
+    [Fact]
+    public void RoundingIsCorrect()
+    {
+        var midpoint = 0.5;
+        
+        Assert.Equal(1, Calculators.RoundedColumnValue(midpoint));
+    }
 }

@@ -124,7 +124,7 @@ public static class Calculators
 
     public static int CalculateCarbonDioxideRate(List<int[]> inputs)
     {
-        throw new NotImplementedException();
+        return FilterInputValuesForEnvironmentRatings(inputs, false);
     }
 }
 

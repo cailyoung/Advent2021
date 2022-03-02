@@ -84,13 +84,15 @@ public static class Calculators
 
     private static int FilterInputValuesForEnvironmentRatings(List<int[]> inputs, bool findMostCommon = true)
     {
-        var inputLength = inputs[0].Length;
+        var listCopy = new List<int[]>(inputs);
+        
+        var inputLength = listCopy[0].Length;
 
         for (int i = 0; i < inputLength; i++)
         {
             var columnIndex = i;
 
-            var tempColumn = inputs.Select(row => row[columnIndex]);
+            var tempColumn = listCopy.Select(row => row[columnIndex]);
 
             var mostCommonBitValueInColumn = MostCommonBitValueInColumn(tempColumn);
 
@@ -98,18 +100,18 @@ public static class Calculators
             switch (findMostCommon)
             {
                 case true:
-                    inputs.RemoveAll(s => s[columnIndex] != mostCommonBitValueInColumn);
+                    listCopy.RemoveAll(s => s[columnIndex] != mostCommonBitValueInColumn);
                     break;
                 case false:
-                    inputs.RemoveAll(s => s[columnIndex] == mostCommonBitValueInColumn);
+                    listCopy.RemoveAll(s => s[columnIndex] == mostCommonBitValueInColumn);
                     break;
             }
             
-            if (inputs.Count == 1) 
+            if (listCopy.Count == 1) 
                 break;
         }
 
-        var finalValueBools = inputs
+        var finalValueBools = listCopy
             .Single()
             .Select(Convert.ToBoolean)
             .ToArray()

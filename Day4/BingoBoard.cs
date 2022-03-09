@@ -5,6 +5,7 @@ namespace Day4;
 public class BingoBoard
 {
     private List<Position> Board { get; }
+    public bool IsWinningBoard => false;
 
     public BingoBoard(List<Position> board)
     {

@@ -26,7 +26,7 @@ public class BingoBoard
 public class Position
 {
     private int Value { get; }
-    private bool Called { get; }
+    public bool Called { get; set; }
     internal int CoordinateX { get; }
     internal int CoordinateY { get; }
 
@@ -38,10 +38,10 @@ public class Position
         CoordinateY = coordinateY;
     }
 
-    public static IEnumerable<Position> GeneratePositionRow(IEnumerable<int> values, int rowNumber)
+    public static IEnumerable<Position> GeneratePositionRow(IEnumerable<int> values, int rowNumber, bool called = false)
     {
         return Enumerable
             .Range(0, values.Count())
-            .Select((v, i) => new Position(i, rowNumber, v));
+            .Select((v, i) => new Position(i, rowNumber, v, called));
     }
 }

@@ -72,4 +72,24 @@ public class UnitTest1
 
         actualBoardOne.Should().BeEquivalentTo(expectedBoardOne);
     }
+
+    [Fact]
+    public void WinningBoardHorizontalIsCorrect()
+    {
+        var positionList = new List<Position>();
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 1, true));
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 2));
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 3));
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 4));
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 5));
+        
+        var winningBoard = new BingoBoard(positionList);
+
+        winningBoard.IsWinningBoard.Should().BeTrue();
+    }
 }

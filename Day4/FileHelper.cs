@@ -15,4 +15,9 @@ public class FileHelper
 
         return firstLine.Split(',').Select(s => Convert.ToInt32(s));
     }
+
+    public static IEnumerable<BingoBoard> ExtractBingoBoardsFromFile(string[] input, int boardHeight, int boardWidth)
+    {
+        return new List<BingoBoard>();
+    }
 }

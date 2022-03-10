@@ -15,7 +15,8 @@ public class GameOperations
 
         return new GameStep(
             CallNumberOnBoards(numberToCall, previousStep.Boards),
-            previousStep.BingoNumbersToCall.Skip(1).ToImmutableList());
+            previousStep.BingoNumbersToCall.Skip(1).ToImmutableList(),
+            numberToCall);
     }
 
     private static ImmutableList<BingoBoard> CallNumberOnBoards(int numberToCall, ImmutableList<BingoBoard> boards)
@@ -23,5 +24,18 @@ public class GameOperations
         return new List<BingoBoard>(boards
             .Select(board => board.ApplyCalledNumber(board, numberToCall)))
             .ToImmutableList();
+    }
+
+    public static GameStep RunGameUntilWin(GameStep initialGameStep)
+    {
+        var gameOver = false;
+        var currentGameStep = new GameStep(initialGameStep.Boards, initialGameStep.BingoNumbersToCall);
+        while (gameOver == false)
+        {
+            currentGameStep = CallNextBingoNumber(currentGameStep);
+            gameOver = currentGameStep.Boards.Exists(board => board.IsWinningBoard);
+        }
+
+        return currentGameStep;
     }
 }

@@ -321,7 +321,7 @@ public class UnitTest1
         
         Assert.Equal(24, finalCalledNumber);
 
-        var winningBoard = finalState.Boards.Single(board => board.IsWinningBoard);
+        var winningBoard = GameOperations.GetWinningBoards(finalState).Single();
 
         var totalUncalledValuesFromWinningBoard = winningBoard.UnCalledPositions().Sum(position => position.Value);
         

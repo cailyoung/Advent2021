@@ -38,4 +38,9 @@ public static class GameOperations
 
         return currentGameStep;
     }
+
+    public static IEnumerable<BingoBoard> GetWinningBoards(GameStep finalStep)
+    {
+        return finalStep.Boards.Where(board => board.IsWinningBoard);
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections.Immutable;
 
 namespace Day4;
 
-public class GameOperations
+public static class GameOperations
 {
     public static GameStep CallNextBingoNumber(GameStep previousStep)
     {

@@ -18,6 +18,23 @@ public class FileHelper
 
     public static IEnumerable<BingoBoard> ExtractBingoBoardsFromFile(string[] input, int boardHeight, int boardWidth)
     {
-        return new List<BingoBoard>();
+        // first row is the called number sequence, drop it
+        var trimmedInput = input.Skip(1).ToList();
+
+        var chunkedInput = trimmedInput
+            .Chunk(boardHeight)
+            .Where(chunk => chunk.Length == boardHeight)
+            .Select(strings => strings.Select(s => s.Trim()));
+
+        var convertedBoards = chunkedInput
+            .Select(c => c
+                .SelectMany(s => s.Split(" ", StringSplitOptions.TrimEntries))
+                .Where(s => !string.IsNullOrEmpty(s))
+                .Select(s => Convert.ToInt32(s))
+                .Chunk(boardWidth)
+                .SelectMany((rowValues, index) => Position.GeneratePositionRow(rowValues, index)))
+            .Select(b => new BingoBoard(b.ToList()));
+        
+        return new List<BingoBoard>(convertedBoards);
     }
 }

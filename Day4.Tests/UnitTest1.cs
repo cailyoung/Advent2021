@@ -323,7 +323,7 @@ public class UnitTest1
 
         var winningBoard = GameOperations.GetWinningBoards(finalState).Single();
 
-        var totalUncalledValuesFromWinningBoard = winningBoard.UnCalledPositions().Sum(position => position.Value);
+        var totalUncalledValuesFromWinningBoard = winningBoard.TotalUncalledValues;
         
         Assert.Equal(188, totalUncalledValuesFromWinningBoard);
     }

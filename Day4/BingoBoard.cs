@@ -6,6 +6,7 @@ public class BingoBoard
 {
     private List<Position> Board { get; }
     public bool IsWinningBoard => CalculateIfWinning();
+    public int TotalUncalledValues => UnCalledPositions().Sum(p => p.Value);
 
     public BingoBoard(List<Position> board)
     {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
+using System.Security.Cryptography;
 using FluentAssertions;
 using Xunit;
 
@@ -217,7 +218,49 @@ public class UnitTest1
         {
             7, 4, 9, 5, 11
         };
-        var previousStep = new GameStep(initialBoardList, ImmutableList<int>.Empty);
+        var previousStep = new GameStep(initialBoardList, initialNumbersToCall.ToImmutableList());
+
+        var nextStep = GameOperations.CallNextBingoNumber(previousStep);
+
+        var calledCount = nextStep.Boards.SelectMany(board => board.CalledPositions()).Count();
+        var calledViolations = nextStep.Boards.SelectMany(board => board.CalledPositions())
+            .Where(position => position.Value != initialNumbersToCall.First());
+        
+        Assert.Equal(3, calledCount);
+        Assert.Empty(calledViolations);
     }
     
+    [Fact]
+    public void CallingFirstNumberRemovesItFromTheList()
+    {
+        var positionListOne = new List<Position>();
+        positionListOne.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 0));
+        positionListOne.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 8, 2, 23, 4, 24 }, 1));
+        positionListOne.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 21, 9, 14, 16, 7 }, 2));
+        positionListOne.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 6, 10, 3, 18, 5 }, 3));
+        positionListOne.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 1, 12, 20, 15, 19 }, 4));
+        
+        var boardOne = new BingoBoard(positionListOne);
+        
+        var initialBoardList = new List<BingoBoard> { boardOne };
+        var initialNumbersToCall = new[]
+        {
+            7, 4, 9, 5, 11
+        };
+
+        var expectedNumbersToCallNext = new[]
+        {
+            4, 9, 5, 11
+        };
+        var previousStep = new GameStep(initialBoardList, initialNumbersToCall.ToImmutableList());
+
+        var nextStep = GameOperations.CallNextBingoNumber(previousStep);
+
+        nextStep.BingoNumbersToCall.Should().BeEquivalentTo(expectedNumbersToCallNext);
+    }
 }

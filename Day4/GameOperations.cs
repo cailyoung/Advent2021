@@ -4,7 +4,7 @@ namespace Day4;
 
 public class GameOperations
 {
-    public GameStep CallNextBingoNumber(GameStep previousStep)
+    public static GameStep CallNextBingoNumber(GameStep previousStep)
     {
         if (previousStep.BingoNumbersToCall.Count == 0)
         {
@@ -18,7 +18,7 @@ public class GameOperations
             previousStep.BingoNumbersToCall.Skip(1).ToImmutableList());
     }
 
-    private List<BingoBoard> CallNumberOnBoards(int numberToCall, List<BingoBoard> boards)
+    private static List<BingoBoard> CallNumberOnBoards(int numberToCall, List<BingoBoard> boards)
     {
         return boards;
     }

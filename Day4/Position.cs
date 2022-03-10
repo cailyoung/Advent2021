@@ -2,7 +2,7 @@ namespace Day4;
 
 public class Position
 {
-    private int Value { get; }
+    public int Value { get; }
     public bool Called { get; set; }
     internal int CoordinateX { get; }
     internal int CoordinateY { get; }

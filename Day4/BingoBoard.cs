@@ -23,4 +23,9 @@ public class BingoBoard
 
         return columnWinCondition || rowWinCondition;
     }
+
+    public List<Position> CalledPositions()
+    {
+        return Board.Where(p => p.Called).ToList();
+    }
 }

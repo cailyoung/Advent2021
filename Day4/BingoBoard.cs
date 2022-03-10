@@ -9,17 +9,7 @@ public class BingoBoard
     {
         Board = board;
     }
-
-    public IEnumerable<Position> GetRow (int rowNumber)
-    {
-        return Board.Where(position => position.CoordinateY == rowNumber);
-    }
     
-    public IEnumerable<Position> GetColumn (int rowNumber)
-    {
-        return Board.Where(position => position.CoordinateX == rowNumber);
-    }
-
     private bool CalculateIfWinning()
     {
         var columnGroups = Board.GroupBy(position => position.CoordinateX);

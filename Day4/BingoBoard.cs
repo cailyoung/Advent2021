@@ -1,3 +1,5 @@
+using System.Linq.Expressions;
+
 namespace Day4;
 
 public class BingoBoard
@@ -27,5 +29,17 @@ public class BingoBoard
     public List<Position> CalledPositions()
     {
         return Board.Where(p => p.Called).ToList();
+    }
+
+    public BingoBoard ApplyCalledNumber(BingoBoard oldBoard, int calledNumber)
+    {
+        var newBoard = new BingoBoard(oldBoard.Board);
+
+        foreach (var position in newBoard.Board.Where(position => position.Value == calledNumber))
+        {
+            position.Called = true;
+        }
+
+        return newBoard;
     }
 }

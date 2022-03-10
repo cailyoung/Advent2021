@@ -212,8 +212,8 @@ public class UnitTest1
             .GeneratePositionRow(new List<int>() { 2, 0, 12, 3, 7 }, 4));
         
         var boardThree = new BingoBoard(positionListThree);
-        
-        var initialBoardList = new List<BingoBoard> { boardOne, boardTwo, boardThree };
+
+        var initialBoardList = ImmutableList.Create(boardOne, boardTwo, boardThree);
         var initialNumbersToCall = new[]
         {
             7, 4, 9, 5, 11
@@ -247,7 +247,7 @@ public class UnitTest1
         
         var boardOne = new BingoBoard(positionListOne);
         
-        var initialBoardList = new List<BingoBoard> { boardOne };
+        var initialBoardList = ImmutableList.Create(boardOne);
         var initialNumbersToCall = new[]
         {
             7, 4, 9, 5, 11

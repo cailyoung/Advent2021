@@ -4,11 +4,11 @@ namespace Day4;
 
 public class GameStep
 {
-    public List<BingoBoard> Boards { get; }
+    public ImmutableList<BingoBoard> Boards { get; }
 
     public ImmutableList<int> BingoNumbersToCall { get; }
 
-    public GameStep(List<BingoBoard> boards, ImmutableList<int> bingoNumbersToCall)
+    public GameStep(ImmutableList<BingoBoard> boards, ImmutableList<int> bingoNumbersToCall)
     {
         Boards = boards;
         BingoNumbersToCall = bingoNumbersToCall;

@@ -18,8 +18,10 @@ public class GameOperations
             previousStep.BingoNumbersToCall.Skip(1).ToImmutableList());
     }
 
-    private static List<BingoBoard> CallNumberOnBoards(int numberToCall, List<BingoBoard> boards)
+    private static ImmutableList<BingoBoard> CallNumberOnBoards(int numberToCall, ImmutableList<BingoBoard> boards)
     {
-        return boards;
+        return new List<BingoBoard>(boards
+            .Select(board => board.ApplyCalledNumber(board, numberToCall)))
+            .ToImmutableList();
     }
 }

@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 namespace Day4;
 
 public class FileHelper
@@ -16,7 +18,7 @@ public class FileHelper
         return firstLine.Split(',').Select(s => Convert.ToInt32(s));
     }
 
-    public static IEnumerable<BingoBoard> ExtractBingoBoardsFromFile(string[] input, int boardHeight, int boardWidth)
+    public static ImmutableList<BingoBoard> ExtractBingoBoardsFromFile(string[] input, int boardHeight, int boardWidth)
     {
         // first row is the called number sequence, drop it
         var trimmedInput = input.Skip(1).ToList();
@@ -35,6 +37,6 @@ public class FileHelper
                 .SelectMany((rowValues, index) => Position.GeneratePositionRow(rowValues, index)))
             .Select(b => new BingoBoard(b.ToList()));
         
-        return new List<BingoBoard>(convertedBoards);
+        return convertedBoards.ToImmutableList();
     }
 }

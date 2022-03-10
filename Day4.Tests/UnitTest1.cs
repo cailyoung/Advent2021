@@ -58,15 +58,15 @@ public class UnitTest1
         var expectedBoardOnePositions = new List<Position>();
 
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int> { 22, 13, 17, 11, 0 }, 1));
+            .GeneratePositionRow(new List<int> { 22, 13, 17, 11, 0 }, 0));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int> { 8, 2, 23, 4, 24 }, 2));
+            .GeneratePositionRow(new List<int> { 8, 2, 23, 4, 24 }, 1));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int> { 21, 9, 14, 16, 7 }, 3));
+            .GeneratePositionRow(new List<int> { 21, 9, 14, 16, 7 }, 2));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int> { 6, 10, 3, 18, 5 }, 4));
+            .GeneratePositionRow(new List<int> { 6, 10, 3, 18, 5 }, 3));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int> { 1, 12, 20, 15, 19 }, 5));
+            .GeneratePositionRow(new List<int> { 1, 12, 20, 15, 19 }, 4));
 
         var expectedBoardOne = new BingoBoard(expectedBoardOnePositions);
 
@@ -326,5 +326,7 @@ public class UnitTest1
         var totalUncalledValuesFromWinningBoard = winningBoard.TotalUncalledValues;
         
         Assert.Equal(188, totalUncalledValuesFromWinningBoard);
+        
+        Assert.Equal(4512, totalUncalledValuesFromWinningBoard * finalCalledNumber);
     }
 }

@@ -30,6 +30,11 @@ public class BingoBoard
     {
         return Board.Where(p => p.Called).ToList();
     }
+    
+    public List<Position> UnCalledPositions()
+    {
+        return Board.Except(CalledPositions()).ToList();
+    }
 
     public BingoBoard ApplyCalledNumber(BingoBoard oldBoard, int calledNumber)
     {

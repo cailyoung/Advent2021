@@ -317,7 +317,14 @@ public class UnitTest1
         var initialStep = new GameStep(initialBoardList, initialNumbersToCall.ToImmutableList());
 
         var finalState = GameOperations.RunGameUntilWin(initialStep);
+        var finalCalledNumber = finalState.LastCalledNumber;
         
-        Assert.Equal(24, finalState.LastCalledNumber);
+        Assert.Equal(24, finalCalledNumber);
+
+        var winningBoard = finalState.Boards.Single(board => board.IsWinningBoard);
+
+        var totalUncalledValuesFromWinningBoard = winningBoard.UnCalledPositions().Sum(position => position.Value);
+        
+        Assert.Equal(188, totalUncalledValuesFromWinningBoard);
     }
 }

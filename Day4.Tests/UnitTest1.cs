@@ -56,15 +56,15 @@ public class UnitTest1
         var expectedBoardOnePositions = new List<Position>();
 
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 1));
+            .GeneratePositionRow(new List<int> { 22, 13, 17, 11, 0 }, 1));
         expectedBoardOnePositions.AddRange(Position
             .GeneratePositionRow(new List<int> { 8, 2, 23, 4, 24 }, 2));
         expectedBoardOnePositions.AddRange(Position
             .GeneratePositionRow(new List<int> { 21, 9, 14, 16, 7 }, 3));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow(new List<int>{ 6, 10, 3, 18, 5 }, 4));
+            .GeneratePositionRow(new List<int> { 6, 10, 3, 18, 5 }, 4));
         expectedBoardOnePositions.AddRange(Position
-            .GeneratePositionRow( new List<int> { 1, 12, 20, 15, 19 }, 5));
+            .GeneratePositionRow(new List<int> { 1, 12, 20, 15, 19 }, 5));
 
         var expectedBoardOne = new BingoBoard(expectedBoardOnePositions);
 
@@ -78,18 +78,92 @@ public class UnitTest1
     {
         var positionList = new List<Position>();
         positionList.AddRange(Position
-            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 1, true));
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 0, true));
+        positionList.AddRange(Position
+            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 1));
         positionList.AddRange(Position
             .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 2));
         positionList.AddRange(Position
             .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 3));
         positionList.AddRange(Position
             .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 4));
-        positionList.AddRange(Position
-            .GeneratePositionRow(new List<int>() { 22, 13, 17, 11, 0 }, 5));
         
         var winningBoard = new BingoBoard(positionList);
 
         winningBoard.IsWinningBoard.Should().BeTrue();
     }
+    [Fact]
+    public void WinningBoardVerticalIsCorrect()
+    {
+        var positionList = new List<Position>
+        {
+            new(0, 0, 0, true),
+            new(0, 1, 0, true),
+            new(0, 2, 0, true),
+            new(0, 3, 0, true),
+            new(0, 4, 0, true),
+            new(1, 0, 0),
+            new(1, 1, 0),
+            new(1, 2, 0),
+            new(1, 3, 0),
+            new(1, 4, 0),
+            new(2, 0, 0),
+            new(2, 1, 0),
+            new(2, 2, 0),
+            new(2, 3, 0),
+            new(2, 4, 0),
+            new(3, 0, 0),
+            new(3, 1, 0),
+            new(3, 2, 0),
+            new(3, 3, 0),
+            new(3, 4, 0),
+            new(4, 0, 0),
+            new(4, 1, 0),
+            new(4, 2, 0),
+            new(4, 3, 0),
+            new(4, 4, 0)
+        };
+
+        var winningBoard = new BingoBoard(positionList);
+
+        winningBoard.IsWinningBoard.Should().BeTrue();
+    }
+    
+    [Fact]
+    public void WinningBoardVerticalAndHorizontalIsCorrect()
+    {
+        var positionList = new List<Position>
+        {
+            new(0, 0, 0, true),
+            new(0, 1, 0, true),
+            new(0, 2, 0, true),
+            new(0, 3, 0, true),
+            new(0, 4, 0, true),
+            new(1, 0, 0, true),
+            new(1, 1, 0),
+            new(1, 2, 0),
+            new(1, 3, 0),
+            new(1, 4, 0),
+            new(2, 0, 0, true),
+            new(2, 1, 0),
+            new(2, 2, 0),
+            new(2, 3, 0),
+            new(2, 4, 0),
+            new(3, 0, 0, true),
+            new(3, 1, 0),
+            new(3, 2, 0),
+            new(3, 3, 0),
+            new(3, 4, 0),
+            new(4, 0, 0, true),
+            new(4, 1, 0),
+            new(4, 2, 0),
+            new(4, 3, 0),
+            new(4, 4, 0)
+        };
+
+        var winningBoard = new BingoBoard(positionList);
+
+        winningBoard.IsWinningBoard.Should().BeTrue();
+    }
+    
 }

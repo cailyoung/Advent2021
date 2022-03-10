@@ -1,11 +1,9 @@
-using System.Windows.Markup;
-
 namespace Day4;
 
 public class BingoBoard
 {
     private List<Position> Board { get; }
-    public bool IsWinningBoard => false;
+    public bool IsWinningBoard => CalculateIfWinning();
 
     public BingoBoard(List<Position> board)
     {
@@ -20,6 +18,20 @@ public class BingoBoard
     public IEnumerable<Position> GetColumn (int rowNumber)
     {
         return Board.Where(position => position.CoordinateX == rowNumber);
+    }
+
+    private bool CalculateIfWinning()
+    {
+        var columnGroups = Board.GroupBy(position => position.CoordinateX);
+        var winningColumns = columnGroups.Where(c => c.All(position => position.Called));
+        var columnWinCondition = winningColumns.Any();
+        
+        var rowGroups = Board.GroupBy(position => position.CoordinateY);
+        var winningRows = rowGroups.Where(c => c.All(position => position.Called));
+        var rowWinCondition = winningRows.Any();
+
+
+        return columnWinCondition || rowWinCondition;
     }
 }
 
@@ -40,8 +52,10 @@ public class Position
 
     public static IEnumerable<Position> GeneratePositionRow(IEnumerable<int> values, int rowNumber, bool called = false)
     {
+        var valueArray = values.ToArray();
+        
         return Enumerable
-            .Range(0, values.Count())
-            .Select((v, i) => new Position(i, rowNumber, v, called));
+            .Range(0, valueArray.Length)
+            .Select((_, i) => new Position(i, rowNumber, valueArray[i], called));
     }
 }

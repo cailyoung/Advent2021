@@ -329,4 +329,21 @@ public class UnitTest1
         
         Assert.Equal(4512, totalUncalledValuesFromWinningBoard * finalCalledNumber);
     }
+
+    [Fact]
+    public void FullInputIsParsedCorrectly()
+    {
+        var rawInput = FileHelper.ExtractInputFromFile("../../../../Day4/bin/Debug/net6.0/day4input.txt");
+        
+        var startingBoards = FileHelper.ExtractBingoBoardsFromFile(rawInput, 5, 5);
+
+        var calledPositionViolations = startingBoards.Select(board => board.CalledPositions().Count).Any(s => s != 0);
+        
+        Assert.False(calledPositionViolations);
+        
+        var uncalledPositionViolations = startingBoards.Select(board => board.UnCalledPositions().Count).Any(s => s != 25);
+        
+        Assert.False(uncalledPositionViolations);
+
+    }
 }

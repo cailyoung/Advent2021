@@ -21,7 +21,7 @@ public class FileHelper
     public static ImmutableList<BingoBoard> ExtractBingoBoardsFromFile(string[] input, int boardHeight, int boardWidth)
     {
         // first row is the called number sequence, drop it
-        var trimmedInput = input.Skip(1).ToList();
+        var trimmedInput = input.Skip(1).Where(s => !string.IsNullOrEmpty(s)).ToList();
 
         var chunkedInput = trimmedInput
             .Chunk(boardHeight)

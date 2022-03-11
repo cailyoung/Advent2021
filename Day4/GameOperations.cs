@@ -41,11 +41,27 @@ public static class GameOperations
 
     public static GameStep RunGameUntilFinalWin(GameStep initialGameStep)
     {
-        return new GameStep(ImmutableList<BingoBoard>.Empty, ImmutableList<int>.Empty);
+        var loserBoardRemains = true;
+        var currentGameStep = new GameStep(initialGameStep.Boards, initialGameStep.BingoNumbersToCall);
+        var previousGameStep = new GameStep(ImmutableList<BingoBoard>.Empty, ImmutableList<int>.Empty);
+        while (loserBoardRemains)
+        {
+            currentGameStep = RunGameUntilWin(currentGameStep);
+            previousGameStep = currentGameStep;
+            currentGameStep = new GameStep(RemoveWinningBoards(currentGameStep.Boards), currentGameStep.BingoNumbersToCall, currentGameStep.LastCalledNumber);
+            loserBoardRemains = currentGameStep.Boards.Exists(board => !board.IsWinningBoard);
+        }
+
+        return previousGameStep;
     }
 
     public static IEnumerable<BingoBoard> GetWinningBoards(GameStep finalStep)
     {
         return finalStep.Boards.Where(board => board.IsWinningBoard);
+    }
+
+    private static ImmutableList<BingoBoard> RemoveWinningBoards(ImmutableList<BingoBoard> boards)
+    {
+        return new List<BingoBoard>(boards.Where(board => !board.IsWinningBoard)).ToImmutableList();
     }
 }

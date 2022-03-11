@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-
 namespace Day4;
 
 public class BingoBoard

@@ -17,3 +17,12 @@ var finalGameStep = GameOperations.RunGameUntilWin(initialGameStep);
 var finalScore = finalGameStep.LastCalledNumber * GameOperations.GetWinningBoards(finalGameStep).Single().TotalUncalledValues;
 
 Console.WriteLine($"Part 1 solution is {finalScore}");
+
+// Part 2
+
+var part2InitialStep = new GameStep(startingBoards, startingBingoNumbersToCall);
+var part2Final = GameOperations.RunGameUntilFinalWin(part2InitialStep);
+
+var part2FinalScore = part2Final.LastCalledNumber * GameOperations.GetWinningBoards(part2Final).Single().TotalUncalledValues;
+
+Console.WriteLine($"Part 2 solution is {part2FinalScore}");

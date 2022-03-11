@@ -39,6 +39,11 @@ public static class GameOperations
         return currentGameStep;
     }
 
+    public static GameStep RunGameUntilFinalWin(GameStep initialGameStep)
+    {
+        return new GameStep(ImmutableList<BingoBoard>.Empty, ImmutableList<int>.Empty);
+    }
+
     public static IEnumerable<BingoBoard> GetWinningBoards(GameStep finalStep)
     {
         return finalStep.Boards.Where(board => board.IsWinningBoard);

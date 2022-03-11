@@ -7,11 +7,12 @@ using Day4;
 
 var rawInput = FileHelper.ExtractInputFromFile("day4input.txt");
 
-var finalGameStep = GameOperations
-        .RunGameUntilWin(
-                new GameStep(FileHelper.ExtractBingoBoardsFromFile(rawInput, 5, 5),
-                    FileHelper.ExtractBingoNumbersFromFile(rawInput).ToImmutableList())
-                );
+var startingBoards = FileHelper.ExtractBingoBoardsFromFile(rawInput, 5, 5);
+var startingBingoNumbersToCall = FileHelper.ExtractBingoNumbersFromFile(rawInput).ToImmutableList();
+
+var initialGameStep = new GameStep(startingBoards, startingBingoNumbersToCall);
+
+var finalGameStep = GameOperations.RunGameUntilWin(initialGameStep);
 
 var finalScore = finalGameStep.LastCalledNumber * GameOperations.GetWinningBoards(finalGameStep).Single().TotalUncalledValues;
 

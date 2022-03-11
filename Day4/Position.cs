@@ -18,7 +18,7 @@ public class Position
     public static IEnumerable<Position> GeneratePositionRow(IEnumerable<int> values, int rowNumber, bool called = false)
     {
         var valueArray = values.ToArray();
-        
+
         return Enumerable
             .Range(0, valueArray.Length)
             .Select((_, i) => new Position(i, rowNumber, valueArray[i], called));

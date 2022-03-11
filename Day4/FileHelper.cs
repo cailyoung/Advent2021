@@ -36,7 +36,7 @@ public class FileHelper
                 .Chunk(boardWidth)
                 .SelectMany((rowValues, index) => Position.GeneratePositionRow(rowValues, index)))
             .Select(b => new BingoBoard(b.ToList()));
-        
+
         return convertedBoards.ToImmutableList();
     }
 }

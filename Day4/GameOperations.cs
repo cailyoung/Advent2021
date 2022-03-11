@@ -22,7 +22,7 @@ public static class GameOperations
     private static ImmutableList<BingoBoard> CallNumberOnBoards(int numberToCall, ImmutableList<BingoBoard> boards)
     {
         return new List<BingoBoard>(boards
-            .Select(board => board.ApplyCalledNumber(board, numberToCall)))
+                .Select(board => board.ApplyCalledNumber(board, numberToCall)))
             .ToImmutableList();
     }
 

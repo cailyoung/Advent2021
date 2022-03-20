@@ -58,4 +58,18 @@ public class UnitTest1
 
         inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
     }
+
+    [Fact]
+    public void MapGridCanNotBeBuiltFromMixed()
+    {
+        var inputVentLines = new List<VentLine>
+        {
+            new("0,9", "5,9"),
+            new("8,0", "0,8"),
+            new("9,4", "3,4")
+
+        }.ToImmutableList();
+
+        Assert.Throws<ArgumentException>(() => new MapGrid(inputVentLines));
+    }
 }

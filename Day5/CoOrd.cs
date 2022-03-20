@@ -4,7 +4,7 @@ public class CoOrd
 {
     public int XValue { get; }
     public int YValue { get; }
-
+    public (int XValue, int YValue) CompoundCoordinate => new(XValue, YValue);
     public CoOrd(string textCoOrd)
     {
         XValue = Convert.ToInt32(textCoOrd.Split(",").First());

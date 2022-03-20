@@ -6,6 +6,9 @@ public class Calculators
 {
     public static ImmutableList<(CoOrd coOrd, int overlapCount)> Overlaps(MapGrid currentGrid)
     {
-        return ImmutableList<(CoOrd, int)>.Empty;
+        return currentGrid.CurrentMapGrid
+            .GroupBy(c => c.CompoundCoordinate)
+            .Select(row => new ValueTuple<CoOrd, int>(row.GetEnumerator().Current, row.Count()))
+            .ToImmutableList();
     }
 }

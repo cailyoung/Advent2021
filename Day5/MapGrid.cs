@@ -8,10 +8,15 @@ public class MapGrid
 
     public MapGrid(IEnumerable<VentLine> currentVentLines)
     {
-        if (currentVentLines.Any(line => line.Diagonal))
+        var ventLines = currentVentLines.ToList();
+        if (ventLines.Any(line => line.Diagonal))
         {
             throw new ArgumentException("Grids can only be built from horizontal and vertical lines");
         }
+
+        var workingList = ventLines.SelectMany(c => c.LineCoOrds);
+
+        CurrentMapGrid = workingList.ToImmutableList();
     }
 
 }

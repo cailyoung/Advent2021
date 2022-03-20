@@ -9,6 +9,7 @@ public class VentLine
     public ImmutableList<CoOrd> LineCoOrds => CalculateLineCoOrds();
     public bool Horizontal => Start.YValue == End.YValue;
     public bool Vertical => Start.XValue == End.XValue;
+
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {
         if (!Horizontal && !Vertical)
@@ -20,13 +21,13 @@ public class VentLine
         if (Horizontal)
         {
             var yValue = Start.YValue;
-            
+
             var xValues = new List<int>
             {
                 Start.XValue,
                 End.XValue
             };
-            
+
             var workingList = Enumerable.Range(xValues.Min(), xValues.Max() - xValues.Min() + 1)
                 .Select(xValue => new CoOrd(xValue, yValue))
                 .ToImmutableList();
@@ -37,20 +38,20 @@ public class VentLine
         if (Vertical)
         {
             var xValue = Start.XValue;
-            
+
             var yValues = new List<int>
             {
                 Start.YValue,
                 End.YValue
             };
-            
+
             var workingList = Enumerable.Range(yValues.Min(), yValues.Max() - yValues.Min() + 1)
                 .Select(yValue => new CoOrd(xValue, yValue))
                 .ToImmutableList();
 
-            return workingList; 
+            return workingList;
         }
-        
+
         return ImmutableList<CoOrd>.Empty;
     }
 

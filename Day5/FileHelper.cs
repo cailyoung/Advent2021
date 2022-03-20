@@ -22,27 +22,3 @@ public class FileHelper
     }
 
 }
-
-public class VentLine
-{
-    public CoOrd Start { get; }
-    public CoOrd End { get; }
-
-    public VentLine(string textCoOrdStart, string textCoOrdEnd)
-    {
-        Start = new CoOrd(textCoOrdStart);
-        End = new CoOrd(textCoOrdEnd);
-    }
-}
-
-public class CoOrd
-{
-    public int XValue { get; }
-    public int YValue { get; }
-
-    public CoOrd(string textCoOrd)
-    {
-        XValue = Convert.ToInt32(textCoOrd.Split(",").First());
-        YValue = Convert.ToInt32(textCoOrd.Split(",").Reverse().First());
-    }
-}

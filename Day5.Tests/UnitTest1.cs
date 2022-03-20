@@ -29,4 +29,19 @@ public class UnitTest1
 
         output.Should().BeEquivalentTo(expectedOutput);
     }
+
+    [Fact]
+    public void CorrectLineCoOrdsReturned()
+    {
+        var inputVentLine = new VentLine("1,1", "1,3");
+
+        var expectedCoOrds = new List<CoOrd>
+        {
+            new("1,1"),
+            new("1,2"),
+            new("1,3")
+        }.ToImmutableList();
+
+        inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
+    }
 }

@@ -23,12 +23,6 @@ public class VentLine
     public CoOrd Start { get; }
     public CoOrd End { get; }
 
-    public VentLine(CoOrd start, CoOrd end)
-    {
-        Start = start;
-        End = end;
-    }
-
     public VentLine(string textCoOrdStart, string textCoOrdEnd)
     {
         Start = new CoOrd(textCoOrdStart);
@@ -40,12 +34,6 @@ public class CoOrd
 {
     public int XValue { get; }
     public int YValue { get; }
-
-    public CoOrd(int xValue, int yValue)
-    {
-        XValue = xValue;
-        YValue = yValue;
-    }
 
     public CoOrd(string textCoOrd)
     {

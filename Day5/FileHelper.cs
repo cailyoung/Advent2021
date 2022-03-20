@@ -13,7 +13,12 @@ public class FileHelper
 
     public static ImmutableList<VentLine> ExtractVentLinesFromFile(string[] input)
     {
-        return ImmutableList<VentLine>.Empty;
+        var workingList = input
+            .Select(row => row.Split(" -> "))
+            .Select(coOrdPair => new VentLine(coOrdPair[0], coOrdPair[1]))
+            .ToImmutableList();
+
+        return workingList;
     }
 
 }

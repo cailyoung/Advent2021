@@ -31,7 +31,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void CorrectLineCoOrdsReturned()
+    public void CorrectVerticalLineCoOrdsReturned()
     {
         var inputVentLine = new VentLine("1,1", "1,3");
 
@@ -40,6 +40,20 @@ public class UnitTest1
             new("1,1"),
             new("1,2"),
             new("1,3")
+        }.ToImmutableList();
+
+        inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
+    }
+    [Fact]
+    public void CorrectHorizontalLineCoOrdsReturned()
+    {
+        var inputVentLine = new VentLine("1,1", "3,1");
+
+        var expectedCoOrds = new List<CoOrd>
+        {
+            new("1,1"),
+            new("2,1"),
+            new("3,1")
         }.ToImmutableList();
 
         inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);

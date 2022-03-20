@@ -12,12 +12,6 @@ public class VentLine
 
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {
-        if (!Horizontal && !Vertical)
-        {
-            // not in spec (yet?)
-            return ImmutableList<CoOrd>.Empty;
-        }
-
         if (Horizontal)
         {
             var yValue = Start.YValue;

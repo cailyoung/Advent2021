@@ -37,9 +37,9 @@ public class UnitTest1
 
         var expectedCoOrds = new List<CoOrd>
         {
-            new("1,1"),
-            new("1,2"),
-            new("1,3")
+            new(1,1),
+            new(1,2),
+            new(1,3)
         }.ToImmutableList();
 
         inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
@@ -51,9 +51,9 @@ public class UnitTest1
 
         var expectedCoOrds = new List<CoOrd>
         {
-            new("1,1"),
-            new("2,1"),
-            new("3,1")
+            new(1,1),
+            new(2,1),
+            new(3,1)
         }.ToImmutableList();
 
         inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);

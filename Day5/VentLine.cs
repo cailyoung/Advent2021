@@ -9,6 +9,7 @@ public class VentLine
     public ImmutableList<CoOrd> LineCoOrds => CalculateLineCoOrds();
     public bool Horizontal => Start.YValue == End.YValue;
     public bool Vertical => Start.XValue == End.XValue;
+    public bool Diagonal => !Horizontal && !Vertical;
 
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {

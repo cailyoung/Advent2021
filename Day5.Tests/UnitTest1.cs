@@ -72,4 +72,20 @@ public class UnitTest1
 
         Assert.Throws<ArgumentException>(() => new MapGrid(inputVentLines));
     }
+    
+    [Fact]
+    public void MapGridCanBeBuilt()
+    {
+        var inputVentLines = new List<VentLine>
+        {
+            new("0,9", "5,9"),
+            new("8,8", "0,8"),
+            new("9,4", "3,4")
+
+        }.ToImmutableList();
+
+        var exception = Record.Exception(() => new MapGrid(inputVentLines));
+        
+        Assert.Null(exception);
+    }
 }

@@ -8,7 +8,7 @@ public class MapGrid
 
     public MapGrid(IEnumerable<VentLine> currentVentLines)
     {
-        if (currentVentLines.Any(line => !line.Horizontal || !line.Vertical))
+        if (currentVentLines.Any(line => line.Diagonal))
         {
             throw new ArgumentException("Grids can only be built from horizontal and vertical lines");
         }

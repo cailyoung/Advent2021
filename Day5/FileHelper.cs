@@ -20,5 +20,4 @@ public class FileHelper
 
         return workingList;
     }
-
 }

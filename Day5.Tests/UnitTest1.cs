@@ -165,9 +165,7 @@ public class UnitTest1
         var rawInput = FileHelper.ExtractInputFromFile("../../../../Day5/bin/Debug/net6.0/day5input.txt");
 
         var parsedInput = FileHelper
-            .ExtractVentLinesFromFile(rawInput)
-            .Where(l => !l.Diagonal)
-            .ToImmutableList();
+            .ExtractVentLinesFromFile(rawInput);
 
         var violations = parsedInput.Where(line => !FullVentLineCoOrdsContainStartOrEnd(line));
         

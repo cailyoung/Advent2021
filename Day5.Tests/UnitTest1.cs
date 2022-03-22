@@ -137,8 +137,7 @@ public class UnitTest1
 ".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
 
         var filteredInput = FileHelper
-            .ExtractVentLinesFromFile(rawInput)
-            .ToImmutableList();
+            .ExtractVentLinesFromFile(rawInput);
 
         var result = Calculators
             .Overlaps(new MapGrid(filteredInput))

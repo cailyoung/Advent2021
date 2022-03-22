@@ -148,14 +148,13 @@ public class UnitTest1
     }
 
     [Fact]
-    public void FullInputAllNonDiagonalLinesHaveLength()
+    public void FullInputAllLinesHaveLength()
     {
         var rawInput = FileHelper.ExtractInputFromFile("../../../../Day5/bin/Debug/net6.0/day5input.txt");
 
         var parsedInput = FileHelper.ExtractVentLinesFromFile(rawInput);
 
         var violations = parsedInput
-            .Where(line => !line.Diagonal)
             .Count(line => line.LineCoOrds.Count < 1);
         
         Assert.Equal(0, violations);

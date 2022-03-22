@@ -22,21 +22,14 @@ public class VentLine
 
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {
-        switch (Slope)
+        return Slope switch
         {
-            case SlopeOptions.Horizontal:
-                return GenerateHorizontalFullCoOrds();
-            case SlopeOptions.Vertical:
-                return GenerateVerticalFullCoOrds();
-            case SlopeOptions.Diagonal:
-                return GenerateDiagonalFullCoOrds();
-            case SlopeOptions.Unknown:
-                throw new ArgumentException("This isn't a diagonal");
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-        
-        return ImmutableList<CoOrd>.Empty;
+            SlopeOptions.Horizontal => GenerateHorizontalFullCoOrds(),
+            SlopeOptions.Vertical => GenerateVerticalFullCoOrds(),
+            SlopeOptions.Diagonal => GenerateDiagonalFullCoOrds(),
+            SlopeOptions.Unknown => throw new ArgumentException("This isn't a diagonal"),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
     private ImmutableList<CoOrd> GenerateVerticalFullCoOrds()

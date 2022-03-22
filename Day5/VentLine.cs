@@ -29,7 +29,7 @@ public class VentLine
             case SlopeOptions.Vertical:
                 return GenerateVerticalFullCoOrds();
             case SlopeOptions.Diagonal:
-                break;
+                return GenerateDiagonalFullCoOrds();
             case SlopeOptions.Unknown:
                 throw new ArgumentException("This isn't a diagonal");
             default:
@@ -71,6 +71,26 @@ public class VentLine
             .ToImmutableList();
 
         return workingList;
+    }
+    
+    private ImmutableList<CoOrd> GenerateDiagonalFullCoOrds()
+    {
+        var yValues = new List<int>
+        {
+            Start.YValue,
+            End.YValue
+        };
+
+        var xValues = new List<int>
+        {
+            Start.XValue,
+            End.XValue
+        };
+
+        var xRange = Enumerable.Range(xValues.Min(), xValues.Max() - xValues.Min() + 1);
+        var yRange = Enumerable.Range(yValues.Min(), yValues.Max() - yValues.Min() + 1);
+
+        return xRange.Zip(yRange, (x, y) => new CoOrd(x, y)).ToImmutableList();
     }
 
     public VentLine(string textCoOrdStart, string textCoOrdEnd)

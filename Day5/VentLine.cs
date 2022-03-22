@@ -80,10 +80,15 @@ public class VentLine
             End.XValue
         };
 
-        var xRange = Enumerable.Range(xValues.Min(), xValues.Max() - xValues.Min() + 1);
-        var yRange = Enumerable.Range(yValues.Min(), yValues.Max() - yValues.Min() + 1);
+        var xRange = GetSortedValuesRange(xValues, Start.XValue < End.XValue);
+        var yRange = GetSortedValuesRange(yValues, Start.YValue < End.YValue);
 
         return xRange.Zip(yRange, (x, y) => new CoOrd(x, y)).ToImmutableList();
+    }
+
+    private static IEnumerable<int> GetSortedValuesRange(List<int> values, bool ascending)
+    {
+        return Enumerable.Range(values.First(), values.Max() - values.Min() + 1);
     }
 
     public VentLine(string textCoOrdStart, string textCoOrdEnd)

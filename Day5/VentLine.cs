@@ -31,7 +31,7 @@ public class VentLine
             case SlopeOptions.Diagonal:
                 break;
             case SlopeOptions.Unknown:
-                throw new ArgumentException("This isn't a 45degree diagonal");
+                throw new ArgumentException("This isn't a diagonal");
             default:
                 throw new ArgumentOutOfRangeException();
         }

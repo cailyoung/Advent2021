@@ -22,41 +22,65 @@ public class VentLine
 
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {
+        switch (Slope)
+        {
+            case SlopeOptions.Horizontal:
+                break;
+            case SlopeOptions.Vertical:
+                break;
+            case SlopeOptions.Diagonal:
+                break;
+            case SlopeOptions.Unknown:
+                throw new ArgumentException("This isn't a 45degree diagonal");
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
         if (Horizontal)
         {
-            var yValue = Start.YValue;
-
-            var xValues = new List<int>
-            {
-                Start.XValue,
-                End.XValue
-            };
-
-            var workingList = Enumerable.Range(xValues.Min(), xValues.Max() - xValues.Min() + 1)
-                .Select(xValue => new CoOrd(xValue, yValue))
-                .ToImmutableList();
-
-            return workingList;
+            return GenerateHorizontalFullCoOrds();
         }
 
         if (Vertical)
         {
-            var xValue = Start.XValue;
-
-            var yValues = new List<int>
-            {
-                Start.YValue,
-                End.YValue
-            };
-
-            var workingList = Enumerable.Range(yValues.Min(), yValues.Max() - yValues.Min() + 1)
-                .Select(yValue => new CoOrd(xValue, yValue))
-                .ToImmutableList();
-
-            return workingList;
+            return GenerateVerticalFullCoOrds();
         }
 
         return ImmutableList<CoOrd>.Empty;
+    }
+
+    private ImmutableList<CoOrd> GenerateVerticalFullCoOrds()
+    {
+        var xValue = Start.XValue;
+
+        var yValues = new List<int>
+        {
+            Start.YValue,
+            End.YValue
+        };
+
+        var workingList = Enumerable.Range(yValues.Min(), yValues.Max() - yValues.Min() + 1)
+            .Select(yValue => new CoOrd(xValue, yValue))
+            .ToImmutableList();
+
+        return workingList;
+    }
+
+    private ImmutableList<CoOrd> GenerateHorizontalFullCoOrds()
+    {
+        var yValue = Start.YValue;
+
+        var xValues = new List<int>
+        {
+            Start.XValue,
+            End.XValue
+        };
+
+        var workingList = Enumerable.Range(xValues.Min(), xValues.Max() - xValues.Min() + 1)
+            .Select(xValue => new CoOrd(xValue, yValue))
+            .ToImmutableList();
+
+        return workingList;
     }
 
     public VentLine(string textCoOrdStart, string textCoOrdEnd)

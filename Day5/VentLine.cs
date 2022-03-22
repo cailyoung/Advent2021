@@ -25,9 +25,9 @@ public class VentLine
         switch (Slope)
         {
             case SlopeOptions.Horizontal:
-                break;
+                return GenerateHorizontalFullCoOrds();
             case SlopeOptions.Vertical:
-                break;
+                return GenerateVerticalFullCoOrds();
             case SlopeOptions.Diagonal:
                 break;
             case SlopeOptions.Unknown:
@@ -36,16 +36,6 @@ public class VentLine
                 throw new ArgumentOutOfRangeException();
         }
         
-        if (Horizontal)
-        {
-            return GenerateHorizontalFullCoOrds();
-        }
-
-        if (Vertical)
-        {
-            return GenerateVerticalFullCoOrds();
-        }
-
         return ImmutableList<CoOrd>.Empty;
     }
 

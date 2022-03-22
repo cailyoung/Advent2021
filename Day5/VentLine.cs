@@ -10,6 +10,15 @@ public class VentLine
     public bool Horizontal => Start.YValue == End.YValue;
     public bool Vertical => Start.XValue == End.XValue;
     public bool Diagonal => !Horizontal && !Vertical;
+    public SlopeOptions Slope { get; }
+
+    public enum SlopeOptions
+    {
+        Vertical,
+        Horizontal,
+        Diagonal,
+        Unknown
+    }
 
     private ImmutableList<CoOrd> CalculateLineCoOrds()
     {
@@ -54,5 +63,14 @@ public class VentLine
     {
         Start = new CoOrd(textCoOrdStart);
         End = new CoOrd(textCoOrdEnd);
+        Slope = GetSlope();
+    }
+
+    private SlopeOptions GetSlope()
+    {
+        if (Diagonal) return SlopeOptions.Diagonal;
+        if (Vertical) return SlopeOptions.Vertical;
+        if (Horizontal) return SlopeOptions.Horizontal;
+        return SlopeOptions.Unknown;
     }
 }

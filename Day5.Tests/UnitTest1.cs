@@ -117,4 +117,39 @@ public class UnitTest1
         
         Assert.Equal(5, result);
     }
+
+    [Fact]
+    public void FullInputAllNonDiagonalLinesHaveLength()
+    {
+        var rawInput = FileHelper.ExtractInputFromFile("../../../../Day5/bin/Debug/net6.0/day5input.txt");
+
+        var parsedInput = FileHelper.ExtractVentLinesFromFile(rawInput);
+
+        var violations = parsedInput
+            .Where(line => !line.Diagonal)
+            .Count(line => line.LineCoOrds.Count < 1);
+        
+        Assert.Equal(0, violations);
+    }
+    [Fact]
+    public void FullInputAllComputedPositionsContainStartAndEnd()
+    {
+        var rawInput = FileHelper.ExtractInputFromFile("../../../../Day5/bin/Debug/net6.0/day5input.txt");
+
+        var parsedInput = FileHelper
+            .ExtractVentLinesFromFile(rawInput)
+            .Where(l => !l.Diagonal)
+            .ToImmutableList();
+
+        var violations = parsedInput.Where(line => !FullVentLineCoOrdsContainStartOrEnd(line));
+        
+        Assert.Empty(violations);
+    }
+
+    private static bool FullVentLineCoOrdsContainStartOrEnd(VentLine ventLine)
+    {
+        return ventLine.LineCoOrds
+            .Select(l => new { Start = ventLine.Start.CompoundCoordinate, End = ventLine.End.CompoundCoordinate, l.CompoundCoordinate })
+            .Any(l => l.CompoundCoordinate == l.Start || l.CompoundCoordinate == l.End);
+    }
 }

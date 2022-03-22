@@ -1,4 +1,5 @@
 using System.Collections.Immutable;
+using System.Linq.Expressions;
 
 namespace Day5;
 
@@ -88,7 +89,11 @@ public class VentLine
 
     private static IEnumerable<int> GetSortedValuesRange(List<int> values, bool ascending)
     {
-        return Enumerable.Range(values.First(), values.Max() - values.Min() + 1);
+        return ascending switch
+        {
+            true => Enumerable.Range(values.First(), values.Max() - values.Min() + 1),
+            false => Enumerable.Range(values.Min(), values.Max() - values.Min() + 1).Reverse()
+        };
     }
 
     public VentLine(string textCoOrdStart, string textCoOrdEnd)

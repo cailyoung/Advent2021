@@ -61,17 +61,18 @@ public class UnitTest1
     }
 
     [Fact]
-    public void MapGridCanNotBeBuiltFromMixed()
+    public void CorrectDiagonalLinesCoOrdsReturned()
     {
-        var inputVentLines = new List<VentLine>
-        {
-            new("0,9", "5,9"),
-            new("8,0", "0,8"),
-            new("9,4", "3,4")
+        var inputVentLine = new VentLine("1,1", "3,3");
 
+        var expectedCoOrds = new List<CoOrd>
+        {
+            new(1,1),
+            new(2,2),
+            new(3,3)
         }.ToImmutableList();
 
-        Assert.Throws<ArgumentException>(() => new MapGrid(inputVentLines));
+        inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
     }
     
     [Fact]
@@ -81,7 +82,8 @@ public class UnitTest1
         {
             new("0,9", "5,9"),
             new("8,8", "0,8"),
-            new("9,4", "3,4")
+            new("9,4", "3,4"),
+            new("1,1", "3,3")
 
         }.ToImmutableList();
 
@@ -91,7 +93,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void MapGridReturnsRightPart1Value()
+    public void MapGridWithNoDiagonalsReturnsRightPart1Value()
     {
         var rawInput = @"
 0,9 -> 5,9
@@ -116,6 +118,33 @@ public class UnitTest1
             .Count(v => v.overlapCount >= 2);
         
         Assert.Equal(5, result);
+    }
+    
+    [Fact]
+    public void MapGridWithDiagonalsReturnsRightPart2Value()
+    {
+        var rawInput = @"
+0,9 -> 5,9
+8,0 -> 0,8
+9,4 -> 3,4
+2,2 -> 2,1
+7,0 -> 7,4
+6,4 -> 2,0
+0,9 -> 2,9
+3,4 -> 1,4
+0,0 -> 8,8
+5,5 -> 8,2
+".Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries);
+
+        var filteredInput = FileHelper
+            .ExtractVentLinesFromFile(rawInput)
+            .ToImmutableList();
+
+        var result = Calculators
+            .Overlaps(new MapGrid(filteredInput))
+            .Count(v => v.overlapCount >= 2);
+        
+        Assert.Equal(12, result);
     }
 
     [Fact]

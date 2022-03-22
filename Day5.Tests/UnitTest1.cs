@@ -74,6 +74,20 @@ public class UnitTest1
 
         inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
     }
+    [Fact]
+    public void CorrectBackwardsDiagonalLinesCoOrdsReturned()
+    {
+        var inputVentLine = new VentLine("9,7", "7,9");
+
+        var expectedCoOrds = new List<CoOrd>
+        {
+            new(9,7),
+            new(8,8),
+            new(7,9)
+        }.ToImmutableList();
+
+        inputVentLine.LineCoOrds.Should().BeEquivalentTo(expectedCoOrds);
+    }
     
     [Fact]
     public void MapGridCanBeBuilt()

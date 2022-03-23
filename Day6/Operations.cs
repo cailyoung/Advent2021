@@ -6,6 +6,10 @@ public class Operations
 {
     public static School AddADay(School currentSchool)
     {
-        return new School(ImmutableList<LanternFish>.Empty);
+        var workingSchoolFish = currentSchool.CurrentFish
+            .Select(f => new LanternFish(f.DaysUntilBirth - 1))
+            .ToImmutableList();
+        
+        return new School(workingSchoolFish);
     }
 }

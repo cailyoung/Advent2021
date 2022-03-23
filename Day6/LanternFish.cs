@@ -7,5 +7,5 @@ public class LanternFish
         DaysUntilBirth = daysUntilBirth;
     }
 
-    private int DaysUntilBirth;
+    public int DaysUntilBirth { get; }
 }

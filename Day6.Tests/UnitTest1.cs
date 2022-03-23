@@ -150,4 +150,26 @@ public class UnitTest1
 
         finalState.SchoolSize.Should().Be(expectedCount);
     }
+
+    [Fact]
+    public void NumericConstructorIsSane()
+    {
+        var inputNumbers = new[]
+        {
+            3, 4, 3, 1, 2
+        };
+        
+        var expectedSchool = new School(
+            ImmutableList.Create(
+                new LanternFish(3),
+                new LanternFish(4),
+                new LanternFish(3),
+                new LanternFish(1),
+                new LanternFish(2)
+            ));
+
+        var actualSchool = new School(inputNumbers);
+
+        actualSchool.Should().BeEquivalentTo(expectedSchool);
+    }
 }

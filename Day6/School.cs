@@ -11,4 +11,9 @@ public class School
     {
         CurrentFish = currentFish;
     }
+
+    public School(IEnumerable<int> fishSizes)
+    {
+        CurrentFish = fishSizes.Select(s => new LanternFish(s)).ToImmutableList();
+    }
 }

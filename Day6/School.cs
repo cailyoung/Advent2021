@@ -5,6 +5,7 @@ namespace Day6;
 public class School
 {
     public ImmutableList<LanternFish> CurrentFish { get; }
+    public int SchoolSize => CurrentFish.Count;
 
     public School(ImmutableList<LanternFish> currentFish)
     {

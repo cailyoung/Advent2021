@@ -60,4 +60,47 @@ public class UnitTest1
         actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedAfterSecondDay.CurrentFish);
 
     }
+
+    [Fact]
+    public void MultipleNewBirthsWork()
+    {
+        var initialState = new School(
+            ImmutableList.Create(
+                new LanternFish(0),
+                new LanternFish(1),
+                new LanternFish(0),
+                new LanternFish(5),
+                new LanternFish(6),
+                new LanternFish(0),
+                new LanternFish(1),
+                new LanternFish(2),
+                new LanternFish(2),
+                new LanternFish(3),
+                new LanternFish(7),
+                new LanternFish(8)
+            ));
+        
+        var expectedNextDaySchool = new School(
+            ImmutableList.Create(
+                new LanternFish(6),
+                new LanternFish(0),
+                new LanternFish(6),
+                new LanternFish(4),
+                new LanternFish(5),
+                new LanternFish(6),
+                new LanternFish(0),
+                new LanternFish(1),
+                new LanternFish(1),
+                new LanternFish(2),
+                new LanternFish(6),
+                new LanternFish(7),
+                new LanternFish(8),
+                new LanternFish(8),
+                new LanternFish(8)
+            ));
+        
+        var actualAfterSecondDay = Operations.AddADay(initialState);
+
+        actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedNextDaySchool.CurrentFish);
+    }
 }

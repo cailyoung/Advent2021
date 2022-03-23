@@ -18,4 +18,16 @@ public class Operations
         
         return new School(workingSchoolFish.ToImmutableList());
     }
+
+    public static School RunSimulation(School initialSchool, int daysToSimulate)
+    {
+        var workingSchool = new School(initialSchool.CurrentFish);
+        
+        for (int i = 0; i < daysToSimulate; i++)
+        {
+            workingSchool = AddADay(workingSchool);
+        }
+
+        return workingSchool;
+    }
 }

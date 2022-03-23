@@ -103,4 +103,51 @@ public class UnitTest1
 
         actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedNextDaySchool.CurrentFish);
     }
+
+    [Fact]
+    public void RunSimulationThreeDaysGivesCorrectOutput()
+    {
+        var initialState = new School(
+            ImmutableList.Create(
+                new LanternFish(3),
+                new LanternFish(4),
+                new LanternFish(3),
+                new LanternFish(1),
+                new LanternFish(2)
+            ));
+
+        var expectedFinalState = new School(
+            ImmutableList.Create(
+                new LanternFish(0),
+                new LanternFish(1),
+                new LanternFish(0),
+                new LanternFish(5),
+                new LanternFish(6),
+                new LanternFish(7),
+                new LanternFish(8)
+            ));
+        
+        var finalState = Operations.RunSimulation(initialState, 3);
+
+        finalState.CurrentFish.Should().BeEquivalentTo(expectedFinalState.CurrentFish);
+    }
+
+    [Theory]
+    [InlineData(18, 26)]
+    [InlineData(80, 5934)]
+    public void RunSimulationGivesCorrectSchoolSizes(int daysToRun, int expectedCount)
+    {
+        var initialState = new School(
+            ImmutableList.Create(
+                new LanternFish(3),
+                new LanternFish(4),
+                new LanternFish(3),
+                new LanternFish(1),
+                new LanternFish(2)
+            ));
+        
+        var finalState = Operations.RunSimulation(initialState, daysToRun);
+
+        finalState.SchoolSize.Should().Be(expectedCount);
+    }
 }

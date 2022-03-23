@@ -32,4 +32,32 @@ public class UnitTest1
 
         actualAfterFirstDay.CurrentFish.Should().BeEquivalentTo(expectedAfterFirstDay.CurrentFish);
     }
+
+    [Fact]
+    public void SecondDayReturnsCorrectSchool()
+    {
+        var initialState = new School(
+            ImmutableList.Create(
+                new LanternFish(2),
+                new LanternFish(3),
+                new LanternFish(2),
+                new LanternFish(0),
+                new LanternFish(1)
+            ));
+        
+        var expectedAfterSecondDay = new School(
+            ImmutableList.Create(
+                new LanternFish(1),
+                new LanternFish(2),
+                new LanternFish(1),
+                new LanternFish(6),
+                new LanternFish(0),
+                new LanternFish(8)
+            ));
+        
+        var actualAfterSecondDay = Operations.AddADay(initialState);
+
+        actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedAfterSecondDay.CurrentFish);
+
+    }
 }

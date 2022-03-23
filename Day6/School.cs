@@ -4,7 +4,7 @@ namespace Day6;
 
 public class School
 {
-    private ImmutableList<LanternFish> CurrentFish;
+    public ImmutableList<LanternFish> CurrentFish { get; }
 
     public School(ImmutableList<LanternFish> currentFish)
     {

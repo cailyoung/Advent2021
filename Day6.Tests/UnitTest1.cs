@@ -135,7 +135,8 @@ public class UnitTest1
     [Theory]
     [InlineData(18, 26)]
     [InlineData(80, 5934)]
-    public void RunSimulationGivesCorrectSchoolSizes(int daysToRun, int expectedCount)
+    [InlineData(256, 26984457539)]
+    public void RunSimulationGivesCorrectSchoolSizes(int daysToRun, long expectedCount)
     {
         var initialState = new School(
             ImmutableList.Create(
@@ -148,7 +149,7 @@ public class UnitTest1
         
         var finalState = Operations.RunSimulation(initialState, daysToRun);
 
-        finalState.SchoolSize.Should().Be(expectedCount);
+        Assert.Equal(expectedCount, finalState.SchoolSize);
     }
 
     [Fact]

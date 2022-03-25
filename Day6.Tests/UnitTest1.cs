@@ -1,9 +1,8 @@
 using System.Collections.Immutable;
-using Day6;
 using FluentAssertions;
 using Xunit;
 
-namespace Day.Tests;
+namespace Day6.Tests;
 
 public class UnitTest1
 {

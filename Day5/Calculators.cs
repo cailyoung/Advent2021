@@ -8,7 +8,7 @@ public class Calculators
     {
         return currentGrid.CurrentMapGrid
             .GroupBy(c => c.CompoundCoordinate)
-            .Select(row => new ValueTuple<CoOrd, int>(row.GetEnumerator().Current, row.Count()))
+            .Select(row => new ValueTuple<CoOrd, int>(row.First(), row.Count()))
             .ToImmutableList();
     }
 }

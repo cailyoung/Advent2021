@@ -22,21 +22,19 @@ public class Operations
             .Where(pair => pair.Age >= AgeToGiveBirth)
             .ToDictionary(pair => pair.Age, pair => pair.Count);
 
-        if (numberOfFishToAdd > 0)
+        if (numberOfFishToAdd <= 0) return new School(agedDict.ToImmutableDictionary());
+        
+        if (agedDict.ContainsKey(NewAgeForOldFishAtBirth))
         {
-        
-            if (agedDict.ContainsKey(NewAgeForOldFishAtBirth))
-            {
-                agedDict[NewAgeForOldFishAtBirth] += numberOfFishToAdd;
-            }
-            else
-            {
-                agedDict.Add(NewAgeForOldFishAtBirth, numberOfFishToAdd);
-            }
-            
-            agedDict.Add(NewAgeForNewFishAtBirth, numberOfFishToAdd);
+            agedDict[NewAgeForOldFishAtBirth] += numberOfFishToAdd;
         }
-        
+        else
+        {
+            agedDict.Add(NewAgeForOldFishAtBirth, numberOfFishToAdd);
+        }
+            
+        agedDict.Add(NewAgeForNewFishAtBirth, numberOfFishToAdd);
+
         return new School(agedDict.ToImmutableDictionary());
     }
 

@@ -125,7 +125,7 @@ public class UnitTest1
     [Theory]
     [InlineData(18, 26)]
     [InlineData(80, 5934)]
-    [InlineData(160, 26984457539)]
+    [InlineData(256, 26984457539)]
     public void RunSimulationGivesCorrectSchoolSizes(int daysToRun, long expectedCount)
     {
         var initialState = new School(

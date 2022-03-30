@@ -19,15 +19,6 @@ public class UnitTest1
                 new LanternFish(2)
             ));
         
-        var expectedAfterFirstDay = new School(
-            ImmutableList.Create(
-                new LanternFish(2),
-                new LanternFish(3),
-                new LanternFish(2),
-                new LanternFish(0),
-                new LanternFish(1)
-            ));
-
         var expectedDictAfterFirstDay = new Dictionary<int, int>
         {
             { 0, 1 },
@@ -51,16 +42,6 @@ public class UnitTest1
                 new LanternFish(2),
                 new LanternFish(0),
                 new LanternFish(1)
-            ));
-        
-        var expectedAfterSecondDay = new School(
-            ImmutableList.Create(
-                new LanternFish(1),
-                new LanternFish(2),
-                new LanternFish(1),
-                new LanternFish(6),
-                new LanternFish(0),
-                new LanternFish(8)
             ));
         
         var expectedDictAfterSecondDay = new Dictionary<int, int>
@@ -97,25 +78,6 @@ public class UnitTest1
                 new LanternFish(8)
             ));
         
-        var expectedNextDaySchool = new School(
-            ImmutableList.Create(
-                new LanternFish(6),
-                new LanternFish(0),
-                new LanternFish(6),
-                new LanternFish(4),
-                new LanternFish(5),
-                new LanternFish(6),
-                new LanternFish(0),
-                new LanternFish(1),
-                new LanternFish(1),
-                new LanternFish(2),
-                new LanternFish(6),
-                new LanternFish(7),
-                new LanternFish(8),
-                new LanternFish(8),
-                new LanternFish(8)
-            ));
-        
         var expectedDictAfterNextDay = new Dictionary<int, int>
         {
             { 0, 2 },
@@ -143,17 +105,6 @@ public class UnitTest1
                 new LanternFish(3),
                 new LanternFish(1),
                 new LanternFish(2)
-            ));
-
-        var expectedFinalState = new School(
-            ImmutableList.Create(
-                new LanternFish(0),
-                new LanternFish(1),
-                new LanternFish(0),
-                new LanternFish(5),
-                new LanternFish(6),
-                new LanternFish(7),
-                new LanternFish(8)
             ));
         
         var expectedDictAfterSimulation = new Dictionary<int, int>

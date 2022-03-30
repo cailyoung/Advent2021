@@ -4,10 +4,10 @@ namespace Day6;
 
 public class School
 {
-    public ImmutableDictionary<int, int> CurrentFishDict { get;  }
+    public ImmutableDictionary<int, long> CurrentFishDict { get;  }
     public long SchoolSize => CurrentFishCount();
 
-    private int CurrentFishCount()
+    private long CurrentFishCount()
     {
         return CurrentFishDict.Select(v => v.Value).Sum();
     }
@@ -17,18 +17,18 @@ public class School
         CurrentFishDict = currentFish
             .GroupBy(fish => fish.DaysUntilBirth)
             .Select(fishes => new { Age = fishes.Key, Count = fishes.Count() })
-            .ToImmutableDictionary(group => group.Age, group => group.Count);
+            .ToImmutableDictionary(group => group.Age, group => (long)group.Count);
     }
 
     public School(IEnumerable<int> fishSizes)
     {
         CurrentFishDict = fishSizes.GroupBy(v => v)
             .Select(fishes => new { Age = fishes.Key, Count = fishes.Count() })
-            .ToImmutableDictionary(group => group.Age, group => group.Count);
+            .ToImmutableDictionary(group => group.Age, group => (long)group.Count);
         ;
     }
 
-    public School(ImmutableDictionary<int, int> fishDict)
+    public School(ImmutableDictionary<int, long> fishDict)
     {
         CurrentFishDict = fishDict;
     }

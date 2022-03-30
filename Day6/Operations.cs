@@ -14,7 +14,7 @@ public class Operations
         var workingDict = currentSchool.CurrentFishDict;
 
         // https://stackoverflow.com/a/25127601/16498827
-        int numberOfFishToAdd = workingDict.TryGetValue(AgeToGiveBirth, out numberOfFishToAdd) ? numberOfFishToAdd : 0;
+        long numberOfFishToAdd = workingDict.TryGetValue(AgeToGiveBirth, out numberOfFishToAdd) ? numberOfFishToAdd : 0;
 
         var agedDict = workingDict
             .ToList()

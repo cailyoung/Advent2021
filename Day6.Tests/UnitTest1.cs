@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using FluentAssertions;
 using Xunit;
@@ -27,9 +28,18 @@ public class UnitTest1
                 new LanternFish(1)
             ));
 
+        var expectedDictAfterFirstDay = new Dictionary<int, int>
+        {
+            { 0, 1 },
+            { 1, 1 },
+            { 2, 2 },
+            { 3, 1 }
+        }.ToImmutableDictionary();
+
         var actualAfterFirstDay = Operations.AddADay(initialState);
 
         actualAfterFirstDay.CurrentFish.Should().BeEquivalentTo(expectedAfterFirstDay.CurrentFish);
+        actualAfterFirstDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterFirstDay);
     }
 
     [Fact]
@@ -54,9 +64,19 @@ public class UnitTest1
                 new LanternFish(8)
             ));
         
+        var expectedDictAfterSecondDay = new Dictionary<int, int>
+        {
+            { 0, 1 },
+            { 1, 2 },
+            { 2, 1 },
+            { 6, 1 },
+            { 8, 1 }
+        }.ToImmutableDictionary();
+        
         var actualAfterSecondDay = Operations.AddADay(initialState);
 
         actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedAfterSecondDay.CurrentFish);
+        actualAfterSecondDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterSecondDay);
 
     }
 
@@ -98,9 +118,22 @@ public class UnitTest1
                 new LanternFish(8)
             ));
         
+        var expectedDictAfterNextDay = new Dictionary<int, int>
+        {
+            { 0, 2 },
+            { 1, 2 },
+            { 2, 1 },
+            { 4, 1 },
+            { 5, 1 },
+            { 6, 4 },
+            { 7, 1 },
+            { 8, 3 }
+        }.ToImmutableDictionary();
+        
         var actualAfterSecondDay = Operations.AddADay(initialState);
 
         actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedNextDaySchool.CurrentFish);
+        actualAfterSecondDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterNextDay);
     }
 
     [Fact]
@@ -126,9 +159,20 @@ public class UnitTest1
                 new LanternFish(8)
             ));
         
+        var expectedDictAfterSimulation = new Dictionary<int, int>
+        {
+            { 0, 2 },
+            { 1, 1 },
+            { 5, 1 },
+            { 6, 1 },
+            { 7, 1 },
+            { 8, 1 }
+        }.ToImmutableDictionary();
+        
         var finalState = Operations.RunSimulation(initialState, 3);
 
         finalState.CurrentFish.Should().BeEquivalentTo(expectedFinalState.CurrentFish);
+        finalState.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterSimulation);
     }
 
     [Theory]

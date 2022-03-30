@@ -5,19 +5,39 @@ namespace Day6;
 
 public class Operations
 {
+    private const int AgeToGiveBirth = 0;
+    private const int NewAgeForNewFishAtBirth = 8;
+    private const int NewAgeForOldFishAtBirth = 6;
+    
     public static School AddADay(School currentSchool)
     {
-        var workingSchoolFish = currentSchool.CurrentFish
-            .Select(f => new LanternFish(f.DaysUntilBirth - 1)).ToArray();
+        var workingDict = currentSchool.CurrentFishDict;
 
-        var countOfFishToBirth = workingSchoolFish.Count(f => f.DaysUntilBirth < 0);
+        // https://stackoverflow.com/a/25127601/16498827
+        int numberOfFishToAdd = workingDict.TryGetValue(AgeToGiveBirth, out numberOfFishToAdd) ? numberOfFishToAdd : 0;
 
-        var newSchoolFish = workingSchoolFish
-            .Where(f => f.DaysUntilBirth >= 0)
-            .Concat(Enumerable.Repeat(new LanternFish(), countOfFishToBirth))
-            .Concat(Enumerable.Repeat(new LanternFish(6), countOfFishToBirth));
+        var agedDict = workingDict
+            .ToList()
+            .Select(pair => new { Age = pair.Key - 1, Count = pair.Value })
+            .Where(pair => pair.Age >= AgeToGiveBirth)
+            .ToDictionary(pair => pair.Age, pair => pair.Count);
 
-        return new School(newSchoolFish.ToImmutableList());
+        if (numberOfFishToAdd > 0)
+        {
+        
+            if (agedDict.ContainsKey(NewAgeForOldFishAtBirth))
+            {
+                agedDict[NewAgeForOldFishAtBirth] += numberOfFishToAdd;
+            }
+            else
+            {
+                agedDict.Add(NewAgeForOldFishAtBirth, numberOfFishToAdd);
+            }
+            
+            agedDict.Add(NewAgeForNewFishAtBirth, numberOfFishToAdd);
+        }
+        
+        return new School(agedDict.ToImmutableDictionary());
     }
 
     public static School RunSimulation(School initialSchool, int daysToSimulate)

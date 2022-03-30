@@ -38,7 +38,6 @@ public class UnitTest1
 
         var actualAfterFirstDay = Operations.AddADay(initialState);
 
-        actualAfterFirstDay.CurrentFish.Should().BeEquivalentTo(expectedAfterFirstDay.CurrentFish);
         actualAfterFirstDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterFirstDay);
     }
 
@@ -75,7 +74,6 @@ public class UnitTest1
         
         var actualAfterSecondDay = Operations.AddADay(initialState);
 
-        actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedAfterSecondDay.CurrentFish);
         actualAfterSecondDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterSecondDay);
 
     }
@@ -132,7 +130,6 @@ public class UnitTest1
         
         var actualAfterSecondDay = Operations.AddADay(initialState);
 
-        actualAfterSecondDay.CurrentFish.Should().BeEquivalentTo(expectedNextDaySchool.CurrentFish);
         actualAfterSecondDay.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterNextDay);
     }
 
@@ -171,7 +168,6 @@ public class UnitTest1
         
         var finalState = Operations.RunSimulation(initialState, 3);
 
-        finalState.CurrentFish.Should().BeEquivalentTo(expectedFinalState.CurrentFish);
         finalState.CurrentFishDict.Should().BeEquivalentTo(expectedDictAfterSimulation);
     }
 

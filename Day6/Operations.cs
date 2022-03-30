@@ -22,7 +22,7 @@ public class Operations
 
     public static School RunSimulation(School initialSchool, int daysToSimulate)
     {
-        var workingSchool = new School(initialSchool.CurrentFish);
+        var workingSchool = new School(initialSchool.CurrentFishDict);
 
         var stopwatch = new Stopwatch();
         

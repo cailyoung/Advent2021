@@ -10,7 +10,7 @@ public class School
 
     private int CurrentFishCount()
     {
-        return CurrentFish.Count;
+        return CurrentFishDict.Select(v => v.Value).Sum();
     }
 
     public School(ImmutableList<LanternFish> currentFish)

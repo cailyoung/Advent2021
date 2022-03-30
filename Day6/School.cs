@@ -6,7 +6,12 @@ public class School
 {
     public ImmutableList<LanternFish> CurrentFish { get; }
     public ImmutableDictionary<int, int> CurrentFishDict { get;  }
-    public long SchoolSize => CurrentFish.Count;
+    public long SchoolSize => CurrentFishCount();
+
+    private int CurrentFishCount()
+    {
+        return CurrentFish.Count;
+    }
 
     public School(ImmutableList<LanternFish> currentFish)
     {

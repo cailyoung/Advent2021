@@ -8,6 +8,9 @@ public class SubmarineField
     }
 
     public IEnumerable<Crab> Crabs { get; }
+    private int MinHorizontalPosition => Crabs.Select(c => c.Position).Min();
+    private int MaxHorizontalPosition => Crabs.Select(c => c.Position).Max();
+    private IEnumerable<int> listOfAllPotentialPositions => Enumerable.Range(MinHorizontalPosition, MaxHorizontalPosition - MinHorizontalPosition + 1);
 
     public int CheapestTargetPositionLinearFuelUsed => GetLinearFuelConsumptionValues()
         .Select(v => v.FuelConsumed)
@@ -19,10 +22,6 @@ public class SubmarineField
 
     public IEnumerable<FuelConsumptionValue> GetLinearFuelConsumptionValues()
     {
-        var minHorizontalPosition = Crabs.Select(c => c.Position).Min();
-        var maxHorizontalPosition = Crabs.Select(c => c.Position).Max();
-        var listOfAllPotentialPositions = Enumerable.Range(minHorizontalPosition, maxHorizontalPosition - minHorizontalPosition + 1);
-
         var fuelValues = listOfAllPotentialPositions
             .Select(p => new FuelConsumptionValue(p, GetTotalLinearCrabConsumptionAtPosition(p)));
         
@@ -31,10 +30,6 @@ public class SubmarineField
     
     public IEnumerable<FuelConsumptionValue> GetGeometricFuelConsumptionValues()
     {
-        var minHorizontalPosition = Crabs.Select(c => c.Position).Min();
-        var maxHorizontalPosition = Crabs.Select(c => c.Position).Max();
-        var listOfAllPotentialPositions = Enumerable.Range(minHorizontalPosition, maxHorizontalPosition - minHorizontalPosition + 1);
-        
         var fuelValues = listOfAllPotentialPositions
             .Select(p => new FuelConsumptionValue(p, GetTotalGeometricCrabConsumptionAtPosition(p)));
         

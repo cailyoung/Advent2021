@@ -21,7 +21,7 @@ public class UnitTest1
         var inputSubField = new SubmarineField(inputData);
         
         var actualUsage = inputSubField
-            .GetFuelConsumptionValues()
+            .GetLinearFuelConsumptionValues()
             .Where(v => v.TargetPosition == targetPosition)
             .Select(v => v.FuelConsumed)
             .Single();
@@ -41,7 +41,7 @@ public class UnitTest1
         var inputSubField = new SubmarineField(inputData);
         
         var actualUsage = inputSubField
-            .GetFuelConsumptionValues()
+            .GetLinearFuelConsumptionValues()
             .Where(v => v.TargetPosition == targetPosition)
             .Select(v => v.FuelConsumed)
             .Single();
@@ -58,7 +58,7 @@ public class UnitTest1
 
         var inputSubField = new SubmarineField(inputData);
 
-        var actualMinCalc = inputSubField.CheapestTargetPositionFuelUsed;
+        var actualMinCalc = inputSubField.CheapestTargetPositionLinearFuelUsed;
 
         actualMinCalc.Should().Be(37);
     }

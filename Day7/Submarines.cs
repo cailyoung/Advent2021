@@ -9,11 +9,11 @@ public class SubmarineField
 
     public IEnumerable<Crab> Crabs { get; }
 
-    public int CheapestTargetPositionFuelUsed => GetFuelConsumptionValues()
+    public int CheapestTargetPositionLinearFuelUsed => GetLinearFuelConsumptionValues()
         .Select(v => v.FuelConsumed)
         .Min();
 
-    public IEnumerable<FuelConsumptionValue> GetFuelConsumptionValues()
+    public IEnumerable<FuelConsumptionValue> GetLinearFuelConsumptionValues()
     {
         var minHorizontalPosition = Crabs.Select(c => c.Position).Min();
         var maxHorizontalPosition = Crabs.Select(c => c.Position).Max();

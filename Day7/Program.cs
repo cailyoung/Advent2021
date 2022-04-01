@@ -8,6 +8,6 @@ var rawInput = FileHelper.ExtractInputFromFile("day7input.txt");
 
 var subField = new SubmarineField(rawInput);
 
-var minimumFuelToAlign = subField.CheapestTargetPositionFuelUsed;
+var minimumFuelToAlign = subField.CheapestTargetPositionLinearFuelUsed;
 
 Console.WriteLine($"Part 1 = Most fuel efficient position will use {minimumFuelToAlign}");

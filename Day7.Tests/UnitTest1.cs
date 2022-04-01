@@ -7,6 +7,8 @@ namespace Day7.Tests;
 
 public class UnitTest1
 {
+    private const string TestInput = "16,1,2,0,4,2,7,1,2,14";
+
     [Theory]
     [InlineData(1, 41)]
     [InlineData(3, 39)]
@@ -14,7 +16,7 @@ public class UnitTest1
     [InlineData(2, 37)]
     public void TargetPositionGetsCorrectLinearFuelUsage(int targetPosition, int expectedFuelConsumed)
     {
-        var inputData = "16,1,2,0,4,2,7,1,2,14"
+        var inputData = TestInput
             .Split(",")
             .Select(v => Convert.ToInt32(v));
 
@@ -34,7 +36,7 @@ public class UnitTest1
     [InlineData(2, 206)]
     public void TargetPositionGetsCorrectGeometricFuelUsage(int targetPosition, int expectedFuelConsumed)
     {
-        var inputData = "16,1,2,0,4,2,7,1,2,14"
+        var inputData = TestInput
             .Split(",")
             .Select(v => Convert.ToInt32(v));
 
@@ -52,7 +54,7 @@ public class UnitTest1
     [Fact]
     public void CheapestPositionCalcIsCorrectPartOne()
     {
-        var inputData = "16,1,2,0,4,2,7,1,2,14"
+        var inputData = TestInput
             .Split(",")
             .Select(v => Convert.ToInt32(v));
 
@@ -66,7 +68,7 @@ public class UnitTest1
     [Fact]
     public void CheapestPositionCalcIsCorrectPartTwo()
     {
-        var inputData = "16,1,2,0,4,2,7,1,2,14"
+        var inputData = TestInput
             .Split(",")
             .Select(v => Convert.ToInt32(v));
 

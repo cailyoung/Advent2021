@@ -17,4 +17,8 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Day7\Day7.csproj" />
+    </ItemGroup>
+
 </Project>

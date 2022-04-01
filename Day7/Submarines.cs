@@ -13,6 +13,10 @@ public class SubmarineField
         .Select(v => v.FuelConsumed)
         .Min();
 
+    public int CheapestTargetPositionGeometricFuelUsed => GetGeometricFuelConsumptionValues()
+        .Select(v => v.FuelConsumed)
+        .Min();
+
     public IEnumerable<FuelConsumptionValue> GetLinearFuelConsumptionValues()
     {
         var minHorizontalPosition = Crabs.Select(c => c.Position).Min();

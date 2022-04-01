@@ -62,4 +62,18 @@ public class UnitTest1
 
         actualMinCalc.Should().Be(37);
     }
+    
+    [Fact]
+    public void CheapestPositionCalcIsCorrectPartTwo()
+    {
+        var inputData = "16,1,2,0,4,2,7,1,2,14"
+            .Split(",")
+            .Select(v => Convert.ToInt32(v));
+
+        var inputSubField = new SubmarineField(inputData);
+
+        var actualMinCalc = inputSubField.CheapestTargetPositionGeometricFuelUsed;
+
+        actualMinCalc.Should().Be(168);
+    }
 }

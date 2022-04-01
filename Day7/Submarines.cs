@@ -7,7 +7,7 @@ public class SubmarineField
         Crabs = horizontalPositions.Select(p => new Crab(p));
     }
 
-    public IEnumerable<Crab> Crabs { get; }
+    private IEnumerable<Crab> Crabs { get; }
     private int MinHorizontalPosition => Crabs.Select(c => c.Position).Min();
     private int MaxHorizontalPosition => Crabs.Select(c => c.Position).Max();
     private IEnumerable<int> ListOfAllPotentialPositions => Enumerable.Range(MinHorizontalPosition, MaxHorizontalPosition - MinHorizontalPosition + 1);

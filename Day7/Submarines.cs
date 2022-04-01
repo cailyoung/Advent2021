@@ -31,7 +31,21 @@ public class SubmarineField
         var maxHorizontalPosition = Crabs.Select(c => c.Position).Max();
         var listOfAllPotentialPositions = Enumerable.Range(minHorizontalPosition, maxHorizontalPosition - minHorizontalPosition + 1);
         
-        return null;
+        var fuelValues = listOfAllPotentialPositions
+            .Select(p => new FuelConsumptionValue(p, GetTotalGeometricCrabConsumptionAtPosition(p)));
+        
+        return fuelValues;
+    }
+
+    private int GetTotalGeometricCrabConsumptionAtPosition(int targetPosition)
+    {
+        // Triangle Numbers Weeeeeeeeeee!!!!
+        return Crabs.Select(c => TriangleNumber(Math.Abs(targetPosition - c.Position))).Sum();
+    }
+
+    private static int TriangleNumber(int size)
+    {
+        return size * (size + 1) / 2;
     }
 
     private int GetTotalLinearCrabConsumptionAtPosition(int targetPosition)

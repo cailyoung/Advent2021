@@ -22,18 +22,14 @@ public class SubmarineField
 
     public IEnumerable<FuelConsumptionValue> GetLinearFuelConsumptionValues()
     {
-        var fuelValues = ListOfAllPotentialPositions
+        return ListOfAllPotentialPositions
             .Select(p => new FuelConsumptionValue(p, GetTotalLinearCrabConsumptionAtPosition(p)));
-        
-        return fuelValues;
     }
     
     public IEnumerable<FuelConsumptionValue> GetGeometricFuelConsumptionValues()
     {
-        var fuelValues = ListOfAllPotentialPositions
+        return ListOfAllPotentialPositions
             .Select(p => new FuelConsumptionValue(p, GetTotalGeometricCrabConsumptionAtPosition(p)));
-        
-        return fuelValues;
     }
 
     private int GetTotalGeometricCrabConsumptionAtPosition(int targetPosition)

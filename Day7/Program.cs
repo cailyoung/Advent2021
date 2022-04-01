@@ -11,3 +11,9 @@ var subField = new SubmarineField(rawInput);
 var minimumFuelToAlign = subField.CheapestTargetPositionLinearFuelUsed;
 
 Console.WriteLine($"Part 1 = Most fuel efficient position will use {minimumFuelToAlign}");
+
+// Part 2
+
+var minimumFuelPartTwo = subField.CheapestTargetPositionGeometricFuelUsed;
+
+Console.WriteLine($"Part 2 - For nonlinear fuel usage, the cheapest position uses {minimumFuelPartTwo}");

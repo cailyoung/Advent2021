@@ -41,7 +41,7 @@ public class UnitTest1
         var inputSubField = new SubmarineField(inputData);
         
         var actualUsage = inputSubField
-            .GetLinearFuelConsumptionValues()
+            .GetGeometricFuelConsumptionValues()
             .Where(v => v.TargetPosition == targetPosition)
             .Select(v => v.FuelConsumed)
             .Single();

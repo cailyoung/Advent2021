@@ -12,7 +12,27 @@ public class UnitTest1
     [InlineData(3, 39)]
     [InlineData(10, 71)]
     [InlineData(2, 37)]
-    public void TargetPositionGetsCorrectFuelUsage(int targetPosition, int expectedFuelConsumed)
+    public void TargetPositionGetsCorrectLinearFuelUsage(int targetPosition, int expectedFuelConsumed)
+    {
+        var inputData = "16,1,2,0,4,2,7,1,2,14"
+            .Split(",")
+            .Select(v => Convert.ToInt32(v));
+
+        var inputSubField = new SubmarineField(inputData);
+        
+        var actualUsage = inputSubField
+            .GetFuelConsumptionValues()
+            .Where(v => v.TargetPosition == targetPosition)
+            .Select(v => v.FuelConsumed)
+            .Single();
+
+        actualUsage.Should().Be(expectedFuelConsumed);
+    }
+    
+    [Theory]
+    [InlineData(5, 168)]
+    [InlineData(2, 206)]
+    public void TargetPositionGetsCorrectGeometricFuelUsage(int targetPosition, int expectedFuelConsumed)
     {
         var inputData = "16,1,2,0,4,2,7,1,2,14"
             .Split(",")
@@ -30,7 +50,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void CheapestPositionCalcIsCorrect()
+    public void CheapestPositionCalcIsCorrectPartOne()
     {
         var inputData = "16,1,2,0,4,2,7,1,2,14"
             .Split(",")

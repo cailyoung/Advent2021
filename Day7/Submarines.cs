@@ -20,12 +20,12 @@ public class SubmarineField
         var listOfAllPotentialPositions = Enumerable.Range(minHorizontalPosition, maxHorizontalPosition - minHorizontalPosition + 1);
 
         var fuelValues = listOfAllPotentialPositions
-            .Select(p => new FuelConsumptionValue(p, GetTotalCrabConsumptionAtPosition(p)));
+            .Select(p => new FuelConsumptionValue(p, GetTotalLinearCrabConsumptionAtPosition(p)));
         
         return fuelValues;
     }
 
-    private int GetTotalCrabConsumptionAtPosition(int targetPosition)
+    private int GetTotalLinearCrabConsumptionAtPosition(int targetPosition)
     {
         return Crabs.Select(c => Math.Abs(targetPosition - c.Position)).Sum();
     }

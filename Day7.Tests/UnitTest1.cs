@@ -28,4 +28,18 @@ public class UnitTest1
 
         actualUsage.Should().Be(expectedFuelConsumed);
     }
+
+    [Fact]
+    public void CheapestPositionCalcIsCorrect()
+    {
+        var inputData = "16,1,2,0,4,2,7,1,2,14"
+            .Split(",")
+            .Select(v => Convert.ToInt32(v));
+
+        var inputSubField = new SubmarineField(inputData);
+
+        var actualMinCalc = inputSubField.CheapestTargetPositionFuelUsed;
+
+        actualMinCalc.Should().Be(37);
+    }
 }

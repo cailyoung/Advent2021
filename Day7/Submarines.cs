@@ -16,7 +16,19 @@ public class SubmarineField
 
     public IEnumerable<FuelConsumptionValue> GetFuelConsumptionValues()
     {
-        return new[] { new FuelConsumptionValue(default, default) };
+        var minHorizontalPosition = Crabs.Select(c => c.Position).Min();
+        var maxHorizontalPosition = Crabs.Select(c => c.Position).Max();
+        var listOfAllPotentialPositions = Enumerable.Range(minHorizontalPosition, maxHorizontalPosition - minHorizontalPosition + 1);
+
+        var fuelValues = listOfAllPotentialPositions
+            .Select(p => new FuelConsumptionValue(p, GetTotalCrabConsumptionAtPosition(p)));
+        
+        return fuelValues;
+    }
+
+    private int GetTotalCrabConsumptionAtPosition(int targetPosition)
+    {
+        return Crabs.Select(c => Math.Abs(targetPosition - c.Position)).Sum();
     }
 }
 

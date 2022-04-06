@@ -8,9 +8,9 @@ public class UnitTest1
     [Fact]
     public void ParserSplitsSingleLineCorrectly()
     {
-        var inputLine = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
+        const string inputLine = "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf";
 
-        var expectedSplit = new string[]
+        var expectedSplit = new[]
         {
             "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab",
             "cdfeb fcadb cdfeb cdbaf"

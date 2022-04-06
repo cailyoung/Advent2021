@@ -17,7 +17,7 @@ public class Digit
         Unknown
     }
 
-    public Character CurrentCharacter;
+    public readonly Character CurrentCharacter;
 
     
     public Digit(string inputCharacters)

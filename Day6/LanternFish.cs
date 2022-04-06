@@ -2,7 +2,7 @@ namespace Day6;
 
 public class LanternFish
 {
-    public LanternFish(int daysUntilBirth = 8)
+    public LanternFish(int daysUntilBirth)
     {
         DaysUntilBirth = daysUntilBirth;
     }

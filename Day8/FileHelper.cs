@@ -8,4 +8,9 @@ public class FileHelper
 
         return rawInput;
     }
+    
+    public static string[] SplitInputLine(string inputLine)
+    {
+        return new string[2];
+    }
 }

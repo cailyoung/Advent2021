@@ -8,9 +8,4 @@ public class FileHelper
 
         return rawInput.SelectMany(s => s.Split(",")).Select(n => Convert.ToInt32(n));
     }
-
-    public static string[] SplitInputLine(string inputLine)
-    {
-        return new string[2];
-    }
 }

@@ -18,7 +18,7 @@ public class FileHelper
 
     public static IEnumerable<Digit> SplitDataRowSection(string input)
     {
-        return new List<Digit>();
+        return input.Split(" ").Select(i => new Digit(i));
     }
 }
 

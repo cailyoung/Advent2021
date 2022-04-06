@@ -15,6 +15,11 @@ public class FileHelper
 
         return new DataRow(split[0], split[1]);
     }
+
+    public static IEnumerable<Digit> SplitDataRowSection(DataRow input)
+    {
+        return new List<Digit>();
+    }
 }
 
 public class DataRow

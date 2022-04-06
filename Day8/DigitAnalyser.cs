@@ -4,6 +4,6 @@ public class DigitAnalyser
 {
     public static int CalculateNumberOfUniqueSegmentCountDigits(IEnumerable<Digit> inputDigits)
     {
-        return int.MinValue;
+        return inputDigits.Count(d => d.CurrentCharacter != Digit.Character.Unknown);
     }
 }

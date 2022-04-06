@@ -9,8 +9,22 @@ public class FileHelper
         return rawInput;
     }
     
-    public static IEnumerable<string> SplitInputLine(string inputLine)
+    public static DataRow SplitInputLine(string inputLine)
     {
-        return inputLine.Split("|", StringSplitOptions.TrimEntries);
+        var split = inputLine.Split("|", StringSplitOptions.TrimEntries);
+
+        return new DataRow(split[0], split[1]);
+    }
+}
+
+public class DataRow
+{
+    public string InputValues;
+    public string OutputValues;
+
+    public DataRow(string inputValues, string outputValues)
+    {
+        this.InputValues = inputValues;
+        this.OutputValues = outputValues;
     }
 }

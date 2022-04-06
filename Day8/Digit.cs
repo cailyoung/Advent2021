@@ -25,6 +25,11 @@ public class Digit
         CurrentCharacter = IdentifyCharacter(inputCharacters);
     }
 
+    public Digit(Character character)
+    {
+        CurrentCharacter = character;
+    }
+
     private Character IdentifyCharacter(string inputCharacters)
     {
         /*

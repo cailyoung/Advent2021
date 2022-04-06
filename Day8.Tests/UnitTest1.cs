@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using FluentAssertions;
 using Xunit;
 
@@ -20,4 +21,17 @@ public class UnitTest1
 
         actualSplit.Should().BeEquivalentTo(expectedSplit);
     }
+
+    [Theory]
+    [InlineData("gc", Digit.Character.One)]
+    [InlineData("cbg", Digit.Character.Seven)]
+    [InlineData("gecf", Digit.Character.Four)]
+    [InlineData("dgebacf", Digit.Character.Eight)]
+    public void DigitCharacterReturnsCorrect(string inputDigit, Digit.Character expectedCharacter)
+    {
+        var actualDigit = new Digit(inputDigit);
+
+        actualDigit.CurrentCharacter.Should().Be(expectedCharacter);
+    }
+    
 }

@@ -36,6 +36,13 @@ public class Digit
          * '8' == 7 segments
          */
 
-        return Character.Unknown;
+        return inputCharacters.Length switch
+        {
+            2 => Character.One,
+            3 => Character.Seven,
+            4 => Character.Four,
+            7 => Character.Eight,
+            _ => Character.Unknown
+        };
     }
 }

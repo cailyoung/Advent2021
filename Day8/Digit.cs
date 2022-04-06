@@ -30,7 +30,7 @@ public class Digit
         CurrentCharacter = character;
     }
 
-    private Character IdentifyCharacter(string inputCharacters)
+    private static Character IdentifyCharacter(string inputCharacters)
     {
         /*
          * '7' == 3 segments

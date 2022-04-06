@@ -25,7 +25,6 @@ public class School
         CurrentFishDict = fishSizes.GroupBy(v => v)
             .Select(fishes => new { Age = fishes.Key, Count = fishes.Count() })
             .ToImmutableDictionary(group => group.Age, group => (long)group.Count);
-        ;
     }
 
     public School(ImmutableDictionary<int, long> fishDict)

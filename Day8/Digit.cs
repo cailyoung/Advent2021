@@ -1,5 +1,3 @@
-using System.Linq.Expressions;
-
 namespace Day8;
 
 public class Digit

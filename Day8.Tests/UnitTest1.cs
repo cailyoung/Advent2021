@@ -93,18 +93,18 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
             new("ab")
         };
 
-        var expectedOutput = new Dictionary<Digit.Character, List<char>>
+        var expectedOutput = new Dictionary<Digit.Character, char[]>
         {
-            { Digit.Character.Eight, "acedgfb".ToList() },
-            { Digit.Character.Five, "cdfbe".ToList() },
-            { Digit.Character.Two, "gcdfa".ToList() },
-            { Digit.Character.Three, "fbcad".ToList() },
-            { Digit.Character.Seven, "dab".ToList() },
-            { Digit.Character.Nine, "cefabd".ToList() },
-            { Digit.Character.Six, "cdfgeb".ToList() },
-            { Digit.Character.Four, "eafb".ToList() },
-            { Digit.Character.Zero, "cagedb".ToList() },
-            { Digit.Character.One, "ab".ToList() }
+            { Digit.Character.Eight, "acedgfb".ToArray() },
+            { Digit.Character.Five, "cdfbe".ToArray() },
+            { Digit.Character.Two, "gcdfa".ToArray() },
+            { Digit.Character.Three, "fbcad".ToArray() },
+            { Digit.Character.Seven, "dab".ToArray() },
+            { Digit.Character.Nine, "cefabd".ToArray() },
+            { Digit.Character.Six, "cdfgeb".ToArray() },
+            { Digit.Character.Four, "eafb".ToArray() },
+            { Digit.Character.Zero, "cagedb".ToArray() },
+            { Digit.Character.One, "ab".ToArray() }
         };
 
         var actualOutput = DigitAnalyser.GenerateCharacterMappings(exampleInput);

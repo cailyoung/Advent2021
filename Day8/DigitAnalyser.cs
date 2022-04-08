@@ -7,7 +7,7 @@ public static class DigitAnalyser
         return inputDigits.Count(d => d.CurrentCharacter != Digit.Character.Unknown);
     }
 
-    public static IDictionary<Digit.Character, IEnumerable<char>> GenerateCharacterMappings(IEnumerable<Digit> inputDigits)
+    public static IDictionary<Digit.Character, char[]> GenerateCharacterMappings(IEnumerable<Digit> inputDigits)
     {
 
         var digitArray = inputDigits.ToArray();
@@ -15,14 +15,44 @@ public static class DigitAnalyser
         var decodeMapper = GenerateDecodeMapper(digitArray);
 
         var decodedDigits = digitArray
-            .Select(d => new Digit(DecodeSegmentString(d.OriginalString, decodeMapper)));
+            .Select(d => new Digit(d.OriginalString, DecodeSegmentString(d.OriginalString, decodeMapper)));
+
+        var inferredDigits = decodedDigits
+            .Select(d => new Digit(GetCharacterFromDecodedSegments(d.DecodedString!), d.OriginalString, d.DecodedString!));
+
+        var finalDict = inferredDigits.ToDictionary(d => d.CurrentCharacter, d => d.OriginalString.ToCharArray());
         
-        return new Dictionary<Digit.Character, IEnumerable<char>>();
+        return finalDict;
     }
 
+    private static Digit.Character GetCharacterFromDecodedSegments(string decodedSegmentNames)
+    {
+        // https://stackoverflow.com/a/6441600/16498827
+        var orderedInput = string.Concat(decodedSegmentNames.OrderBy(c => c));
+        
+        var segmentEncoder = new Dictionary<string, Digit.Character>
+        {
+            { "acf", Digit.Character.Seven },
+            { "bcdf", Digit.Character.Four },
+            { "cf", Digit.Character.One },
+            { "abcdefg", Digit.Character.Eight },
+            { "acdeg", Digit.Character.Two },
+            { "acdfg", Digit.Character.Three },
+            { "abdfg", Digit.Character.Five },
+            { "abcefg", Digit.Character.Zero },
+            { "abdefg", Digit.Character.Six },
+            { "abcdfg", Digit.Character.Nine }
+        };
+
+        return segmentEncoder[orderedInput];
+    }
+    
     private static string DecodeSegmentString(string encodedSegmentString, IEnumerable<CharMapper> mapper)
     {
-        return string.Empty;
+        var decodedChars = encodedSegmentString
+            .Select(c => mapper.Single(m => m.EncodedSegmentName == c).DecodedSegmentName);
+
+        return string.Concat(decodedChars);
     }
     
     private static IEnumerable<CharMapper> GenerateDecodeMapper(IEnumerable<Digit> inputDigits)
@@ -116,8 +146,8 @@ public static class DigitAnalyser
 
 public class CharMapper
 {
-    private char EncodedSegmentName;
-    private char DecodedSegmentName;
+    public char EncodedSegmentName;
+    public char DecodedSegmentName;
 
     public CharMapper(char encodedSegmentName, char decodedSegmentName)
     {

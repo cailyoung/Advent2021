@@ -146,8 +146,8 @@ public static class DigitAnalyser
 
 public class CharMapper
 {
-    public char EncodedSegmentName;
-    public char DecodedSegmentName;
+    public readonly char EncodedSegmentName;
+    public readonly char DecodedSegmentName;
 
     public CharMapper(char encodedSegmentName, char decodedSegmentName)
     {

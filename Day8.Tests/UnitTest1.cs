@@ -75,4 +75,39 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 
         actualCount.Should().Be(26);
     }
+
+    [Fact]
+    public void CharacterInferenceIsCorrect()
+    {
+        var exampleInput = new List<Digit>
+        {
+            new("acedgfb"),
+            new("cdfbe"),
+            new("gcdfa"),
+            new("fbcad"),
+            new("dab"),
+            new("cefabd"),
+            new("eafb"),
+            new("cagedb"),
+            new("ab")
+        };
+
+        var expectedOutput = new Dictionary<string, Digit.Character>
+        {
+            { "acedgfb", Digit.Character.Eight },
+            { "cdfbe", Digit.Character.Five },
+            { "gcdfa", Digit.Character.Two },
+            { "fbcad", Digit.Character.Three },
+            { "dab", Digit.Character.Seven },
+            { "cefabd", Digit.Character.Nine },
+            { "cdfgeb", Digit.Character.Six },
+            { "eafb", Digit.Character.Four },
+            { "cagedb", Digit.Character.Zero },
+            { "ab", Digit.Character.One }
+        };
+
+        var actualOutput = DigitAnalyser.GenerateCharacterMappings(exampleInput);
+
+        actualOutput.Should().BeEquivalentTo(expectedOutput);
+    }
 }

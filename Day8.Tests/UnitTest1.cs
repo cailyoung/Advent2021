@@ -40,10 +40,10 @@ public class UnitTest1
 
         var expectedDigits = new List<Digit>
         {
-            new(Digit.Character.One),
-            new(Digit.Character.Seven),
-            new(Digit.Character.Four),
-            new(Digit.Character.Eight)
+            new(Digit.Character.One, "gc"),
+            new(Digit.Character.Seven, "cbg"),
+            new(Digit.Character.Four, "gecf"),
+            new(Digit.Character.Eight, "dgebacf")
         };
 
         var actualDigits = FileHelper.SplitDataRowSection(inputValues);

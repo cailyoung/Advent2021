@@ -18,16 +18,19 @@ public class Digit
     }
 
     public readonly Character CurrentCharacter;
+    public readonly string OriginalString;
 
     
     public Digit(string inputCharacters)
     {
         CurrentCharacter = IdentifyCharacter(inputCharacters);
+        OriginalString = inputCharacters;
     }
 
-    public Digit(Character character)
+    public Digit(Character character, string originalString)
     {
         CurrentCharacter = character;
+        OriginalString = originalString;
     }
 
     private static Character IdentifyCharacter(string inputCharacters)

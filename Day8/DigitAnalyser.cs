@@ -97,37 +97,6 @@ public static class DigitAnalyser
     }
 }
 
-public class CharDecoderKey
-{
-    private int UniqueSegmentCharCount;
-    private int UnknownSegmentCharCount;
-
-    public CharDecoderKey(int uniqueSegmentCharCount, int unknownSegmentCharCount)
-    {
-        UniqueSegmentCharCount = uniqueSegmentCharCount;
-        UnknownSegmentCharCount = unknownSegmentCharCount;
-    }
-}
-
-public class CharDecoderSegmentName
-{
-    public char SegmentName;
-
-    public CharDecoderSegmentName(char segmentName)
-    {
-        SegmentName = segmentName;
-    }
-}
-
-public class EncodedSegmentName
-{
-    private char SegmentName;
-
-    public EncodedSegmentName(char segmentName)
-    {
-        SegmentName = segmentName;
-    }
-}
 
 public class CharMapper
 {

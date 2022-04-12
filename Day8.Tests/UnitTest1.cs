@@ -46,7 +46,7 @@ public class UnitTest1
             new(Digit.Character.Eight, "dgebacf")
         };
 
-        var actualDigits = DataRow.SplitDataRowSection(inputValues);
+        var actualDigits = new DataRow(inputValues, String.Empty).GetInputDigits();
 
         actualDigits.Should().BeEquivalentTo(expectedDigits);
     }

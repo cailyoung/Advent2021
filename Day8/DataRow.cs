@@ -55,4 +55,22 @@ public class DataRow
     {
         return input.Split(" ").Select(i => new Digit(i));
     }
+
+    public IEnumerable<Digit> GetInputDigits()
+    {
+        var inputStrings = InputValues.Split(" ");
+
+        return CharacterMapping != null 
+            ? inputStrings.Select(i => new Digit(DigitAnalyser.IdentifyCharacter(i, CharacterMapping), i)) 
+            : inputStrings.Select(i => new Digit(i));
+    }
+    
+    public IEnumerable<Digit> GetOutputDigits()
+    {
+        var inputStrings = OutputValues.Split(" ");
+
+        return CharacterMapping != null 
+            ? inputStrings.Select(i => new Digit(DigitAnalyser.IdentifyCharacter(i, CharacterMapping), i)) 
+            : inputStrings.Select(i => new Digit(i));
+    }
 }

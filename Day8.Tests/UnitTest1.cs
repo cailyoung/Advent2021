@@ -66,10 +66,9 @@ egadfb cdbfeg cegd fecab cgb gbdefca cg fgcdab egfdb bfceg | gbdfcae bgc cg cgb
 gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce".Split(Environment.NewLine);
 
         var outputsOnly = exampleInput
-            .Select(FileHelper.SplitInputLine)
-            .Select(r => r.OutputValues);
+            .Select(FileHelper.SplitInputLine);
 
-        var outputDigits = outputsOnly.SelectMany(DataRow.SplitDataRowSection);
+        var outputDigits = outputsOnly.SelectMany(dr => dr.GetOutputDigits());
 
         var actualCount = DigitAnalyser.CalculateNumberOfUniqueSegmentCountDigits(outputDigits);
 
@@ -177,7 +176,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
         
 
 
-        int? actualCount = null;
+        var actualCount = int.MinValue;
 
         actualCount.Should().Be(61229);
     }

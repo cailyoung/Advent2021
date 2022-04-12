@@ -8,8 +8,7 @@ var rawInput = FileHelper.ExtractInputFromFile("day8input.txt");
 
 var outputsOnly = rawInput
     .Select(FileHelper.SplitInputLine)
-    .Select(r => r.OutputValues)
-    .SelectMany(DataRow.SplitDataRowSection);
+    .SelectMany(dr => dr.GetInputDigits());
 
 var partOneCount = DigitAnalyser.CalculateNumberOfUniqueSegmentCountDigits(outputsOnly);
 

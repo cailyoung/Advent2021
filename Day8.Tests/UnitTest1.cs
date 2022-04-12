@@ -138,7 +138,22 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 
         newCharacterInference.Should().Be(expectedCharacter);
     }
-    
+
+    [Fact]
+    public void OutputRowCanBeConvertedIntoNumber()
+    {
+        var exampleOutput = new List<Digit>
+        {
+            new(Digit.Character.Five, "cdfeb"),
+            new(Digit.Character.Three, "fcadb"),
+            new(Digit.Character.Five, "cdfeb"),
+            new(Digit.Character.Three, "cdfab")
+        };
+
+        var actualOutputValue = DataRow.GenerateOutputSectionNumber(exampleOutput);
+
+        actualOutputValue.Should().Be(5353);
+    }    
     [Fact]
     public void ExampleInputGeneratesRightPartTwoValue()
     {
@@ -158,6 +173,8 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
             .ToList();
 
         var mappedDataRows = DataRow.GenerateMappedDataRows(dataRows);
+        
+        
 
 
         int? actualCount = null;

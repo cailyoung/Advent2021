@@ -170,13 +170,11 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
         var dataRows = exampleInput
             .Select(FileHelper.SplitInputLine)
             .ToList();
-
-        var mappedDataRows = DataRow.GenerateMappedDataRows(dataRows);
         
-        
-
-
-        var actualCount = int.MinValue;
+        var actualCount = DataRow.GenerateMappedDataRows(dataRows)
+            .Select(dr => dr.GetOutputDigits())
+            .Select(DataRow.GenerateOutputSectionNumber)
+            .Sum();
 
         actualCount.Should().Be(61229);
     }

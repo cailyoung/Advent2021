@@ -19,7 +19,7 @@ public class DataRow
             new DataRow(
                 dr.InputValues,
                 dr.OutputValues, 
-                DigitAnalyser.GenerateCharacterMappings(FileHelper.SplitDataRowSection(dr.InputValues))
+                DigitAnalyser.GenerateCharacterMappings(SplitDataRowSection(dr.InputValues))
             )
         );
     }
@@ -49,5 +49,10 @@ public class DataRow
             Digit.Character.Unknown => '?',
             _ => throw new ArgumentOutOfRangeException(nameof(character))
         };
+    }
+
+    public static IEnumerable<Digit> SplitDataRowSection(string input)
+    {
+        return input.Split(" ").Select(i => new Digit(i));
     }
 }

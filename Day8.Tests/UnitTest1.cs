@@ -46,7 +46,7 @@ public class UnitTest1
             new(Digit.Character.Eight, "dgebacf")
         };
 
-        var actualDigits = FileHelper.SplitDataRowSection(inputValues);
+        var actualDigits = DataRow.SplitDataRowSection(inputValues);
 
         actualDigits.Should().BeEquivalentTo(expectedDigits);
     }
@@ -69,7 +69,7 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
             .Select(FileHelper.SplitInputLine)
             .Select(r => r.OutputValues);
 
-        var outputDigits = outputsOnly.SelectMany(FileHelper.SplitDataRowSection);
+        var outputDigits = outputsOnly.SelectMany(DataRow.SplitDataRowSection);
 
         var actualCount = DigitAnalyser.CalculateNumberOfUniqueSegmentCountDigits(outputDigits);
 

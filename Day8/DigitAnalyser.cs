@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Day8;
 
 public static class DigitAnalyser
@@ -27,7 +29,13 @@ public static class DigitAnalyser
 
     public static Digit.Character IdentifyCharacter(string inputString, IDictionary<Digit.Character, char[]> mapping)
     {
-        return Digit.Character.Unknown;
+        var probableCharacter = mapping
+            .Single(keyValuePair => keyValuePair.Value
+                .OrderBy(v => v)
+                .SequenceEqual(inputString.ToCharArray().OrderBy(c => c)))
+            .Key;
+        
+        return probableCharacter;
     }
 
     private static Digit.Character GetCharacterFromDecodedSegments(string decodedSegmentNames)

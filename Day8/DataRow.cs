@@ -23,4 +23,9 @@ public class DataRow
             )
         );
     }
+
+    public static int GenerateOutputSectionNumber(IEnumerable<Digit> outputSection)
+    {
+        return int.MinValue;
+    }
 }

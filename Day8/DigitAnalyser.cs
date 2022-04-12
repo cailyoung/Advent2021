@@ -1,5 +1,3 @@
-using System.Linq;
-
 namespace Day8;
 
 public static class DigitAnalyser

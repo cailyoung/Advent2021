@@ -13,3 +13,16 @@ var outputsOnly = rawInput
 var partOneCount = DigitAnalyser.CalculateNumberOfUniqueSegmentCountDigits(outputsOnly);
 
 Console.WriteLine($"Part 1 - the number of times 1/4/7/8 appear in the outputs is {partOneCount}");
+
+// Part 2
+
+var dataRows = rawInput
+    .Select(FileHelper.SplitInputLine)
+    .ToList();
+    
+var partTwoCount = DataRow.GenerateMappedDataRows(dataRows)
+    .Select(dr => dr.GetOutputDigits())
+    .Select(DataRow.GenerateOutputSectionNumber)
+    .Sum();
+    
+Console.WriteLine($"Part 2 - after decoding, the sum of all output digits is {partTwoCount}");

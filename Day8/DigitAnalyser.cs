@@ -25,6 +25,11 @@ public static class DigitAnalyser
         return finalDict;
     }
 
+    public static Digit.Character IdentifyCharacter(string inputString, IDictionary<Digit.Character, char[]> mapping)
+    {
+        return Digit.Character.Unknown;
+    }
+
     private static Digit.Character GetCharacterFromDecodedSegments(string decodedSegmentNames)
     {
         // https://stackoverflow.com/a/6441600/16498827

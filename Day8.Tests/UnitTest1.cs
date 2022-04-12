@@ -111,4 +111,31 @@ gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce
 
         actualOutput.Should().BeEquivalentTo(expectedOutput);
     }
+
+    [Theory]
+    [InlineData("cdfeb", Digit.Character.Five)]
+    [InlineData("fcadb", Digit.Character.Three)]
+    [InlineData("cdbaf", Digit.Character.Three)]
+    public void GivenCharacterInferenceNewDigitIsCorrect(string newInput, Digit.Character expectedCharacter)
+    {
+        var exampleInput = new List<Digit>
+        {
+            new("acedgfb"),
+            new("cdfbe"),
+            new("gcdfa"),
+            new("fbcad"),
+            new("dab"),
+            new("cefabd"),
+            new("cdfgeb"),
+            new("eafb"),
+            new("cagedb"),
+            new("ab")
+        };
+
+        var characterInferenceMap = DigitAnalyser.GenerateCharacterMappings(exampleInput);
+
+        var newCharacterInference = DigitAnalyser.IdentifyCharacter(newInput, characterInferenceMap);
+
+        newCharacterInference.Should().Be(expectedCharacter);
+    }
 }

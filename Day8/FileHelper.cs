@@ -21,15 +21,3 @@ public class FileHelper
         return input.Split(" ").Select(i => new Digit(i));
     }
 }
-
-public class DataRow
-{
-    public string InputValues;
-    public string OutputValues;
-
-    public DataRow(string inputValues, string outputValues)
-    {
-        this.InputValues = inputValues;
-        this.OutputValues = outputValues;
-    }
-}

@@ -15,7 +15,7 @@ public class UnitTest1
 
         var expectedOutput = new HeightMap(new[]
         {
-            new Position(0, 0, 1),
+            new Position(0,0,1),
             new Position(0,1,2),
             new Position(1,0,2),
             new Position(1,1,3)

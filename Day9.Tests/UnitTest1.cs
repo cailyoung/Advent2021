@@ -38,10 +38,10 @@ public class UnitTest1
 
         var expectedLowestPoints = new List<Position>
         {
-            new(0, 9, 0, true),
-            new(0, 1, 1, true),
+            new(9, 0, 0, true),
+            new(1, 0, 1, true),
             new(2, 2, 5, true),
-            new(4, 6, 5, true)
+            new(6, 4, 5, true)
         };
 
         var actualLowestPoints = MapOperations.GetLowestPositions(exampleMap);

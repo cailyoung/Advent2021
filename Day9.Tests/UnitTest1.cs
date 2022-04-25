@@ -81,4 +81,24 @@ public class UnitTest1
 
         product.Should().Be(1134);
     }
+
+    [Theory]
+    [InlineData(1,0,1,3)]
+    [InlineData(9,0,0,9)]
+    [InlineData(2,2,5,14)]
+    [InlineData(6,4,5,9)]
+    public void BasinFinderIsCorrect(short xValue, short yValue, short height, int expectedSize)
+    {
+        var startingPosition = new Position(xValue, yValue, height, true);
+        
+        var exampleMap = FileHelper.GenerateInitialHeightMap(@"2199943210
+3987894921
+9856789892
+8767896789
+9899965678".Split(Environment.NewLine));
+
+        var actualBasinSize = MapOperations.FindAllPositionsInBasin(startingPosition, exampleMap).Length;
+
+        actualBasinSize.Should().Be(expectedSize);
+    }
 }

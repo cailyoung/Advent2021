@@ -21,6 +21,11 @@ public static class MapOperations
         return new List<Basin>();
     }
 
+    public static Position[] FindAllPositionsInBasin(Position startingPosition, HeightMap map)
+    {
+        return Array.Empty<Position>();
+    }
+    
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)
     {
         var xValue = positionToCheck.XValue;

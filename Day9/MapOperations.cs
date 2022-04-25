@@ -16,6 +16,11 @@ public static class MapOperations
             .Sum();
     }
 
+    public static IEnumerable<Basin> FindAllBasins(HeightMap inputMap)
+    {
+        return new List<Basin>();
+    }
+
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)
     {
         var xValue = positionToCheck.XValue;

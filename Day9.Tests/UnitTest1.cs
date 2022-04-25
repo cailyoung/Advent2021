@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -61,5 +62,23 @@ public class UnitTest1
         var actualRiskScore = MapOperations.GetMapRisk(exampleMap);
 
         actualRiskScore.Should().Be(15);
+    }
+
+    [Fact]
+    public void ExampleInputGivesCorrectBasins()
+    {
+        var exampleMap = FileHelper.GenerateInitialHeightMap(@"2199943210
+3987894921
+9856789892
+8767896789
+9899965678".Split(Environment.NewLine));
+
+        var actualBasins = MapOperations.FindAllBasins(exampleMap);
+
+        var product = actualBasins
+            .Select(b => b.Size)
+            .Aggregate((r, i) => r * i);
+
+        product.Should().Be(1134);
     }
 }

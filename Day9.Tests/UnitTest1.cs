@@ -77,6 +77,8 @@ public class UnitTest1
 
         var product = actualBasins
             .Select(b => b.Size)
+            .OrderByDescending(b => b)
+            .Take(3)
             .Aggregate((r, i) => r * i);
 
         product.Should().Be(1134);

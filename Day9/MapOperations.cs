@@ -28,12 +28,20 @@ public static class MapOperations
     
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)
     {
+        var comparisonList = GetSurroundingPositions(positionToCheck, map);
+
+        return comparisonList.Min(p => p?.Height ?? int.MaxValue) == positionToCheck.Height 
+               && comparisonList.Count(p => p?.Height == positionToCheck.Height) == 1;
+    }
+
+    private static List<Position?> GetSurroundingPositions(Position positionToCheck, HeightMap map)
+    {
         var xValue = positionToCheck.XValue;
         var yValue = positionToCheck.YValue;
-        
+
         var above = map.Map.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue - 1, null);
         var below = map.Map.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue + 1, null);
-        var left  = map.Map.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue, null);
+        var left = map.Map.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue, null);
         var right = map.Map.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue, null);
 
         var comparisonList = new List<Position?>
@@ -44,8 +52,6 @@ public static class MapOperations
             left,
             right
         };
-
-        return comparisonList.Min(p => p?.Height ?? int.MaxValue) == positionToCheck.Height 
-               && comparisonList.Count(p => p?.Height == positionToCheck.Height) == 1;
+        return comparisonList;
     }
 }

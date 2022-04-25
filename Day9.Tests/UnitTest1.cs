@@ -10,15 +10,15 @@ public class UnitTest1
     [Fact]
     public void TwoLineInputGeneratesValidMap()
     {
-        var input = @"12
+        var input = @"21
 23"
             .Split(Environment.NewLine);
 
         var expectedOutput = new HeightMap(new[]
         {
-            new Position(0,0,1),
+            new Position(0,0,2),
+            new Position(1,0,1),
             new Position(0,1,2),
-            new Position(1,0,2),
             new Position(1,1,3)
         });
 

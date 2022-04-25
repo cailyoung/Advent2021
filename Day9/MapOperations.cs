@@ -11,7 +11,9 @@ public static class MapOperations
 
     public static int GetMapRisk(HeightMap inputMap)
     {
-        return int.MinValue;
+        return GetLowestPositions(inputMap)
+            .Select(p => p.Height + 1)
+            .Sum();
     }
 
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)

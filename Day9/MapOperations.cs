@@ -35,6 +35,7 @@ public static class MapOperations
             right
         };
 
-        return comparisonList.Min(p => p?.Height ?? int.MaxValue) == positionToCheck.Height;
+        return comparisonList.Min(p => p?.Height ?? int.MaxValue) == positionToCheck.Height 
+               && comparisonList.Count(p => p?.Height == positionToCheck.Height) == 1;
     }
 }

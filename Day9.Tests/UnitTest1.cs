@@ -48,4 +48,18 @@ public class UnitTest1
 
         actualLowestPoints.Should().BeEquivalentTo(expectedLowestPoints);
     }
+
+    [Fact]
+    public void ExampleInputGivesCorrectRiskScore()
+    {
+        var exampleMap = FileHelper.GenerateInitialHeightMap(@"2199943210
+3987894921
+9856789892
+8767896789
+9899965678".Split(Environment.NewLine));
+
+        var actualRiskScore = MapOperations.GetMapRisk(exampleMap);
+
+        actualRiskScore.Should().Be(15);
+    }
 }

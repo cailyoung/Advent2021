@@ -9,6 +9,11 @@ public static class MapOperations
             .Select(p => p with { Lowest = true });
     }
 
+    public static int GetMapRisk(HeightMap inputMap)
+    {
+        return int.MinValue;
+    }
+
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)
     {
         var xValue = positionToCheck.XValue;

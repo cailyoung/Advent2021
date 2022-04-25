@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
@@ -24,5 +25,27 @@ public class UnitTest1
         var actualOutput = FileHelper.GenerateInitialHeightMap(input);
 
         actualOutput.Should().BeEquivalentTo(expectedOutput);
+    }
+
+    [Fact]
+    public void ExampleMapGivesCorrectLowPoints()
+    {
+        var exampleMap = FileHelper.GenerateInitialHeightMap(@"2199943210
+3987894921
+9856789892
+8767896789
+9899965678".Split(Environment.NewLine));
+
+        var expectedLowestPoints = new List<Position>
+        {
+            new(0, 9, 0, true),
+            new(0, 1, 1, true),
+            new(2, 2, 5, true),
+            new(4, 6, 5, true)
+        };
+
+        var actualLowestPoints = MapOperations.GetLowestPositions(exampleMap);
+
+        actualLowestPoints.Should().BeEquivalentTo(expectedLowestPoints);
     }
 }

@@ -37,7 +37,7 @@ public static class MapOperations
                     .Where(p => p is not null)
                     .SelectMany(p => GetSurroundingPositions(p!, map))
                     .Where(p => p is not null)
-                    .Where(p => p!.Height != 9)
+                    .Where(p => p!.Height != 9) // Height of 9 doesn't count for a basin
                     .ToHashSet();
             }
 

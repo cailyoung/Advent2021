@@ -22,7 +22,35 @@ public static class MapOperations
 
     public static Position[] FindAllPositionsInBasin(Position startingPosition, HeightMap map)
     {
-        return Array.Empty<Position>();
+        var fullPositionList = new HashSet<Position>();
+        var edgePositionList = new HashSet<Position?> {startingPosition};
+
+        var exhausted = false;
+
+        while (!exhausted)
+        {
+            // add the edge list to the full list
+            if (edgePositionList.Any(p => p is not null))
+            {
+                fullPositionList.UnionWith(edgePositionList!);
+
+                // get the next set of positions based on the current edge list and replace the edge list with it
+                edgePositionList = edgePositionList
+                    .Where(p => p is not null)
+                    .SelectMany(p => GetSurroundingPositions(p!, map))
+                    .Where(p => p is not null)
+                    .Where(p => p!.Height != 9)
+                    .ToHashSet();
+            }
+
+            // check if exhausted (edge list is empty or all 9s)
+            if (edgePositionList.SetEquals(fullPositionList))
+            {
+                exhausted = true;
+            }
+        }
+        
+        return fullPositionList.ToArray();
     }
     
     private static bool IsLowestPosition(Position positionToCheck, HeightMap map)

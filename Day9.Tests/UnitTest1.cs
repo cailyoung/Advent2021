@@ -39,10 +39,10 @@ public class UnitTest1
 
         var expectedLowestPoints = new List<Position>
         {
-            new(9, 0, 0, true),
-            new(1, 0, 1, true),
-            new(2, 2, 5, true),
-            new(6, 4, 5, true)
+            new(9, 0, 0),
+            new(1, 0, 1),
+            new(2, 2, 5),
+            new(6, 4, 5)
         };
 
         var actualLowestPoints = MapOperations.GetLowestPositions(exampleMap);
@@ -91,7 +91,7 @@ public class UnitTest1
     [InlineData(6,4,5,9)]
     public void BasinFinderIsCorrect(short xValue, short yValue, short height, int expectedSize)
     {
-        var startingPosition = new Position(xValue, yValue, height, true);
+        var startingPosition = new Position(xValue, yValue, height);
         
         var exampleMap = FileHelper.GenerateInitialHeightMap(@"2199943210
 3987894921

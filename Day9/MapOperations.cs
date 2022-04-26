@@ -5,8 +5,7 @@ public static class MapOperations
     public static IEnumerable<Position> GetLowestPositions(HeightMap inputMap)
     {
         return inputMap.Map
-            .Where(p => IsLowestPosition(p, inputMap))
-            .Select(p => p with { Lowest = true });
+            .Where(p => IsLowestPosition(p, inputMap));
     }
 
     public static int GetMapRisk(HeightMap inputMap)

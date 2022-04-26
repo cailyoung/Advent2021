@@ -17,7 +17,10 @@ public static class MapOperations
 
     public static IEnumerable<Basin> FindAllBasins(HeightMap inputMap)
     {
-        return new List<Basin>();
+        var basinStartingPoints = GetLowestPositions(inputMap);
+
+        return basinStartingPoints
+            .Select(p => new Basin(FindAllPositionsInBasin(p, inputMap).Length));
     }
 
     public static Position[] FindAllPositionsInBasin(Position startingPosition, HeightMap map)

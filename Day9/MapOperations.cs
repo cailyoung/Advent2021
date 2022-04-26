@@ -29,12 +29,10 @@ public static class MapOperations
 
         while (!exhausted)
         {
-            // add the edge list to the full list
             if (edgePositionList.Any(p => p is not null))
             {
                 fullPositionList.UnionWith(edgePositionList!);
 
-                // get the next set of positions based on the current edge list and replace the edge list with it
                 edgePositionList = edgePositionList
                     .Where(p => p is not null)
                     .SelectMany(p => GetSurroundingPositions(p!, map))
@@ -43,7 +41,6 @@ public static class MapOperations
                     .ToHashSet();
             }
 
-            // check if exhausted (edge list is empty or all 9s)
             if (edgePositionList.SetEquals(fullPositionList))
             {
                 exhausted = true;

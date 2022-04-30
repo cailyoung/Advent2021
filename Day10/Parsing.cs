@@ -54,4 +54,9 @@ public static class Parsing
         
         return failingToken;
     }
+
+    public static IEnumerable<string> FindCorruptLines(IEnumerable<string> input)
+    {
+        return new List<string>();
+    }
 }

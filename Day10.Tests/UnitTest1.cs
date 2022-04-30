@@ -1,3 +1,4 @@
+using System;
 using FluentAssertions;
 using Xunit;
 
@@ -17,5 +18,30 @@ public class UnitTest1
         var actualOutput = Parsing.FindFirstCorruptToken(input);
 
         actualOutput.Should().Be(expectedFailureToken);
+    }
+
+    [Fact]
+    public void CorruptLineSelectorWorks()
+    {
+        var input = @"[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]".Split(Environment.NewLine);
+
+        var expectedOutput = @"{([(<{}[<>[]}>{[]{[(<()>
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{".Split(Environment.NewLine);
+
+        var actualOutput = Parsing.FindCorruptLines(input);
+
+        actualOutput.Should().BeEquivalentTo(expectedOutput);
     }
 }

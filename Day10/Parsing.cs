@@ -57,6 +57,6 @@ public static class Parsing
 
     public static IEnumerable<string> FindCorruptLines(IEnumerable<string> input)
     {
-        return new List<string>();
+        return input.Where(s => FindFirstCorruptToken(s) != string.Empty);
     }
 }

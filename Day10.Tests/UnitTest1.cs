@@ -12,7 +12,7 @@ public class UnitTest1
     [InlineData("[<(<(<(<{}))><([]([]()", ")")]
     [InlineData("<{([([[(<>()){}]>(<<{{", ">")]
     [InlineData("[({(<(())[]>[[{[]{<()<>>", "")]
-    public void Test1(string input, string? expectedFailureToken)
+    public void FirstCorruptTokenFinderIsAccurate(string input, string? expectedFailureToken)
     {
         var actualOutput = Parsing.FindFirstCorruptToken(input);
 

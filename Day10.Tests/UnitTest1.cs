@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -43,5 +44,29 @@ public class UnitTest1
         var actualOutput = Parsing.FindCorruptLines(input);
 
         actualOutput.Should().BeEquivalentTo(expectedOutput);
+    }
+
+    [Fact]
+    public void ExampleGivesCorrectScore()
+    {
+        var input = @"[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]".Split(Environment.NewLine);
+
+        var badTokens = 
+            Parsing.FindCorruptLines(input)
+            .Select(Parsing.FindFirstCorruptToken)
+            .Select(char.Parse);
+
+        var score = Scoring.CalculateScoreForTokens(badTokens);
+
+        score.Should().Be(26397);
     }
 }

@@ -2,7 +2,7 @@ namespace Day10;
 
 public static class Scoring
 {
-    private static Dictionary<char, int> TokenScores = new()
+    private static readonly Dictionary<char, int> TokenScores = new()
     {
         { ')', 3 },
         { ']', 57 },
@@ -12,6 +12,6 @@ public static class Scoring
 
     public static int CalculateScoreForTokens(IEnumerable<char> tokens)
     {
-        return int.MinValue;
+        return tokens.Select(c => TokenScores[c]).Sum();
     }
 }

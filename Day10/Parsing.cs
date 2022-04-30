@@ -30,25 +30,26 @@ public static class Parsing
     {
         var workingArray = inputLine.ToCharArray();
         var failingToken = string.Empty;
-        
-        for (var potentialCloserIndex = 0; potentialCloserIndex < workingArray.Length; potentialCloserIndex++)
-        {
-            if (ValidOpeners.Contains(workingArray[potentialCloserIndex])) 
-                continue;
-            for (var potentialOpenerIndex = potentialCloserIndex - 1; potentialOpenerIndex >= 0; potentialOpenerIndex--)
-            {
-                var currentCloser = workingArray[potentialCloserIndex];
-                var currentOpener = workingArray[potentialOpenerIndex];
-                var matched = currentOpener == ValidTokenPairs.Single(p => p.Closer == currentCloser).Opener;
-                if (matched)
-                {
-                    workingArray.ToList().RemoveRange(potentialOpenerIndex, 2);
-                    continue;
-                }
 
-                failingToken = currentCloser.ToString();
-                break;
+        var openers = new Stack<char>();
+        bool? validCloser = null;
+
+        foreach (var token in workingArray)
+        {
+            switch (ValidOpeners.Contains(token))
+            {
+                case true:
+                    openers.Push(token);
+                    break;
+                case false:
+                    validCloser = ValidTokenPairs.Single(pair => pair.Closer == token).Opener == openers.Pop();
+                    break;
             }
+
+            if (validCloser is null || (bool)validCloser) continue;
+            
+            failingToken = token.ToString();
+            break;
         }
         
         return failingToken;

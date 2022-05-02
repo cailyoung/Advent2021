@@ -55,6 +55,11 @@ public static class Parsing
         return failingToken;
     }
 
+    public static string GenerateClosingSequence(string incompleteLine)
+    {
+        return string.Empty;
+    }
+    
     public static IEnumerable<string> FindCorruptLines(IEnumerable<string> input)
     {
         return input.Where(s => FindFirstCorruptToken(s) != string.Empty);

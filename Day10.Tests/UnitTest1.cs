@@ -21,6 +21,19 @@ public class UnitTest1
         actualOutput.Should().Be(expectedFailureToken);
     }
 
+    [Theory]
+    [InlineData("[({(<(())[]>[[{[]{<()<>>", "}}]])})]")]
+    [InlineData("[(()[<>])]({[<{<<[]>>(", ")}>]})")]
+    [InlineData("(((({<>}<{<{<>}{[]{[]{}", "}}>}>))))")]
+    [InlineData("{<[[]]>}<{[{[{[]{()[[[]", "]]}}]}]}>")]
+    [InlineData("<{([{{}}[<[[[<>{}]]]>[]]", "])}>")]
+    public void LineCompleterWorksCorrectly(string incompleteLine, string expectedCompletion)
+    {
+        var actualOutput = Parsing.GenerateClosingSequence(incompleteLine);
+
+        actualOutput.Should().Be(expectedCompletion);
+    }
+
     [Fact]
     public void CorruptLineSelectorWorks()
     {

@@ -4,10 +4,10 @@ public static class Parsing
 {
     private static readonly List<TokenPair> ValidTokenPairs = new()
     {
-        new('(', ')'),
-        new('[', ']'),
-        new('{', '}'),
-        new('<', '>')
+        new TokenPair('(', ')'),
+        new TokenPair('[', ']'),
+        new TokenPair('{', '}'),
+        new TokenPair('<', '>')
     };
 
     private static readonly HashSet<char> ValidOpeners = new()

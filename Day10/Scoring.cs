@@ -1,3 +1,5 @@
+using MathNet.Numerics.Statistics;
+
 namespace Day10;
 
 public static class Scoring
@@ -40,7 +42,12 @@ public static class Scoring
 
     public static long FindMiddleScore(IEnumerable<string> inputLines)
     {
-
-        return long.MinValue;
+        var completionScores = inputLines
+            .Select(CalculateLineCompletionScoreForSingleLine)
+            .Select(l => (double)l);
+        
+        var median = (long)completionScores.Median();
+        
+        return median;
     }
 }

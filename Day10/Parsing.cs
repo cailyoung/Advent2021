@@ -17,14 +17,6 @@ public static class Parsing
         '{',
         '<'
     };
-    
-    private static readonly HashSet<char> ValidClosers = new HashSet<char>()
-    {
-        ')',
-        ']',
-        '}',
-        '>'
-    };
 
     public static string FindFirstCorruptToken(string inputLine)
     {

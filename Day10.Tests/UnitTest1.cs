@@ -107,4 +107,17 @@ public class UnitTest1
 
         score.Should().Be(26397);
     }
+
+    [Theory]
+    [InlineData("}}]])})]", 288957)]
+    [InlineData(")}>]})", 5566)]
+    [InlineData("}}>}>))))", 1480781)]
+    [InlineData("]]}}]}]}>", 995444)]
+    [InlineData("])}>", 294)]
+    public void CompletionStringScoringIsCorrect(string completionString, int expectedScore)
+    {
+        var score = Scoring.CalculateLineCompletionScoreForSingleLine(completionString);
+
+        score.Should().Be(expectedScore);
+    }
 }

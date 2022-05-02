@@ -14,4 +14,9 @@ public static class Scoring
     {
         return tokens.Select(c => InvalidTokenSyntaxErrorScores[c]).Sum();
     }
+
+    public static int CalculateLineCompletionScoreForSingleLine(string completionSequence)
+    {
+        return int.MinValue;
+    }
 }

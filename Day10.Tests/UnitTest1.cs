@@ -58,6 +58,31 @@ public class UnitTest1
 
         actualOutput.Should().BeEquivalentTo(expectedOutput);
     }
+    
+    [Fact]
+    public void IncompleteLineSelectorWorks()
+    {
+        var input = @"[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+{([(<{}[<>[]}>{[]{[(<()>
+(((({<>}<{<{<>}{[]{[]{}
+[[<[([]))<([[{}[[()]]]
+[{[{({}]{}}([{[{{{}}([]
+{<[[]]>}<{[{[{[]{()[[[]
+[<(<(<(<{}))><([]([]()
+<{([([[(<>()){}]>(<<{{
+<{([{{}}[<[[[<>{}]]]>[]]".Split(Environment.NewLine);
+
+        var expectedOutput = @"[({(<(())[]>[[{[]{<()<>>
+[(()[<>])]({[<{<<[]>>(
+(((({<>}<{<{<>}{[]{[]{}
+{<[[]]>}<{[{[{[]{()[[[]
+<{([{{}}[<[[[<>{}]]]>[]]".Split(Environment.NewLine);
+
+        var actualOutput = Parsing.FindIncompleteLines(input);
+
+        actualOutput.Should().BeEquivalentTo(expectedOutput);
+    }
 
     [Fact]
     public void ExampleGivesCorrectSyntaxErrorScore()

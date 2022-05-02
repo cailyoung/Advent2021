@@ -109,4 +109,9 @@ public static class Parsing
     {
         return input.Where(s => FindFirstCorruptToken(s) != string.Empty);
     }
+
+    public static IEnumerable<string> FindIncompleteLines(IEnumerable<string> input)
+    {
+        return input.Where(s => FindFirstCorruptToken(s) == string.Empty);
+    }
 }

@@ -2,7 +2,7 @@ namespace Day10;
 
 public static class Scoring
 {
-    private static readonly Dictionary<char, int> TokenScores = new()
+    private static readonly Dictionary<char, int> InvalidTokenSyntaxErrorScores = new()
     {
         { ')', 3 },
         { ']', 57 },
@@ -10,8 +10,8 @@ public static class Scoring
         { '>', 25137 }
     };
 
-    public static int CalculateScoreForTokens(IEnumerable<char> tokens)
+    public static int CalculateSyntaxErrorScoreForTokens(IEnumerable<char> tokens)
     {
-        return tokens.Select(c => TokenScores[c]).Sum();
+        return tokens.Select(c => InvalidTokenSyntaxErrorScores[c]).Sum();
     }
 }

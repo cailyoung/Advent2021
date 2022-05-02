@@ -47,7 +47,7 @@ public class UnitTest1
     }
 
     [Fact]
-    public void ExampleGivesCorrectScore()
+    public void ExampleGivesCorrectSyntaxErrorScore()
     {
         var input = @"[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(
@@ -65,7 +65,7 @@ public class UnitTest1
             .Select(Parsing.FindFirstCorruptToken)
             .Select(char.Parse);
 
-        var score = Scoring.CalculateScoreForTokens(badTokens);
+        var score = Scoring.CalculateSyntaxErrorScoreForTokens(badTokens);
 
         score.Should().Be(26397);
     }

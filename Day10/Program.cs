@@ -12,6 +12,6 @@ var badTokens = corruptedLines
     .Select(Parsing.FindFirstCorruptToken)
     .Select(char.Parse);
 
-var score = Scoring.CalculateScoreForTokens(badTokens);
+var score = Scoring.CalculateSyntaxErrorScoreForTokens(badTokens);
 
 Console.WriteLine($"Part one - total score for corrupted lines is {score}");

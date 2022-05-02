@@ -15,3 +15,13 @@ var badTokens = corruptedLines
 var score = Scoring.CalculateSyntaxErrorScoreForTokens(badTokens);
 
 Console.WriteLine($"Part one - total score for corrupted lines is {score}");
+
+// Part Two
+
+var incompleteLines = Parsing.FindIncompleteLines(input);
+
+var completionSequences = incompleteLines.Select(Parsing.GenerateClosingSequence);
+
+var middleScore = Scoring.FindMiddleScore(completionSequences);
+
+Console.WriteLine($"Part two - middle score is {middleScore}");

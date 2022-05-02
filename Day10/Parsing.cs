@@ -28,9 +28,16 @@ public static class Parsing
 
     public static string FindFirstCorruptToken(string inputLine)
     {
-        var workingArray = inputLine.ToCharArray();
+        
         var failingToken = string.Empty;
+        failingToken = RemoveMatchedTokenPairs(inputLine, failingToken);
 
+        return failingToken;
+    }
+
+    private static string RemoveMatchedTokenPairs(string inputLine, string failingToken)
+    {
+        var workingArray = inputLine.ToCharArray();
         var openers = new Stack<char>();
         bool? validCloser = null;
 
@@ -47,11 +54,11 @@ public static class Parsing
             }
 
             if (validCloser is null || (bool)validCloser) continue;
-            
+
             failingToken = token.ToString();
             break;
         }
-        
+
         return failingToken;
     }
 

@@ -68,25 +68,12 @@ public static class Parsing
             throw new ArgumentException("Input line contained an incorrect closing token, please check your input");
         }
 
-        var workingArray = incompleteLine.ToCharArray();
         var unclosedOpeners = new Stack<char>();
-        bool? validCloser = null;
-        
-        foreach (var token in workingArray)
-        {
-            switch (ValidOpeners.Contains(token))
-            {
-                case true:
-                    unclosedOpeners.Push(token);
-                    break;
-                case false:
-                    validCloser = GetOpenerForCloser(token) == unclosedOpeners.Pop();
-                    break;
-            }
 
-            if (validCloser is null || (bool)validCloser) continue;
-            
-            break;
+        foreach (var token in RemoveMatchedTokenPairs(incompleteLine)
+                     .CleanOpenersSequence)
+        {
+            unclosedOpeners.Push(token);
         }
 
         var closers = new Stack<char>();

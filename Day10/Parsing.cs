@@ -2,7 +2,7 @@ namespace Day10;
 
 public static class Parsing
 {
-    private static readonly List<TokenPair> ValidTokenPairs = new List<TokenPair>()
+    private static readonly List<TokenPair> ValidTokenPairs = new()
     {
         new('(', ')'),
         new('[', ']'),
@@ -10,7 +10,7 @@ public static class Parsing
         new('<', '>')
     };
 
-    private static readonly HashSet<char> ValidOpeners = new HashSet<char>()
+    private static readonly HashSet<char> ValidOpeners = new()
     {
         '(',
         '[',

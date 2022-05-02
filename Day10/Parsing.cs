@@ -28,15 +28,12 @@ public static class Parsing
 
     public static string FindFirstCorruptToken(string inputLine)
     {
-        
-        var failingToken = string.Empty;
-        failingToken = RemoveMatchedTokenPairs(inputLine, failingToken).FirstFailingToken;
-
-        return failingToken;
+        return RemoveMatchedTokenPairs(inputLine).FirstFailingToken;
     }
 
-    private static (string FirstFailingToken, string CleanOpenersSequence) RemoveMatchedTokenPairs(string inputLine, string failingToken)
+    private static (string FirstFailingToken, string CleanOpenersSequence) RemoveMatchedTokenPairs(string inputLine)
     {
+        var failingToken = string.Empty;
         var workingArray = inputLine.ToCharArray();
         var openers = new Stack<char>();
         bool? validCloser = null;

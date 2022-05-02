@@ -68,13 +68,7 @@ public static class Parsing
             throw new ArgumentException("Input line contained an incorrect closing token, please check your input");
         }
 
-        var unclosedOpeners = new Stack<char>();
-
-        foreach (var token in RemoveMatchedTokenPairs(incompleteLine)
-                     .CleanOpenersSequence)
-        {
-            unclosedOpeners.Push(token);
-        }
+        var unclosedOpeners = new Stack<char>(RemoveMatchedTokenPairs(incompleteLine).CleanOpenersSequence.ToCharArray());
 
         var closers = new Stack<char>();
 

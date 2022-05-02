@@ -45,9 +45,7 @@ public static class Scoring
         var completionScores = inputLines
             .Select(CalculateLineCompletionScoreForSingleLine)
             .Select(l => (double)l);
-        
-        var median = (long)completionScores.Median();
-        
-        return median;
+
+        return (long)completionScores.Median();
     }
 }

@@ -30,12 +30,12 @@ public static class Parsing
     {
         
         var failingToken = string.Empty;
-        failingToken = RemoveMatchedTokenPairs(inputLine, failingToken);
+        failingToken = RemoveMatchedTokenPairs(inputLine, failingToken).FirstFailingToken;
 
         return failingToken;
     }
 
-    private static string RemoveMatchedTokenPairs(string inputLine, string failingToken)
+    private static (string FirstFailingToken, string CleanOpenersSequence) RemoveMatchedTokenPairs(string inputLine, string failingToken)
     {
         var workingArray = inputLine.ToCharArray();
         var openers = new Stack<char>();
@@ -59,7 +59,7 @@ public static class Parsing
             break;
         }
 
-        return failingToken;
+        return (failingToken, string.Concat(openers.Reverse()));
     }
 
     private static char GetOpenerForCloser(char token)

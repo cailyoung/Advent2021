@@ -42,7 +42,7 @@ public static class Parsing
                     openers.Push(token);
                     break;
                 case false:
-                    validCloser = ValidTokenPairs.Single(pair => pair.Closer == token).Opener == openers.Pop();
+                    validCloser = GetOpenerForCloser(token) == openers.Pop();
                     break;
             }
 
@@ -53,6 +53,11 @@ public static class Parsing
         }
         
         return failingToken;
+    }
+
+    private static char GetOpenerForCloser(char token)
+    {
+        return ValidTokenPairs.Single(pair => pair.Closer == token).Opener;
     }
 
     public static string GenerateClosingSequence(string incompleteLine)

@@ -37,4 +37,10 @@ public static class Scoring
         score += CompletionTokenScore[c];
         return score;
     }
+
+    public static long FindMiddleScore(IEnumerable<string> inputLines)
+    {
+
+        return long.MinValue;
+    }
 }

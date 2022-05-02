@@ -120,4 +120,18 @@ public class UnitTest1
 
         score.Should().Be(expectedScore);
     }
+
+    [Fact]
+    public void MiddleScoreFinderIsCorrect()
+    {
+        var input = @"}}]])})]
+)}>]})
+}}>}>))))
+]]}}]}]}>
+])}>".Split(Environment.NewLine);
+
+        var actualScore = Scoring.FindMiddleScore(input);
+
+        actualScore.Should().Be(288957);
+    }
 }

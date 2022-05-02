@@ -10,13 +10,31 @@ public static class Scoring
         { '>', 25137 }
     };
 
+    private static readonly Dictionary<char, int> CompletionTokenScore = new()
+    {
+        { ')', 1 },
+        { ']', 2 },
+        { '}', 3 },
+        { '>', 4 }
+    };
+
     public static int CalculateSyntaxErrorScoreForTokens(IEnumerable<char> tokens)
     {
         return tokens.Select(c => InvalidTokenSyntaxErrorScores[c]).Sum();
     }
 
-    public static int CalculateLineCompletionScoreForSingleLine(string completionSequence)
+    public static long CalculateLineCompletionScoreForSingleLine(string completionSequence)
     {
-        return int.MinValue;
+        var score = completionSequence
+            .Aggregate(0L, ApplyScoreForToken);
+        
+        return score;
+    }
+
+    private static long ApplyScoreForToken(long score, char c)
+    {
+        score *= 5;
+        score += CompletionTokenScore[c];
+        return score;
     }
 }

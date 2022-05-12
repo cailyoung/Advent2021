@@ -24,43 +24,66 @@ public static class MapOperations
     private static EnergyMap FlashAllOverNineEnergy(this EnergyMap startingMap)
     {
         var workingMap = new EnergyMap(startingMap.Map);
-        var flashedCoOrds = new HashSet<CoOrd>();
+        var alreadyFlashedCoOrds = new HashSet<CoOrd>();
 
         var exhausted = false;
-
+        
+        // TODO instead of all this, step through each of the to-flash octopuses and store the newly-flashed in another list, then see if that list is empty for exhaustion
+        
         while (!exhausted)
         {
-            var currentlyFlashingPositions = workingMap.Map.Where(p => p.CurrentlyFlashing).ToArray();
-            
-            var positionsToFlashNext = currentlyFlashingPositions
-                .SelectMany(position => GetSurroundingPositions(position, workingMap))
-                .Distinct();
-            
-            flashedCoOrds.UnionWith(currentlyFlashingPositions.Select(p => p.CoOrd));
-            
-            var newFlashedPositions = positionsToFlashNext.Select(IncrementPositionEnergy).ToArray();
-
-            var newWorkingMapPositions = workingMap.Map
-                .ExceptBy(newFlashedPositions.Select(p => p.CoOrd), position => position.CoOrd)
+            var newToFlashCoOrds = workingMap.Map
+                .Where(PositionIsNewlyFlashing())
+                .Select(p => p.CoOrd)
                 .ToList();
 
-            newWorkingMapPositions.AddRange(newFlashedPositions);
-
-            workingMap = new EnergyMap(newWorkingMapPositions);
-
-            if (flashedCoOrds.SetEquals(workingMap.Map.Where(p => p.CurrentlyFlashing).Select(p => p.CoOrd)))
+            switch (newToFlashCoOrds.Any())
             {
-                exhausted = true;
+                case true:
+                    workingMap = ApplyFlashingCoOrdsToWorkingMap(newToFlashCoOrds, workingMap);
+                    alreadyFlashedCoOrds.UnionWith(newToFlashCoOrds);
+                    break;
+                case false:
+                    exhausted = true;
+                    break;
+            }
+            
+            Func<Position, bool> PositionIsNewlyFlashing()
+            {
+                return p => p.CurrentlyFlashing && !alreadyFlashedCoOrds.Contains(p.CoOrd);
             }
         }
 
+        //SetFlashedOctopusEnergiesToZero();
+        
         return workingMap;
     }
-    
-    private static IEnumerable<Position> GetSurroundingPositions(Position positionToCheck, EnergyMap map)
+
+    private static EnergyMap ApplyFlashingCoOrdsToWorkingMap(List<CoOrd> newToFlashCoOrds, EnergyMap workingMap)
     {
-        var xValue = positionToCheck.XValue;
-        var yValue = positionToCheck.YValue;
+        var incrementedMapPositions = workingMap.Map.ToList();
+        
+        foreach (var coOrd in newToFlashCoOrds)
+        {
+            var incrementedPositions = 
+                GetSurroundingPositions(coOrd, workingMap)
+                .Select(IncrementPositionEnergy)
+                .ToList();
+
+            var positionsWithoutOldPositions = incrementedMapPositions.Except(incrementedPositions).ToList();
+
+            positionsWithoutOldPositions.AddRange(incrementedPositions);
+
+
+        }
+        
+        throw new NotImplementedException();
+    }
+
+    private static IEnumerable<Position> GetSurroundingPositions(CoOrd coOrdToCheck, IEnumerable<Position> positionList)
+    {
+        var xValue = coOrdToCheck.XValue;
+        var yValue = coOrdToCheck.YValue;
 
         /*
          *
@@ -70,18 +93,18 @@ public static class MapOperations
          *
          */
         
-        var above = map.Map.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue - 1, null);
-        var below = map.Map.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue + 1, null);
-        var left = map.Map.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue, null);
-        var right = map.Map.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue, null);
-        var aboveLeft = map.Map.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue - 1, null);
-        var aboveRight = map.Map.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue - 1, null);
-        var belowLeft = map.Map.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue + 1, null);
-        var belowRight = map.Map.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue + 1, null);
+        var above = positionList.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue - 1, null);
+        var below = positionList.SingleOrDefault(p => p!.XValue == xValue && p.YValue == yValue + 1, null);
+        var left = positionList.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue, null);
+        var right = positionList.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue, null);
+        var aboveLeft = positionList.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue - 1, null);
+        var aboveRight = positionList.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue - 1, null);
+        var belowLeft = positionList.SingleOrDefault(p => p!.XValue == xValue - 1 && p.YValue == yValue + 1, null);
+        var belowRight = positionList.SingleOrDefault(p => p!.XValue == xValue + 1 && p.YValue == yValue + 1, null);
 
         var comparisonList = new List<Position?>
         {
-            positionToCheck,
+            positionList.Single(p => p.CoOrd == coOrdToCheck),
             above,
             below,
             left,

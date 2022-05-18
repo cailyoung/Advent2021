@@ -27,7 +27,7 @@ public class UnitTest1
 
         var actualMap = MapOperations.ProduceNextStep(initialMap);
 
-        actualMap.Should().BeEquivalentTo(expectedMap);
+        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]
@@ -51,7 +51,7 @@ public class UnitTest1
 
         var actualMap = MapOperations.ProduceFutureStep(initialMap, 2);
 
-        actualMap.Should().BeEquivalentTo(expectedMap);
+        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]
@@ -85,6 +85,7 @@ public class UnitTest1
 
         var actualMap = MapOperations.ProduceFutureStep(initialMap, 10);
 
-        actualMap.Should().BeEquivalentTo(expectedMap);
+        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMap.FlashedOctopusesOnTheLastStep.Should().Be(204);
     }
 }

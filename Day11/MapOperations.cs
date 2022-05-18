@@ -27,7 +27,7 @@ public static class MapOperations
         var alreadyFlashedCoOrds = new HashSet<CoOrd>();
 
         var exhausted = false;
-                
+
         while (!exhausted)
         {
             var newToFlashCoOrds = workingMap.Map

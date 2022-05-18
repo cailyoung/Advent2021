@@ -29,4 +29,28 @@ public class UnitTest1
 
         actualMap.Should().BeEquivalentTo(expectedMap);
     }
+
+    [Fact]
+    public void SmallExampleSecondDayWorksCorrectly()
+    {
+        var input = @"11111
+19991
+19191
+19991
+11111".Split(Environment.NewLine);
+
+        var initialMap = FileHelper.GenerateInitialEnergyMap(input);
+        
+        var expected = @"45654
+51115
+61116
+51115
+45654".Split(Environment.NewLine);
+
+        var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
+
+        var actualMap = MapOperations.ProduceFutureStep(initialMap, 2);
+
+        actualMap.Should().BeEquivalentTo(expectedMap);
+    }
 }

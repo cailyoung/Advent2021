@@ -12,6 +12,11 @@ public static class MapOperations
         return workingMap;
     }
 
+    public static EnergyMap ProduceFutureStep(EnergyMap startingMap, int futureStepNumber)
+    {
+        return new EnergyMap(new List<Position>());
+    }
+
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)
     {
         return new EnergyMap(startingMap.Map.Select(IncrementPositionEnergy));

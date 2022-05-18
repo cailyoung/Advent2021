@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -28,7 +29,7 @@ public class UnitTest1
 
         var actualMap = MapOperations.ProduceNextStep(initialMap);
 
-        actualMap.NextStepMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMap.EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]
@@ -52,7 +53,7 @@ public class UnitTest1
 
         var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 2);
 
-        actualMaps.Last().Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMaps.Last().EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]
@@ -86,6 +87,6 @@ public class UnitTest1
 
         var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 10);
 
-        actualMaps.Last().Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMaps.Last().EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 }

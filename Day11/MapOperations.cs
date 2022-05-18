@@ -27,9 +27,7 @@ public static class MapOperations
         var alreadyFlashedCoOrds = new HashSet<CoOrd>();
 
         var exhausted = false;
-        
-        // TODO instead of all this, step through each of the to-flash octopuses and store the newly-flashed in another list, then see if that list is empty for exhaustion
-        
+                
         while (!exhausted)
         {
             var newToFlashCoOrds = workingMap.Map

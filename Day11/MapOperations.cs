@@ -2,14 +2,15 @@ namespace Day11;
 
 public static class MapOperations
 {
-    public static EnergyMap ProduceNextStep(EnergyMap startingMap)
+    public static (EnergyMap NextStepMap, int FlashCount) ProduceNextStep(EnergyMap startingMap)
     {
         var workingMap = startingMap
             .IncrementAllMapEnergyValues()
-            .FlashAllOverNineEnergy()
-            .SetFlashedOctopusEnergiesToZero();
+            .FlashAllOverNineEnergy();
+            
+        var stepFlashCount = workingMap.Map.Count(p => p.CurrentlyFlashing);
         
-        return workingMap;
+        return (workingMap.SetFlashedOctopusEnergiesToZero(), stepFlashCount);
     }
 
     public static IEnumerable<EnergyMap> ProduceFutureStepState(EnergyMap startingMap, int afterStepNumber)
@@ -19,7 +20,7 @@ public static class MapOperations
 
         while (stepsRemaining > 0)
         {
-            workingMaps.Add(ProduceNextStep(workingMaps.Last()));
+            workingMaps.Add(ProduceNextStep(workingMaps.Last()).NextStepMap);
             stepsRemaining--;
         }
 

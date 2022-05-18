@@ -28,7 +28,7 @@ public class UnitTest1
 
         var actualMap = MapOperations.ProduceNextStep(initialMap);
 
-        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMap.NextStepMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]

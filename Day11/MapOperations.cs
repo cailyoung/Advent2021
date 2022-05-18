@@ -13,7 +13,7 @@ public static class MapOperations
 
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)
     {
-        return new EnergyMap(startingMap.Map.Select(p => p with { Energy = p.Energy + 1 }));
+        return new EnergyMap(startingMap.Map.Select(IncrementPositionEnergy));
     }
 
     private static Position IncrementPositionEnergy(Position startingPosition)

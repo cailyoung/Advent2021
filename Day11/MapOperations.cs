@@ -27,6 +27,11 @@ public static class MapOperations
         return workingMaps;
     }
 
+    public static int CalculateStepWhenAllFlash(EnergyMap startingMap)
+    {
+        return int.MinValue;
+    }
+
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)
     {
         return new EnergyMap(startingMap.Map.Select(IncrementPositionEnergy));

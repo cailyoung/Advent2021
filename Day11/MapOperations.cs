@@ -12,9 +12,18 @@ public static class MapOperations
         return workingMap;
     }
 
-    public static EnergyMap ProduceFutureStep(EnergyMap startingMap, int futureStepNumber)
+    public static EnergyMap ProduceFutureStep(EnergyMap startingMap, int afterStepNumber)
     {
-        return new EnergyMap(new List<Position>());
+        var stepsRemaining = afterStepNumber;
+        var workingMap = startingMap;
+
+        while (stepsRemaining > 0)
+        {
+            workingMap = ProduceNextStep(workingMap);
+            stepsRemaining--;
+        }
+
+        return workingMap;
     }
 
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)

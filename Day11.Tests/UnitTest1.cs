@@ -70,8 +70,8 @@ public class UnitTest1
 4846848554
 5283751526".Split(Environment.NewLine);
 
-        var initialMap = FileHelper.GenerateInitialEnergyMap(input); 
-        
+        var initialMap = FileHelper.GenerateInitialEnergyMap(input);
+
         var expected = @"0481112976
 0031112009
 0041112504
@@ -88,5 +88,6 @@ public class UnitTest1
         var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 10);
 
         actualMaps.Last().EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMaps.Sum(p => p.FlashCount).Should().Be(204);
     }
 }

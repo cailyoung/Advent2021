@@ -53,4 +53,38 @@ public class UnitTest1
 
         actualMap.Should().BeEquivalentTo(expectedMap);
     }
+
+    [Fact]
+    public void LargeExampleDayTenWorksCorrectly()
+    {
+        var input = @"5483143223
+2745854711
+5264556173
+6141336146
+6357385478
+4167524645
+2176841721
+6882881134
+4846848554
+5283751526".Split(Environment.NewLine);
+
+        var initialMap = FileHelper.GenerateInitialEnergyMap(input); 
+        
+        var expected = @"0481112976
+0031112009
+0041112504
+0081111406
+0099111306
+0093511233
+0442361130
+5532252350
+0532250600
+0032240000".Split(Environment.NewLine);
+
+        var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
+
+        var actualMap = MapOperations.ProduceFutureStep(initialMap, 10);
+
+        actualMap.Should().BeEquivalentTo(expectedMap);
+    }
 }

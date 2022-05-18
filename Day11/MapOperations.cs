@@ -12,7 +12,7 @@ public static class MapOperations
         return workingMap;
     }
 
-    public static EnergyMap ProduceFutureStep(EnergyMap startingMap, int afterStepNumber)
+    public static EnergyMap ProduceFutureStepState(EnergyMap startingMap, int afterStepNumber)
     {
         var stepsRemaining = afterStepNumber;
         var workingMap = startingMap;

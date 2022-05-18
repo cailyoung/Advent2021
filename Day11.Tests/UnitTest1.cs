@@ -49,7 +49,7 @@ public class UnitTest1
 
         var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
 
-        var actualMap = MapOperations.ProduceFutureStep(initialMap, 2);
+        var actualMap = MapOperations.ProduceFutureStepState(initialMap, 2);
 
         actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
@@ -83,9 +83,8 @@ public class UnitTest1
 
         var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
 
-        var actualMap = MapOperations.ProduceFutureStep(initialMap, 10);
+        var actualMap = MapOperations.ProduceFutureStepState(initialMap, 10);
 
         actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
-        actualMap.FlashedOctopusesOnTheLastStep.Should().Be(204);
     }
 }

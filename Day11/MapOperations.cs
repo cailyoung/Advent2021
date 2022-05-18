@@ -29,7 +29,16 @@ public static class MapOperations
 
     public static int CalculateStepWhenAllFlash(EnergyMap startingMap)
     {
-        return int.MinValue;
+        var workingMap = startingMap;
+        var stepCount = 0;
+        
+        while (workingMap.Map.Any(p => p.Energy != 0))
+        {
+            workingMap = ProduceNextStep(workingMap).EnergyMap;
+            stepCount++;
+        }
+
+        return stepCount;
     }
 
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)

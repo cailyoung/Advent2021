@@ -6,7 +6,8 @@ public static class MapOperations
     {
         var workingMap = startingMap
             .IncrementAllMapEnergyValues()
-            .FlashAllOverNineEnergy();
+            .FlashAllOverNineEnergy()
+            .SetFlashedOctopusEnergiesToZero();
         
         return workingMap;
     }
@@ -51,13 +52,11 @@ public static class MapOperations
                 return p => p.CurrentlyFlashing && !alreadyFlashedCoOrds.Contains(p.CoOrd);
             }
         }
-
-        workingMap = SetFlashedOctopusEnergiesToZero(workingMap);
         
         return workingMap;
     }
 
-    private static EnergyMap SetFlashedOctopusEnergiesToZero(EnergyMap workingMap)
+    private static EnergyMap SetFlashedOctopusEnergiesToZero(this EnergyMap workingMap)
     {
         var zeroedMap = workingMap.Map.Select(position => position.CurrentlyFlashing ? position with { Energy = 0 } : position);
 

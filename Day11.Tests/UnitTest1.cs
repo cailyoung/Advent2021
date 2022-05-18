@@ -23,7 +23,7 @@ public class UnitTest1
 40004
 34543".Split(Environment.NewLine);
 
-        var expectedMap = FileHelper.GenerateInitialEnergyMap(input);
+        var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
 
         var actualMap = MapOperations.ProduceNextStep(initialMap);
 

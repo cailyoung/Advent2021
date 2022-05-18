@@ -54,9 +54,16 @@ public static class MapOperations
             }
         }
 
-        //SetFlashedOctopusEnergiesToZero();
+        workingMap = SetFlashedOctopusEnergiesToZero(workingMap);
         
         return workingMap;
+    }
+
+    private static EnergyMap SetFlashedOctopusEnergiesToZero(EnergyMap workingMap)
+    {
+        var zeroedMap = workingMap.Map.Select(position => position.CurrentlyFlashing ? position with { Energy = 0 } : position);
+
+        return new EnergyMap(zeroedMap);
     }
 
     private static EnergyMap ApplyFlashingCoOrdsToWorkingMap(List<CoOrd> newToFlashCoOrds, EnergyMap workingMap)
@@ -66,7 +73,7 @@ public static class MapOperations
         foreach (var coOrd in newToFlashCoOrds)
         {
             var incrementedPositions = 
-                GetSurroundingPositions(coOrd, workingMap)
+                GetSurroundingPositions(coOrd, incrementedMapPositions)
                 .Select(IncrementPositionEnergy)
                 .ToList();
 
@@ -74,10 +81,10 @@ public static class MapOperations
 
             positionsWithoutOldPositions.AddRange(incrementedPositions);
 
-
+            incrementedMapPositions = positionsWithoutOldPositions;
         }
-        
-        throw new NotImplementedException();
+
+        return new EnergyMap(incrementedMapPositions);
     }
 
     private static IEnumerable<Position> GetSurroundingPositions(CoOrd coOrdToCheck, IEnumerable<Position> positionList)

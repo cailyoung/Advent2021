@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -49,9 +50,9 @@ public class UnitTest1
 
         var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
 
-        var actualMap = MapOperations.ProduceFutureStepState(initialMap, 2);
+        var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 2);
 
-        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMaps.Last().Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
     [Fact]
@@ -83,8 +84,8 @@ public class UnitTest1
 
         var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
 
-        var actualMap = MapOperations.ProduceFutureStepState(initialMap, 10);
+        var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 10);
 
-        actualMap.Map.Should().BeEquivalentTo(expectedMap.Map);
+        actualMaps.Last().Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 }

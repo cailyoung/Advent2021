@@ -12,18 +12,18 @@ public static class MapOperations
         return workingMap;
     }
 
-    public static EnergyMap ProduceFutureStepState(EnergyMap startingMap, int afterStepNumber)
+    public static IEnumerable<EnergyMap> ProduceFutureStepState(EnergyMap startingMap, int afterStepNumber)
     {
+        var workingMaps = new List<EnergyMap> { startingMap };
         var stepsRemaining = afterStepNumber;
-        var workingMap = startingMap;
 
         while (stepsRemaining > 0)
         {
-            workingMap = ProduceNextStep(workingMap);
+            workingMaps.Add(ProduceNextStep(workingMaps.Last()));
             stepsRemaining--;
         }
 
-        return workingMap;
+        return workingMaps;
     }
 
     private static EnergyMap IncrementAllMapEnergyValues(this EnergyMap startingMap)

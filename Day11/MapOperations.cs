@@ -113,7 +113,7 @@ public static class MapOperations
         return new EnergyMap(workingMapPositions);
     }
 
-    private static IEnumerable<Position> GetSurroundingPositions(CoOrd coOrdToCheck, List<Position> positionList)
+    private static IEnumerable<Position> GetSurroundingPositions(CoOrd coOrdToCheck, IReadOnlyCollection<Position> positionList)
     {
         var xValue = coOrdToCheck.XValue;
         var yValue = coOrdToCheck.YValue;

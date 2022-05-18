@@ -56,8 +56,10 @@ public class UnitTest1
         actualMaps.Last().EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
     }
 
-    [Fact]
-    public void LargeExampleDayTenWorksCorrectly()
+    [Theory]
+    [InlineData(10, 204)]
+    [InlineData(100, 1656)]
+    public void LargeExampleFutureDaysWorkCorrectly(int stepsToRun, int expectedFlashCount)
     {
         var input = @"5483143223
 2745854711
@@ -72,22 +74,8 @@ public class UnitTest1
 
         var initialMap = FileHelper.GenerateInitialEnergyMap(input);
 
-        var expected = @"0481112976
-0031112009
-0041112504
-0081111406
-0099111306
-0093511233
-0442361130
-5532252350
-0532250600
-0032240000".Split(Environment.NewLine);
+        var actualMaps = MapOperations.ProduceFutureStepState(initialMap, stepsToRun);
 
-        var expectedMap = FileHelper.GenerateInitialEnergyMap(expected);
-
-        var actualMaps = MapOperations.ProduceFutureStepState(initialMap, 10);
-
-        actualMaps.Last().EnergyMap.Map.Should().BeEquivalentTo(expectedMap.Map);
-        actualMaps.Sum(p => p.FlashCount).Should().Be(204);
+        actualMaps.Sum(p => p.FlashCount).Should().Be(expectedFlashCount);
     }
 }

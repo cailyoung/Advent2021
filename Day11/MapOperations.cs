@@ -65,23 +65,23 @@ public static class MapOperations
 
     private static EnergyMap ApplyFlashingCoOrdsToWorkingMap(List<CoOrd> newToFlashCoOrds, EnergyMap workingMap)
     {
-        var incrementedMapPositions = workingMap.Map.ToList();
+        var workingMapPositions = workingMap.Map.ToList();
         
         foreach (var coOrd in newToFlashCoOrds)
         {
             var incrementedPositions = 
-                GetSurroundingPositions(coOrd, incrementedMapPositions)
+                GetSurroundingPositions(coOrd, workingMapPositions)
                 .Select(IncrementPositionEnergy)
                 .ToList();
 
-            var positionsWithoutOldPositions = incrementedMapPositions.Except(incrementedPositions).ToList();
+            var positionsWithoutOldPositions = workingMapPositions.Except(incrementedPositions).ToList();
 
             positionsWithoutOldPositions.AddRange(incrementedPositions);
 
-            incrementedMapPositions = positionsWithoutOldPositions;
+            workingMapPositions = positionsWithoutOldPositions;
         }
 
-        return new EnergyMap(incrementedMapPositions);
+        return new EnergyMap(workingMapPositions);
     }
 
     private static IEnumerable<Position> GetSurroundingPositions(CoOrd coOrdToCheck, IEnumerable<Position> positionList)

@@ -13,3 +13,9 @@ var futureState = MapOperations.ProduceFutureStepState(initialMap, 100);
 var flashCountInFuturePartOne = futureState.Sum(p => p.FlashCount);
 
 Console.WriteLine($"Part 1 - after 100 steps, {flashCountInFuturePartOne} flashes have occurred");
+
+// Part 2
+
+var stepWhenAllFlashPartTwo = MapOperations.CalculateStepWhenAllFlash(initialMap);
+
+Console.WriteLine($"Part two - the step that all octopuses flash on is {stepWhenAllFlashPartTwo}");

@@ -4,7 +4,7 @@ namespace Day12;
 
 public class CaveSystem
 {
-    private UndirectedGraph<Cave, Edge<Cave>> CaveGraph;
+    private UndirectedGraph<Cave, UndirectedEdge<Cave>> CaveGraph;
     public int ValidPaths => CalculateValidPathCount();
 
     private int CalculateValidPathCount()
@@ -12,19 +12,15 @@ public class CaveSystem
         throw new NotImplementedException();
     }
 
-    public CaveSystem(UndirectedGraph<Cave, Edge<Cave>> caveGraph)
+    public CaveSystem(UndirectedGraph<Cave, UndirectedEdge<Cave>> caveGraph)
     {
         CaveGraph = caveGraph;
     }
 }
 
-public record Cave
-{
-    CaveType caveType;
-}
-
 public enum CaveType
 {
+    Unknown,
     Start,
     End,
     Small,

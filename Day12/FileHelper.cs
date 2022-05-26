@@ -13,6 +13,18 @@ public static class FileHelper
 
     public static CaveSystem ParseInput(string[] inputLines)
     {
-        return new CaveSystem(new UndirectedGraph<Cave, Edge<Cave>>());
+        var workingGraph = new UndirectedGraph<Cave, UndirectedEdge<Cave>>();
+
+        foreach (var inputLine in inputLines)
+        {
+            var splitLine = inputLine
+                .Split('-')
+                .Select(t => new Cave(t))
+                .OrderBy(c => c)
+                .ToList();
+            workingGraph.AddVerticesAndEdge(new UndirectedEdge<Cave>(splitLine.First(), splitLine.Last()));
+        }
+
+        return new CaveSystem(workingGraph);
     }
 }

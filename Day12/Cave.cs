@@ -5,8 +5,8 @@ namespace Day12;
 [DebuggerDisplay("{Token}, type {CaveType}")]
 public record Cave : IComparable<Cave>, IComparable
 {
-    CaveType CaveType;
-    string Token;
+    public CaveType CaveType;
+    public string Token;
 
     public Cave(string token)
     {
@@ -41,4 +41,13 @@ public record Cave : IComparable<Cave>, IComparable
         if (ReferenceEquals(this, obj)) return 0;
         return obj is Cave other ? CompareTo(other) : throw new ArgumentException($"Object must be of type {nameof(Cave)}");
     }
+}
+
+public enum CaveType
+{
+    Unknown,
+    Start,
+    End,
+    Small,
+    Big
 }

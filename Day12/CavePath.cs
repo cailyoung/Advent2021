@@ -1,3 +1,5 @@
+using System.Xml;
+
 namespace Day12;
 
 public class CavePath
@@ -47,7 +49,29 @@ public class CavePath
 
     private bool PartTwoSmallCaveCheckForAdmission(Cave candidateCave)
     {
-        return PathNodes.All(c => c.Token != candidateCave.Token);
+        // if candidate token is already there twice, NO
+        // if it's already there once, check if there is another token there twice, if so, NO, otherwise YES
+        // if it's not there, add it
+
+        var candidateAlreadyThereAtLeastTwice = PathNodes.Count(c => c.Token == candidateCave.Token) >= 2;
+        var candidateAlreadyThereOnce = PathNodes.Count(c => c.Token == candidateCave.Token) == 1;
+        var existingTwiceVisitedCave = PathNodes
+            .GroupBy(c => c.Token)
+            .Select(g => new { Key = g.Key, Count = g.Count() })
+            .FirstOrDefault(g => g.Count == 2);
+
+        var thisIsABrandNewCave = PathNodes.All(c => c.Token != candidateCave.Token);
+
+        if (thisIsABrandNewCave) return true;
+
+        if (candidateAlreadyThereAtLeastTwice) return false;
+
+        if (candidateAlreadyThereOnce && existingTwiceVisitedCave is null)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     private bool PartOneCanAddCave(Cave candidateCave)
@@ -70,9 +94,9 @@ public class CavePath
         }
     }
 
-    public CavePath AddCave(Cave caveToAdd)
+    public CavePath AddCave(Cave caveToAdd, bool isPartTwo)
     {
-        if (!CanAddCave(caveToAdd, false))
+        if (!CanAddCave(caveToAdd, isPartTwo))
         {
             throw new ArgumentException("Cave cannot be added as it is invalid");
         }

@@ -7,30 +7,55 @@ public class CaveSystem
     private readonly UndirectedGraph<Cave, UndirectedEdge<Cave>> CaveGraph;
     public int ValidPartOnePaths => CalculateValidPathCount(false);
     public int ValidPartTwoPaths => CalculateValidPathCount(true);
-    private readonly HashSet<CavePath> CavePaths;
+    private readonly HashSet<CavePath> PartOneCavePaths;
+    private readonly HashSet<CavePath> PartTwoCavePaths;
 
     private int CalculateValidPathCount(bool isPartTwo)
     {
-        while (CavePaths.Any(p => !p.CompletePath))
+        return !isPartTwo ? GeneratePartOnePathCount(isPartTwo) : GeneratePartTwoPathCount(isPartTwo);
+    }
+
+    private int GeneratePartTwoPathCount(bool isPartTwo)
+    {
+        while (PartTwoCavePaths.Any(p => !p.CompletePath))
         {
-            var pathsToExtend = CavePaths
+            var pathsToExtend = PartTwoCavePaths
                 .Where(p => !p.CompletePath)
                 .ToArray();
 
             foreach (var path in pathsToExtend)
             {
-                CavePaths.Remove(path);
-                foreach (var newPath in GenerateNextStepPaths(path, isPartTwo)) CavePaths.Add(newPath);
+                PartTwoCavePaths.Remove(path);
+                foreach (var newPath in GenerateNextStepPaths(path, isPartTwo)) PartTwoCavePaths.Add(newPath);
             }
         }
 
-        return CavePaths.Count;
+        return PartTwoCavePaths.Count;    
+    }
+
+    private int GeneratePartOnePathCount(bool isPartTwo)
+    {
+        while (PartOneCavePaths.Any(p => !p.CompletePath))
+        {
+            var pathsToExtend = PartOneCavePaths
+                .Where(p => !p.CompletePath)
+                .ToArray();
+
+            foreach (var path in pathsToExtend)
+            {
+                PartOneCavePaths.Remove(path);
+                foreach (var newPath in GenerateNextStepPaths(path, isPartTwo)) PartOneCavePaths.Add(newPath);
+            }
+        }
+
+        return PartOneCavePaths.Count;
     }
 
     public CaveSystem(UndirectedGraph<Cave, UndirectedEdge<Cave>> caveGraph)
     {
         CaveGraph = caveGraph;
-        CavePaths = new HashSet<CavePath> { new(new Cave("start")) };
+        PartOneCavePaths = new HashSet<CavePath> { new(new Cave("start")) };
+        PartTwoCavePaths = new HashSet<CavePath> { new(new Cave("start")) };
         if (CaveGraph.Vertices.Any(c => c.CaveType == CaveType.Unknown))
         {
             throw new ArgumentException("Cave tokens must be either 'start', 'end', or a string of all-upper or all-lower case characters");
@@ -42,7 +67,7 @@ public class CaveSystem
         var nextCaves = CaveGraph
             .AdjacentVertices(startingPath.PathNodes.Last())
             .Where(candidateCave => startingPath.CanAddCave(candidateCave, isPartTwo))
-            .Select(startingPath.AddCave);
+            .Select(candidateCave => startingPath.AddCave(candidateCave, isPartTwo));
 
         return nextCaves;
     }

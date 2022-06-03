@@ -6,6 +6,7 @@ public class UnitTest1
 {
     [Theory]
     [InlineData(false, 10)]
+    [InlineData(true, 36)]
     public void SmallExampleHasTenPaths(bool isPartTwo, int expectedPathCount)
     {
         var input = @"start-A
@@ -18,7 +19,7 @@ b-end".Split(Environment.NewLine);
 
         var actualCaveSystem = FileHelper.ParseInput(input);
 
-        var actualPaths = isPartTwo ? actualCaveSystem.ValidPartOnePaths : actualCaveSystem.ValidPartTwoPaths;
+        var actualPaths = !isPartTwo ? actualCaveSystem.ValidPartOnePaths : actualCaveSystem.ValidPartTwoPaths;
 
         actualPaths.Should().Be(expectedPathCount);
     }

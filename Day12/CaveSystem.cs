@@ -5,7 +5,7 @@ namespace Day12;
 public class CaveSystem
 {
     private readonly UndirectedGraph<Cave, UndirectedEdge<Cave>> CaveGraph;
-    public int ValidPaths => CalculateValidPathCount(false);
+    public int ValidPartOnePaths => CalculateValidPathCount(false);
     public int ValidPartTwoPaths => CalculateValidPathCount(true);
     private readonly HashSet<CavePath> CavePaths;
 

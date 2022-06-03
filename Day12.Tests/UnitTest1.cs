@@ -18,7 +18,7 @@ b-end".Split(Environment.NewLine);
 
         var actualCaveSystem = FileHelper.ParseInput(input);
 
-        var actualPaths = actualCaveSystem.ValidPaths;
+        var actualPaths = isPartTwo ? actualCaveSystem.ValidPartOnePaths : actualCaveSystem.ValidPartTwoPaths;
 
         actualPaths.Should().Be(expectedPathCount);
     }
@@ -39,7 +39,7 @@ kj-dc".Split(Environment.NewLine);
         
         var actualCaveSystem = FileHelper.ParseInput(input);
 
-        var actualPaths = actualCaveSystem.ValidPaths;
+        var actualPaths = actualCaveSystem.ValidPartOnePaths;
 
         actualPaths.Should().Be(19);
     }
@@ -69,7 +69,7 @@ start-RW".Split(Environment.NewLine);
         
         var actualCaveSystem = FileHelper.ParseInput(input);
 
-        var actualPaths = actualCaveSystem.ValidPaths;
+        var actualPaths = actualCaveSystem.ValidPartOnePaths;
 
         actualPaths.Should().Be(226);
     }

@@ -5,10 +5,11 @@ namespace Day12;
 public class CaveSystem
 {
     private readonly UndirectedGraph<Cave, UndirectedEdge<Cave>> CaveGraph;
-    public int ValidPaths => CalculateValidPathCount();
+    public int ValidPaths => CalculateValidPathCount(false);
+    public int ValidPartTwoPaths => CalculateValidPathCount(true);
     private readonly HashSet<CavePath> CavePaths;
 
-    private int CalculateValidPathCount()
+    private int CalculateValidPathCount(bool isPartTwo)
     {
         while (CavePaths.Any(p => !p.CompletePath))
         {
@@ -19,7 +20,7 @@ public class CaveSystem
             foreach (var path in pathsToExtend)
             {
                 CavePaths.Remove(path);
-                foreach (var newPath in GenerateNextStepPaths(path)) CavePaths.Add(newPath);
+                foreach (var newPath in GenerateNextStepPaths(path, isPartTwo)) CavePaths.Add(newPath);
             }
         }
 
@@ -36,11 +37,11 @@ public class CaveSystem
         }
     }
 
-    private IEnumerable<CavePath> GenerateNextStepPaths(CavePath startingPath)
+    private IEnumerable<CavePath> GenerateNextStepPaths(CavePath startingPath, bool isPartTwo)
     {
         var nextCaves = CaveGraph
             .AdjacentVertices(startingPath.PathNodes.Last())
-            .Where(candidateCave => startingPath.CanAddCave(candidateCave, false))
+            .Where(candidateCave => startingPath.CanAddCave(candidateCave, isPartTwo))
             .Select(startingPath.AddCave);
 
         return nextCaves;

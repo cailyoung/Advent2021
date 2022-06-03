@@ -4,8 +4,9 @@ namespace Day12.Tests;
 
 public class UnitTest1
 {
-    [Fact]
-    public void SmallExampleHasTenPaths()
+    [Theory]
+    [InlineData(false, 10)]
+    public void SmallExampleHasTenPaths(bool isPartTwo, int expectedPathCount)
     {
         var input = @"start-A
 start-b
@@ -19,7 +20,7 @@ b-end".Split(Environment.NewLine);
 
         var actualPaths = actualCaveSystem.ValidPaths;
 
-        actualPaths.Should().Be(10);
+        actualPaths.Should().Be(expectedPathCount);
     }
 
     [Fact]

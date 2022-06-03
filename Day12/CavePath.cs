@@ -27,7 +27,27 @@ public class CavePath
 
     private bool PartTwoCanAddCave(Cave candidateCave)
     {
-        throw new NotImplementedException();
+        switch (candidateCave.CaveType)
+        {
+            case CaveType.Start:
+                return false;
+            case CaveType.End:
+                return true;
+            case CaveType.Small:
+                // Small caves can only be visited once, unless they're the first one to be hit twice
+                return PartTwoSmallCaveCheckForAdmission(candidateCave);
+            case CaveType.Big:
+                // Large caves can be visited any number of times
+                return true;
+            case CaveType.Unknown:
+            default:
+                throw new ArgumentOutOfRangeException(nameof(candidateCave.CaveType));
+        }
+    }
+
+    private bool PartTwoSmallCaveCheckForAdmission(Cave candidateCave)
+    {
+        return PathNodes.All(c => c.Token != candidateCave.Token);
     }
 
     private bool PartOneCanAddCave(Cave candidateCave)

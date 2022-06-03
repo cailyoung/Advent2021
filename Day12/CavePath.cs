@@ -56,6 +56,7 @@ public class CavePath
         var candidateAlreadyThereAtLeastTwice = PathNodes.Count(c => c.Token == candidateCave.Token) >= 2;
         var candidateAlreadyThereOnce = PathNodes.Count(c => c.Token == candidateCave.Token) == 1;
         var existingTwiceVisitedCave = PathNodes
+            .Where(c => c.CaveType == CaveType.Small)
             .GroupBy(c => c.Token)
             .Select(g => new { Key = g.Key, Count = g.Count() })
             .FirstOrDefault(g => g.Count == 2);

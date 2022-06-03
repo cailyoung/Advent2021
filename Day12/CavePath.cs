@@ -15,13 +15,23 @@ public class CavePath
         PathNodes = pathNodes.ToList();
     }
 
-    public bool CanAddCave(Cave candidateCave)
+    public bool CanAddCave(Cave candidateCave, bool isPartTwo)
     {
         if (CompletePath)
         {
             return false;
         }
         
+        return !isPartTwo ? PartOneCanAddCave(candidateCave) : PartTwoCanAddCave(candidateCave);
+    }
+
+    private bool PartTwoCanAddCave(Cave candidateCave)
+    {
+        throw new NotImplementedException();
+    }
+
+    private bool PartOneCanAddCave(Cave candidateCave)
+    {
         switch (candidateCave.CaveType)
         {
             case CaveType.Start:
@@ -33,7 +43,7 @@ public class CavePath
                 return PathNodes.All(c => c.Token != candidateCave.Token);
             case CaveType.Big:
                 // Large caves can be visited any number of times
-                return true; 
+                return true;
             case CaveType.Unknown:
             default:
                 throw new ArgumentOutOfRangeException(nameof(candidateCave.CaveType));
@@ -42,7 +52,7 @@ public class CavePath
 
     public CavePath AddCave(Cave caveToAdd)
     {
-        if (!CanAddCave(caveToAdd))
+        if (!CanAddCave(caveToAdd, false))
         {
             throw new ArgumentException("Cave cannot be added as it is invalid");
         }

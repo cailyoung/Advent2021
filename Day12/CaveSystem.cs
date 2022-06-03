@@ -40,7 +40,7 @@ public class CaveSystem
     {
         var nextCaves = CaveGraph
             .AdjacentVertices(startingPath.PathNodes.Last())
-            .Where(startingPath.CanAddCave)
+            .Where(candidateCave => startingPath.CanAddCave(candidateCave, false))
             .Select(startingPath.AddCave);
 
         return nextCaves;

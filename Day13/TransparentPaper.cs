@@ -14,12 +14,12 @@ public class TransparentPaper
     {
         Func<Dot, Dot> YAxisDotFolder()
         {
-            return d => d with { XPosition = d.XPosition / 2 };
+            return d => d with { YPosition = coOrdToFoldAt - Math.Abs(d.YPosition - coOrdToFoldAt) };
         }
         
         Func<Dot, Dot> XAxisDotFolder()
         {
-            return d => d with { YPosition = d.YPosition / 2 };
+            return d => d with { XPosition = coOrdToFoldAt - Math.Abs(d.XPosition - coOrdToFoldAt) };
         }
 
         Func<Dot, bool> YAxisThreshold()

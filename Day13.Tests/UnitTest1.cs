@@ -24,6 +24,23 @@ public class UnitTest1
     }
 
     [Fact]
+    public void ParserCanGenerateFoldInstructions()
+    {
+        var input = @"fold along y=7
+fold along x=5".Split(Environment.NewLine);
+
+        var expectedFolds = new List<(int CoOrdToFoldAt, Axis axis)>
+        {
+            new(7, Axis.Y),
+            new(5, Axis.X)
+        };
+
+        var actualFolds = FileHelper.GetFolds(input);
+
+        actualFolds.Should().BeEquivalentTo(expectedFolds);
+    }
+
+    [Fact]
     public void ExampleFirstFoldHasCorrectDotCount()
     {
         var input = @"6,10

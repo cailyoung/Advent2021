@@ -3,7 +3,7 @@ namespace Day13;
 public class TransparentPaper
 {
     public int DotCount => MarkedDots.Count();
-    private readonly IEnumerable<Dot> MarkedDots;
+    public readonly IEnumerable<Dot> MarkedDots;
 
     public TransparentPaper(IEnumerable<Dot> markedDots)
     {

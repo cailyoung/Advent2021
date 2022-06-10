@@ -16,8 +16,13 @@ public static class FileHelper
             .Select(splitRow => new Dot(int.Parse(splitRow.First()), int.Parse(splitRow.Last())));
     }
 
-    public static IEnumerable<(int CoOrdToFoldAt, Axis axis)> GetFolds(string[] input)
+    public static IEnumerable<(int CoOrdToFoldAt, Axis Axis)> GetFolds(string[] input)
     {
-        return new List<(int CoOrdToFoldAt, Axis axis)>();
+        var folds = input
+            .Select(row => row.Replace("fold along ", string.Empty))
+            .Select(row => row.Split('='))
+            .Select(row => (int.Parse(row.Last()), Enum.Parse<Axis>(row.First().ToUpperInvariant())));
+
+        return folds;
     } 
 }

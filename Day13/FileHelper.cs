@@ -8,4 +8,11 @@ public static class FileHelper
 
         return rawInput;
     }
+
+    public static IEnumerable<Dot> GetDots(string[] input)
+    {
+        return input
+            .Select(row => row.Split(','))
+            .Select(splitRow => new Dot(int.Parse(splitRow.First()), int.Parse(splitRow.Last())));
+    }
 }

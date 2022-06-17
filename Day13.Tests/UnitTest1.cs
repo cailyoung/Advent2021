@@ -29,7 +29,7 @@ public class UnitTest1
         var input = @"fold along y=7
 fold along x=5".Split(Environment.NewLine);
 
-        var expectedFolds = new List<(int CoOrdToFoldAt, Axis axis)>
+        var expectedFolds = new List<FoldInstruction>
         {
             new(7, Axis.Y),
             new(5, Axis.X)

@@ -12,6 +12,6 @@ var inputFolds = FileHelper.GetFolds(FileHelper.ExtractInputFromFile("day13folds
 
 var firstFold = inputFolds.First();
 
-var firstFoldedPaper = inputPaper.Fold(firstFold.CoOrdToFoldAt, firstFold.Axis);
+var firstFoldedPaper = inputPaper.Fold(firstFold);
 
 Console.WriteLine($"Part one - after the first fold, there are {firstFoldedPaper.DotCount} dots");

@@ -35,6 +35,16 @@ public class TransparentPaper
         return new TransparentPaper(MarkedDots.Except(dotsToFold).Union(foldedDots));
     }
     
+    public TransparentPaper Fold(FoldInstruction instruction)
+    {
+        return Fold(instruction.CoOrdToFoldAt, instruction.Axis);
+    }
+
+    // public TransparentPaper FoldMultiple(IEnumerable<FoldInstruction> instructions)
+    // {
+    //     return new NotImplementedException();
+    // }
+    
     public override string ToString()
     {
         var sb = new StringBuilder();
@@ -67,3 +77,4 @@ public enum Axis
     Y
 }
 
+public record FoldInstruction(int CoOrdToFoldAt, Axis Axis);

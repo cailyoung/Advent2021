@@ -77,4 +77,40 @@ CN -> C".Split(Environment.NewLine);
 
         actualParsed.Should().BeEquivalentTo(expectedInsertionRules);
     }
+
+    [Theory]
+    [InlineData(1, "NCNBCHB")]
+    public void EachInsertionRoundIsCorrect(int roundsToCalculate, string expectedChain)
+    {
+        var input = @"NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C".Split(Environment.NewLine);
+
+        var inputTemplate = FileHelper.GetTemplate(input);
+        var inputRules = FileHelper.GetInsertionRules(input).ToArray();
+
+        var workingChain = new PolymerChain(inputTemplate);
+
+        for (int i = 0; i < roundsToCalculate; i++)
+        {
+            workingChain = workingChain.ApplyInsertionRules(inputRules);
+        }
+
+        workingChain.ChainString.Should().Be(expectedChain);
+    }
 }

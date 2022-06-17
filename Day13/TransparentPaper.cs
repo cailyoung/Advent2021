@@ -12,25 +12,13 @@ public class TransparentPaper
     
     public TransparentPaper Fold(int coOrdToFoldAt, Axis axis)
     {
-        Func<Dot, Dot> YAxisDotFolder()
-        {
-            return d => d with { YPosition = coOrdToFoldAt - Math.Abs(d.YPosition - coOrdToFoldAt) };
-        }
-        
-        Func<Dot, Dot> XAxisDotFolder()
-        {
-            return d => d with { XPosition = coOrdToFoldAt - Math.Abs(d.XPosition - coOrdToFoldAt) };
-        }
+        Func<Dot, Dot> YAxisDotFolder() => d => d with { YPosition = coOrdToFoldAt - Math.Abs(d.YPosition - coOrdToFoldAt) };
 
-        Func<Dot, bool> YAxisThreshold()
-        {
-            return d => d.YPosition > coOrdToFoldAt;
-        }
-        
-        Func<Dot, bool> XAxisThreshold()
-        {
-            return d => d.XPosition > coOrdToFoldAt;
-        }
+        Func<Dot, Dot> XAxisDotFolder() => d => d with { XPosition = coOrdToFoldAt - Math.Abs(d.XPosition - coOrdToFoldAt) };
+
+        Func<Dot, bool> YAxisThreshold() => d => d.YPosition > coOrdToFoldAt;
+
+        Func<Dot, bool> XAxisThreshold() => d => d.XPosition > coOrdToFoldAt;
 
         var dotIsOverAxisThreshold = axis == Axis.X ? XAxisThreshold() : YAxisThreshold();
 

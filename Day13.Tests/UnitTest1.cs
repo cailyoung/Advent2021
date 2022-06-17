@@ -144,10 +144,15 @@ fold along x=5".Split(Environment.NewLine);
 
         var inputDots = FileHelper.GetDots(input);
         var inputPaper = new TransparentPaper(inputDots);
-        
-        var firstFold = inputPaper.Fold(7, Axis.Y);
-        var secondFold = firstFold.Fold(5, Axis.X);
 
+        var foldInstructions = new List<FoldInstruction>
+        {
+            new(7, Axis.Y),
+            new(5, Axis.X)
+        };
+
+        var actualFolded = inputPaper.FoldMultiple(foldInstructions);
+        
         var expectedText = @"#####
 #...#
 #...#
@@ -155,7 +160,7 @@ fold along x=5".Split(Environment.NewLine);
 #####
 ";
 
-        secondFold.ToString().Should().Be(expectedText);
+        actualFolded.ToString().Should().Be(expectedText);
 
     }
 }

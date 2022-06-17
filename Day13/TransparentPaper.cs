@@ -40,10 +40,15 @@ public class TransparentPaper
         return Fold(instruction.CoOrdToFoldAt, instruction.Axis);
     }
 
-    // public TransparentPaper FoldMultiple(IEnumerable<FoldInstruction> instructions)
-    // {
-    //     return new NotImplementedException();
-    // }
+    private TransparentPaper(TransparentPaper paper)
+    {
+        MarkedDots = paper.MarkedDots;
+    }
+
+    public TransparentPaper FoldMultiple(IEnumerable<FoldInstruction> instructions)
+    {
+        return instructions.Aggregate(this, (paper, foldInstruction) => paper.Fold(foldInstruction));
+    }
     
     public override string ToString()
     {

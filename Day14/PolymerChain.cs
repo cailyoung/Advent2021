@@ -3,6 +3,9 @@ namespace Day14;
 public class PolymerChain
 {
     public readonly string ChainString;
+    public int ChainLength => ChainString.Length;
+    public int MostCommonElementCount => GetMostCommonElementCount();
+    public int LeastCommonElementCount => GetLeastCommonElementCount();
 
     public PolymerChain(string template)
     {
@@ -89,5 +92,23 @@ public class PolymerChain
     private static Queue<char> GetQueueFromString(string chainString)
     {
         return new Queue<char>(chainString.ToCharArray());
+    }
+
+    private int GetMostCommonElementCount()
+    {
+        return ChainString
+            .ToCharArray()
+            .GroupBy(c => c)
+            .OrderByDescending(group => group.Count())
+            .First().Count();
+    }
+    
+    private int GetLeastCommonElementCount()
+    {
+        return ChainString
+            .ToCharArray()
+            .GroupBy(c => c)
+            .OrderBy(group => group.Count())
+            .First().Count();
     }
 }

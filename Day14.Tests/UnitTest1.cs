@@ -1,4 +1,5 @@
 using FluentAssertions;
+using FluentAssertions.Execution;
 
 namespace Day14.Tests;
 
@@ -115,5 +116,84 @@ CN -> C".Split(Environment.NewLine);
         }
 
         workingChain.ChainString.Should().Be(expectedChain);
+    }
+
+    [Theory]
+    [InlineData(5, 97)]
+    [InlineData(10, 3073)]
+    public void InsertionRoundLengthsAreCorrect(int roundsToCalculate, int expectedLength)
+    {
+        var input = @"NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C".Split(Environment.NewLine);
+
+        var inputTemplate = FileHelper.GetTemplate(input);
+        var inputRules = FileHelper.GetInsertionRules(input).ToArray();
+
+        var workingChain = new PolymerChain(inputTemplate);
+
+        for (int i = 0; i < roundsToCalculate; i++)
+        {
+            workingChain = workingChain.ApplyInsertionRules(inputRules);
+        }
+
+        workingChain.ChainLength.Should().Be(expectedLength);
+    }
+
+    [Fact]
+    public void StepTenGroupCountsAreCorrect()
+    {
+        {
+            var input = @"NNCB
+
+CH -> B
+HH -> N
+CB -> H
+NH -> C
+HB -> C
+HC -> B
+HN -> C
+NN -> C
+BH -> H
+NC -> B
+NB -> B
+BN -> B
+BB -> N
+BC -> B
+CC -> N
+CN -> C".Split(Environment.NewLine);
+
+            var inputTemplate = FileHelper.GetTemplate(input);
+            var inputRules = FileHelper.GetInsertionRules(input).ToArray();
+
+            var workingChain = new PolymerChain(inputTemplate);
+            const int roundsToCalculate = 10;
+
+            for (int i = 0; i < roundsToCalculate; i++)
+            {
+                workingChain = workingChain.ApplyInsertionRules(inputRules);
+            }
+
+            using (new AssertionScope())
+            {
+                workingChain.MostCommonElementCount.Should().Be(1749);
+                workingChain.LeastCommonElementCount.Should().Be(161);
+            }
+        }
     }
 }

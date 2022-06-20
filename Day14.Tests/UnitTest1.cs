@@ -80,6 +80,9 @@ CN -> C".Split(Environment.NewLine);
 
     [Theory]
     [InlineData(1, "NCNBCHB")]
+    [InlineData(2, "NBCCNBBBCBHCB")]
+    [InlineData(3, "NBBBCNCCNBBNBNBBCHBHHBCHB")]
+    [InlineData(4, "NBBNBNBBCCNBCNCCNBBNBBNBBBNBBNBBCBHCBHHNHCBBCBHCB")]
     public void EachInsertionRoundIsCorrect(int roundsToCalculate, string expectedChain)
     {
         var input = @"NNCB

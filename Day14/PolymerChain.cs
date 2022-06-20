@@ -2,65 +2,92 @@ namespace Day14;
 
 public class PolymerChain
 {
-    private readonly IEnumerable<PolymerPair> ElementChain;
-    public string ChainString => GetChainString();
+    public readonly string ChainString;
 
     public PolymerChain(string template)
     {
-        ElementChain = CreatePairChainFromTemplate(template);
-    }
-
-    private static IEnumerable<PolymerPair> CreatePairChainFromTemplate(string template)
-    {
-        return template
-            .Zip(template.Skip(1))
-            .Select(tuple => new PolymerPair(tuple.First, tuple.Second));
+        ChainString = template;
     }
 
     public PolymerChain ApplyInsertionRules(IEnumerable<PairInsertionRule> rules)
     {
-        // get all the pairs
-        // for each pair, get back a new string with its insertion (or original if no matching rule)
-        // concat all the strings - this isn't working because need to dedupe somehow :(
-        // return a new chain based on the concats - see above, not working
+        // get a (queue?) of the chars in the current string
+        var workingElementQueue = GetQueueFromString(ChainString);
         
-        // plan B
-        // get the chainstring
-        // ??? match pairs and string positions?
-        // generate insertion instructions that specify positions to insert at
+        // process the queue, passing in insertion rules
+        var updatedQueue = UpdateElementsAccordingToRules(workingElementQueue, rules);
         
-        // plan c
-        // walk the chainstring with a windowed search
-
-        var pairsWithRulesApplied = ApplyRulesToPairs(ElementChain, rules);
-
-        return new PolymerChain(string.Concat(pairsWithRulesApplied));
+        // convert the new queue into a new polymerchain and return it
+        return new PolymerChain(string.Concat(updatedQueue));
     }
 
-    private static IEnumerable<string> ApplyRulesToPairs(IEnumerable<PolymerPair> elementChain, IEnumerable<PairInsertionRule> rules)
+    private IEnumerable<char> UpdateElementsAccordingToRules(Queue<char> elementsToProcess, IEnumerable<PairInsertionRule> rules)
     {
-        return elementChain.Select(pair => ApplyRulesToPair(pair, rules));
-    }
-
-    private static string ApplyRulesToPair(PolymerPair pair, IEnumerable<PairInsertionRule> rules)
-    {
-        var matchingRules = rules
-            .Where(r => r.PairToMatch == pair.ToString())
-            .ToArray();
-
-        return matchingRules.Any() switch
+        var finalElements = new List<char>();
+        var workingRules = rules.ToArray();
+        
+        if (elementsToProcess.Count < 2)
         {
-            false => pair.ToString(),
-            true => string.Concat(pair.Left, matchingRules.Single().CharToInsert, pair.Right)
+            throw new ArgumentException("There needs to be at least two characters in an element template to assess it for insertion rules.");
+        }
+        
+        // Populate first pair
+        var workingElements = new List<char>
+        {
+            elementsToProcess.Dequeue(),
+            elementsToProcess.Dequeue()
+        };
+
+        workingElements = ApplyRulesAndRotateElements(workingElements, workingRules, finalElements);
+
+        while (elementsToProcess.Any())
+        {
+            workingElements.Add(elementsToProcess.Dequeue());
+            
+            workingElements = ApplyRulesAndRotateElements(workingElements, workingRules, finalElements);
+
+            // Last time through, put the closing element in
+            if (!elementsToProcess.Any())
+            {
+                finalElements.AddRange(workingElements);
+            }
+        }
+
+        return finalElements;
+    }
+
+    private List<char> ApplyRulesAndRotateElements(List<char> workingElements, PairInsertionRule[] workingRules, List<char> finalElements)
+    {
+        workingElements = ApplyRulesToSinglePair(workingElements, workingRules);
+        finalElements.AddRange(GetElementsToAddToFinal(workingElements));
+        workingElements = TrimWorkingElements(workingElements);
+        return workingElements;
+    }
+
+    private static List<char> TrimWorkingElements(IEnumerable<char> workingElements)
+    {
+        return workingElements.TakeLast(1).ToList();
+    }
+
+    private static IEnumerable<char> GetElementsToAddToFinal(IEnumerable<char> workingElements)
+    {
+        return workingElements.SkipLast(1);
+    }
+
+    private List<char> ApplyRulesToSinglePair(List<char> workingElements, IEnumerable<PairInsertionRule> rules)
+    {
+        var anyMatchingRule = rules.Any(r => r.PairToMatch == string.Concat(workingElements));
+        var matchingRule = rules.Single(r => r.PairToMatch == string.Concat(workingElements));
+
+        return anyMatchingRule switch
+        {
+            true => new List<char> { workingElements.First(), char.Parse(matchingRule.CharToInsert), workingElements.Last() },
+            false => workingElements
         };
     }
 
-
-    private string GetChainString()
+    private static Queue<char> GetQueueFromString(string chainString)
     {
-        return string.Concat(
-            string.Concat(ElementChain.SkipLast(1).Select(p => p.Left)),
-            ElementChain.Last().ToString()
-        );
+        return new Queue<char>(chainString.ToCharArray());
     }
 }

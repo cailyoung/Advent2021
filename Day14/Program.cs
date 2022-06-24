@@ -8,11 +8,12 @@ var inputTemplate = FileHelper.GetTemplate(input);
 var inputRules = FileHelper.GetInsertionRules(input).ToArray();
 
 var workingChain = new PolymerChain(inputTemplate);
-const int roundsToCalculate = 10;
+const int roundsToCalculate = 20;
 
 for (int i = 0; i < roundsToCalculate; i++)
 {
     workingChain = workingChain.ApplyInsertionRules(inputRules);
+    Console.WriteLine($"Done applying round {i}");
 }
 
 Console.WriteLine($"Part one - the difference between most common and least common elements is {workingChain.MostCommonElementCount - workingChain.LeastCommonElementCount}");

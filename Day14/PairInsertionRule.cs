@@ -1,3 +1,3 @@
 namespace Day14;
 
-public record PairInsertionRule(string PairToMatch, string CharToInsert);
+public record PairInsertionRule(string PairToMatch, char CharToInsert);

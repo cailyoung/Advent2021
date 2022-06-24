@@ -56,22 +56,22 @@ CN -> C".Split(Environment.NewLine);
 
         var expectedInsertionRules = new List<PairInsertionRule>
         {
-            new("CH", "B"),
-            new("HH", "N"),
-            new("CB", "H"),
-            new("NH", "C"),
-            new("HB", "C"),
-            new("HC", "B"),
-            new("HN", "C"),
-            new("NN", "C"),
-            new("BH", "H"),
-            new("NC", "B"),
-            new("NB", "B"),
-            new("BN", "B"),
-            new("BB", "N"),
-            new("BC", "B"),
-            new("CC", "N"),
-            new("CN", "C")
+            new("CH", 'B'),
+            new("HH", 'N'),
+            new("CB", 'H'),
+            new("NH", 'C'),
+            new("HB", 'C'),
+            new("HC", 'B'),
+            new("HN", 'C'),
+            new("NN", 'C'),
+            new("BH", 'H'),
+            new("NC", 'B'),
+            new("NB", 'B'),
+            new("BN", 'B'),
+            new("BB", 'N'),
+            new("BC", 'B'),
+            new("CC", 'N'),
+            new("CN", 'C')
         };
 
         var actualParsed = FileHelper.GetInsertionRules(input);
@@ -155,8 +155,10 @@ CN -> C".Split(Environment.NewLine);
         workingChain.ChainLength.Should().Be(expectedLength);
     }
 
-    [Fact]
-    public void StepTenGroupCountsAreCorrect()
+    [Theory]
+    [InlineData(10, 1749, 161)]
+    [InlineData(40, 2192039569602, 3849876073)]
+    public void StepTenGroupCountsAreCorrect(int roundsToCalculate, long expectedMost, long expectedLeast)
     {
         {
             var input = @"NNCB
@@ -182,7 +184,6 @@ CN -> C".Split(Environment.NewLine);
             var inputRules = FileHelper.GetInsertionRules(input).ToArray();
 
             var workingChain = new PolymerChain(inputTemplate);
-            const int roundsToCalculate = 10;
 
             for (int i = 0; i < roundsToCalculate; i++)
             {
@@ -191,8 +192,8 @@ CN -> C".Split(Environment.NewLine);
 
             using (new AssertionScope())
             {
-                workingChain.MostCommonElementCount.Should().Be(1749);
-                workingChain.LeastCommonElementCount.Should().Be(161);
+                workingChain.MostCommonElementCount.Should().Be(expectedMost);
+                workingChain.LeastCommonElementCount.Should().Be(expectedLeast);
             }
         }
     }

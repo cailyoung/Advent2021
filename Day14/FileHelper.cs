@@ -19,6 +19,6 @@ public static class FileHelper
         return input
             .Skip(2)
             .Select(r => r.Split(" -> "))
-            .Select(r => new PairInsertionRule(r.First(), r.Last()));
+            .Select(r => new PairInsertionRule(r.First(), char.Parse(r.Last())));
     }
 }
